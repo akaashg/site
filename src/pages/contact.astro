@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const CAL_URL = 'https://cal.com/akaash-garg-xvijkt/hi';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Book time with Akaash Garg for XR/Unity engineering work — full-time, contract, or retainer."
+>
+  <section class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
+    <div class="space-y-6">
+      <p class="font-mono text-xs uppercase tracking-[0.28em] text-signal">Contact</p>
+      <h1 class="text-4xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-5xl">Start a premium XR engagement.</h1>
+      <p class="max-w-prose text-base leading-8 text-muted sm:text-lg">
+        I partner with founders, CTOs, and product teams to deliver XR products that are polished, performant, and built for real-world use.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-8 lg:grid-cols-[1fr_320px]">
+      <div class="space-y-6">
+        <div class="glass-card rounded-[2rem] border border-white/10 bg-white/5 p-8 shadow-glow">
+          <p class="text-sm uppercase tracking-[0.28em] text-signal">What I take on</p>
+          <ul class="mt-6 space-y-4 text-base leading-8 text-muted">
+            <li>Senior XR engineering and product delivery</li>
+            <li>Enterprise training, simulation, and real-time collaboration</li>
+            <li>Multiplayer systems, performance tuning, and launch-ready polish</li>
+          </ul>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a
+            href={CAL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-full bg-signal px-6 py-3 text-sm font-semibold text-paper no-underline shadow-lg shadow-signal/15 transition hover:bg-signal/90 hover:text-paper"
+          >
+            Book a consultation
+          </a>
+          <a
+            href="mailto:akaash.garg@gmail.com"
+            class="rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-paper no-underline transition hover:border-signal"
+          >
+            Email me
+          </a>
+        </div>
+      </div>
+
+      <div class="panel p-8">
+        <h2 class="text-lg font-semibold text-paper">Details</h2>
+        <dl class="mt-6 space-y-5 text-sm leading-7 text-muted">
+          <div>
+            <dt class="font-medium text-paper">Availability</dt>
+            <dd>Full-time, contract, or retainer.</dd>
+          </div>
+          <div>
+            <dt class="font-medium text-paper">Specialty</dt>
+            <dd>XR product delivery, multiplayer, and performance engineering.</dd>
+          </div>
+          <div>
+            <dt class="font-medium text-paper">Primary tools</dt>
+            <dd>Unity, OpenXR, Photon Fusion, AR Foundation, Node.js, React.</dd>
+          </div>
+          <div>
+            <dt class="font-medium text-paper">Ideal clients</dt>
+            <dd>Enterprises, startups, agencies, and gaming studios.</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="mt-12 rounded-[2rem] border border-white/10 bg-white/5 p-8">
+      <h2 class="text-xl font-semibold text-paper">Retainer engagements</h2>
+      <p class="mt-4 text-base leading-8 text-muted">
+        I support teams with ongoing XR engineering: hands-on Unity, OpenXR, AR Foundation, and multiplayer systems. This is the same delivery model behind the case studies on this site, but continuous instead of one-off.
+      </p>
+      <p class="mt-4 text-base leading-8 text-muted">
+        Book a call to discuss scope, timeline, and fit.
+      </p>
+    </div>
+
+    <div class="mt-12 panel p-8">
+      <h2 class="text-lg font-semibold text-paper">Direct</h2>
+      <ul class="mt-4 space-y-2 font-mono text-sm text-muted">
+        <li><a href="mailto:akaash.garg@gmail.com" class="text-muted transition hover:text-signal">akaash.garg@gmail.com</a></li>
+        <li><a href="https://linkedin.com/in/akaashgarg" class="text-muted transition hover:text-signal" rel="me">linkedin.com/in/akaashgarg</a></li>
+        <li><a href="https://2dudestudios.com/" class="text-muted transition hover:text-signal">2dudestudios.com</a></li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

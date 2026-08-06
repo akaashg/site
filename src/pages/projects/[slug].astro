@@ -1,0 +1,100 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TechTag from '../../components/TechTag.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', ({ data }) => !data.draft);
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, company, role, timeframe, stack, summary, outcome } = project.data;
+const { Content } = await project.render();
+---
+
+<BaseLayout title={title} description={summary}>
+  <article class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+    <a href="/projects/" class="text-sm text-signal transition hover:text-signal/90">&larr; Back to case studies</a>
+
+    <div class="mt-6 grid gap-12 lg:grid-cols-[1fr_320px]">
+      <div class="space-y-6">
+        <header class="space-y-4 border-b border-white/10 pb-8">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-[0.3em] text-signal">{company}</p>
+            <h1 class="mt-3 text-4xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-5xl">{title}</h1>
+          </div>
+          <div class="space-y-3">
+            <p class="font-mono text-sm uppercase tracking-[0.24em] text-muted">{role} · {timeframe}</p>
+            <p class="max-w-prose text-base leading-8 text-muted">{summary}</p>
+          </div>
+          <ul class="flex flex-wrap gap-2" aria-label="Tech stack">
+            {stack.map((item) => (
+              <li><TechTag label={item} /></li>
+            ))}
+          </ul>
+        </header>
+
+        <section class="prose-case-study space-y-8 text-muted">
+          <Content />
+        </section>
+      </div>
+
+      <aside class="panel space-y-8 p-8">
+        <div>
+          <p class="text-sm uppercase tracking-[0.3em] text-signal">Case focus</p>
+          <div class="mt-4 space-y-3 text-sm leading-7 text-paper">
+            <p><strong>Role:</strong> {role}</p>
+            <p><strong>Company:</strong> {company}</p>
+            <p><strong>Timeframe:</strong> {timeframe}</p>
+          </div>
+        </div>
+
+        {outcome && (
+          <div>
+            <p class="text-sm uppercase tracking-[0.3em] text-signal">Outcome</p>
+            <p class="mt-3 text-base leading-7 text-paper">{outcome}</p>
+          </div>
+        )}
+
+        <div>
+          <p class="text-sm uppercase tracking-[0.3em] text-signal">Technology</p>
+          <ul class="mt-4 flex flex-wrap gap-2" aria-label="Tech stack list">
+            {stack.map((item) => (
+              <li><TechTag label={item} /></li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+          <p class="text-sm uppercase tracking-[0.3em] text-signal">Next step</p>
+          <p class="mt-4 text-base leading-7 text-muted">Want XR engineering that ships with performance and polish? Let’s talk about your next project.</p>
+          <a href="/contact/" class="mt-6 inline-flex rounded-full bg-signal px-5 py-3 text-sm font-semibold text-paper transition hover:bg-signal/90 hover:text-paper">Contact me</a>
+        </div>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .prose-case-study h2 {
+    @apply mt-10 mb-3 text-xl;
+  }
+  .prose-case-study p {
+    @apply mt-4 leading-relaxed text-ink;
+  }
+  .prose-case-study ul,
+  .prose-case-study ol {
+    @apply mt-4 list-disc space-y-2 pl-6 text-ink;
+  }
+  .prose-case-study code {
+    @apply rounded bg-line/60 px-1.5 py-0.5 font-mono text-sm;
+  }
+</style>

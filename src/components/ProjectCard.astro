@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import TechTag from './TechTag.astro';
+
+export interface Props {
+  project: CollectionEntry<'projects'>;
+  index?: number;
+}
+
+const { project, index } = Astro.props;
+const { title, company, role, timeframe, summary, stack, outcome } = project.data;
+const label = typeof index === 'number' ? String(index).padStart(2, '0') : null;
+---
+
+<article class="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-surface/90 p-6 transition duration-300 hover:-translate-y-0.5 hover:border-signal/30 hover:bg-white/5">
+  {label && (
+    <span class="absolute right-4 top-4 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.68rem] uppercase tracking-[0.28em] text-muted">
+      {label}
+    </span>
+  )}
+
+  <div class="space-y-4">
+    <a href={`/projects/${project.slug}/`} class="no-underline">
+      <h3 class="text-lg text-paper transition-colors group-hover:text-signal">{title}</h3>
+    </a>
+    <p class="font-mono text-xs uppercase tracking-[0.24em] text-muted">
+      {role} · {company} · {timeframe}
+    </p>
+    <p class="text-sm leading-7 text-muted">{summary}</p>
+    {outcome && <p class="text-sm leading-7 text-paper">{outcome}</p>}
+    <ul class="flex flex-wrap gap-2" aria-label="Tech stack">
+      {stack.slice(0, 5).map((item) => (
+        <li><TechTag label={item} /></li>
+      ))}
+    </ul>
+  </div>
+
+  <a href={`/projects/${project.slug}/`} class="mt-6 inline-flex text-sm font-semibold text-signal transition hover:text-signal/90">
+    Read the case study &rarr;
+  </a>
+</article>

@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About"
+  description="Akaash Garg — founder & technical lead at 2 Dude Studios. 17+ years in software, currently focused on multiplayer XR simulation for medical, industrial, and enterprise training."
+>
+  <section class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
+    <div class="space-y-8">
+      <div class="space-y-4">
+        <p class="font-mono text-xs uppercase tracking-[0.28em] text-signal">About</p>
+        <h1 class="text-4xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-5xl">
+          Senior XR engineer, founder, and product technologist for enterprise and games.
+        </h1>
+      </div>
+      <p class="max-w-prose text-base leading-8 text-muted sm:text-lg">
+        I lead a 6-person XR studio building premium enterprise training, simulation, and game experiences. With 17+ years in software and 6 years specialized in XR, I ship Unity products that combine performance, polish, and real business outcomes.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      {[
+        { label: 'Experience', value: '17+ years' },
+        { label: 'XR applications shipped', value: '15+' },
+        { label: 'Live venues', value: '3 arenas' },
+        { label: 'Studio size', value: '6 people' },
+      ].map((item) => (
+        <div class="panel p-5">
+          <p class="text-xs uppercase tracking-[0.28em] text-muted">{item.label}</p>
+          <p class="mt-3 text-2xl font-semibold text-paper">{item.value}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-12 grid gap-10 lg:grid-cols-[1.5fr_1fr]">
+      <div class="space-y-6">
+        <h2 class="text-2xl font-semibold text-paper">What I do</h2>
+        <ul class="space-y-4 text-base leading-8 text-muted">
+          <li>Hands-on Unity XR engineering for Quest, HoloLens, Varjo, and SteamVR.</li>
+          <li>Multiplayer systems, real-time networking, and physics simulation tuned for headset budgets.</li>
+          <li>Enterprise-grade AR/VR training, visualization, and AI-assisted workflow products.</li>
+        </ul>
+        <p class="text-base leading-8 text-muted">
+          I pair product strategy with execution, shipping the actual application, backend systems, and performance optimizations — not just design or technical proposals.
+        </p>
+      </div>
+
+      <div class="panel p-6">
+        <h3 class="text-sm uppercase tracking-[0.28em] text-signal">Core strengths</h3>
+        <ul class="mt-6 space-y-4 text-sm leading-7 text-muted">
+          <li>Enterprise XR product development</li>
+          <li>Multiplayer and real-time collaboration</li>
+          <li>Performance engineering for standalone headsets</li>
+          <li>Full-stack tooling, SaaS backends, and studio leadership</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 rounded-[2rem] border border-white/10 bg-white/5 p-8">
+      <div class="space-y-4">
+        <h2 class="text-2xl font-semibold text-paper">Why work with me</h2>
+        <p class="text-base leading-8 text-muted">
+          I help startups, enterprises, and agencies move XR products from prototype to launch with the stability, polish, and performance expected by demanding clients.
+        </p>
+      </div>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        {['Enterprise XR', 'Multiplayer systems', 'AI-integrated experiences', 'Technical leadership'].map((item) => (
+          <div class="rounded-3xl border border-white/10 bg-surface/90 px-4 py-4 text-sm leading-6 text-paper">{item}</div>
+        ))}
+      </div>
+    </div>
+
+    <section class="mt-14 space-y-8">
+      <div>
+        <h2 class="text-xl font-semibold text-paper">Career</h2>
+        <ol class="mt-6 space-y-8 border-l-2 border-white/10 pl-6">
+          <li class="relative">
+            <span class="absolute -left-[29px] top-1 h-2.5 w-2.5 rounded-full bg-signal" aria-hidden="true"></span>
+            <p class="font-mono text-xs uppercase tracking-[0.26em] text-muted">Jul 2023 — Present</p>
+            <h3 class="mt-2 text-base font-semibold text-paper">Founder & Technical Lead, 2 Dude Studios</h3>
+            <p class="mt-2 text-sm leading-7 text-muted">Founded a 6-person XR studio shipping enterprise training, simulation, and game experiences, with live arena VR deployed in 3 commercial venues and a Steam demo ready for Early Access.</p>
+          </li>
+          <li class="relative">
+            <span class="absolute -left-[29px] top-1 h-2.5 w-2.5 rounded-full bg-white/10" aria-hidden="true"></span>
+            <p class="font-mono text-xs uppercase tracking-[0.26em] text-muted">Mar 2023 — Jul 2023</p>
+            <h3 class="mt-2 text-base font-semibold text-paper">Lead VR Developer, Witzeal Technologies</h3>
+            <p class="mt-2 text-sm leading-7 text-muted">Delivered a multiplayer Quest VR extension for a 50M+ mobile platform in three months with zero critical post-launch defects.</p>
+          </li>
+          <li class="relative">
+            <span class="absolute -left-[29px] top-1 h-2.5 w-2.5 rounded-full bg-white/10" aria-hidden="true"></span>
+            <p class="font-mono text-xs uppercase tracking-[0.26em] text-muted">Jan 2022 — Dec 2022</p>
+            <h3 class="mt-2 text-base font-semibold text-paper">Lead Unity Developer, CodeXAR</h3>
+            <p class="mt-2 text-sm leading-7 text-muted">Led a 5-person team building a real-time AR design-review platform with high-fidelity rendering on mobile hardware.</p>
+          </li>
+          <li class="relative">
+            <span class="absolute -left-[29px] top-1 h-2.5 w-2.5 rounded-full bg-white/10" aria-hidden="true"></span>
+            <p class="font-mono text-xs uppercase tracking-[0.26em] text-muted">2008 — 2021</p>
+            <h3 class="mt-2 text-base font-semibold text-paper">Founder & Lead Developer, Cyber Cerebs</h3>
+            <p class="mt-2 text-sm leading-7 text-muted">Grew a digital studio from solo operation to an eight-person team, shipping 50+ products across hospitality, sports, travel, and logistics.</p>
+          </li>
+        </ol>
+      </div>
+
+      <div class="grid gap-10 lg:grid-cols-2">
+        <div>
+          <h2 class="text-xl font-semibold text-paper">Stack</h2>
+          <ul class="mt-4 flex flex-wrap gap-2" aria-label="Technical stack">
+            {
+              [
+                'Unity 3D',
+                'C#',
+                'OpenXR',
+                'AR Foundation',
+                'XR Interaction Toolkit',
+                'Meta XR SDK',
+                'URP / HDRP',
+                'ShaderGraph / HLSL',
+                'Photon Fusion',
+                'Mirror',
+                'Netcode for GameObjects',
+                'Node.js',
+                'React / Next.js',
+                'PostgreSQL / Supabase',
+              ].map((item) => <li class="tag">{item}</li>)
+            }
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold text-paper">Education & certifications</h2>
+          <ul class="mt-4 space-y-2 font-mono text-sm text-muted">
+            <li>B.Tech, Information Technology — GGSIPU, Delhi (2009)</li>
+            <li>Unity Certified User — VR Developer</li>
+            <li>Unity Certified User — AR Developer</li>
+            <li>AWS Solutions Architect — Associate</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="mt-14 rounded-[2rem] border border-white/10 bg-white/5 p-8">
+      <h2 class="text-2xl font-semibold text-paper">Work with me</h2>
+      <p class="mt-4 max-w-prose text-base leading-8 text-muted">
+        Open to senior roles, contract engagements, and retained XR engineering for teams that need a founder-level technical lead and execution partner.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="/contact/" class="rounded-full bg-signal px-5 py-3 text-sm font-semibold text-paper transition hover:bg-signal/90 hover:text-paper">Contact me</a>
+        <a href="mailto:akaash.garg@gmail.com" class="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-paper transition hover:border-signal">Email directly</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    @apply scroll-smooth bg-[#05060d];
+  }
+
+  body {
+    @apply bg-[#05060d] text-paper font-sans antialiased;
+    background-image:
+      radial-gradient(circle at 20% 8%, rgba(124, 58, 237, 0.16), transparent 20%),
+      radial-gradient(circle at 82% 22%, rgba(59, 130, 246, 0.12), transparent 18%),
+      radial-gradient(circle at 50% 110%, rgba(148, 163, 184, 0.08), transparent 28%);
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-sans font-semibold tracking-tight text-paper;
+  }
+
+  p, li, dd, dt {
+    @apply text-muted;
+  }
+
+  a {
+    @apply text-signal underline underline-offset-2 decoration-signal/40 transition duration-200 hover:text-signal/90 hover:decoration-signal/80;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme('colors.signal.DEFAULT');
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  ::selection {
+    background: theme('colors.signal.DEFAULT');
+    color: theme('colors.paper');
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fadeIn 0.9s ease-out forwards;
+  }
+
+  .glass-card {
+    @apply rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl;
+    box-shadow: 0 24px 120px rgba(124, 58, 237, 0.14);
+  }
+
+  .panel {
+    @apply rounded-[2rem] border border-white/10 bg-surface/90;
+  }
+
+  .tag {
+    @apply inline-flex items-center rounded-full border border-signal/10 bg-surface px-3 py-1 text-xs uppercase tracking-[0.28em] text-muted shadow-sm;
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-[#111827] focus:text-paper focus:px-4 focus:py-2 focus:rounded-lg;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

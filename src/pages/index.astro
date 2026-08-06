@@ -1,0 +1,113 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import WireframeHero from '../components/WireframeHero.astro';
+
+const allProjects = await getCollection('projects', ({ data }) => !data.draft);
+const featured = allProjects.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
+---
+
+<BaseLayout
+  title="Akaash Garg"
+  description="Founder & technical lead at 2 Dude Studios. 17+ years building enterprise XR, multiplayer VR, and AR experiences with real-time performance on Quest, HoloLens, Varjo, and SteamVR."
+>
+  <section class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+    <div class="grid gap-12 lg:grid-cols-[1.4fr_420px] lg:items-center">
+      <div class="space-y-8">
+        <p class="font-mono text-xs uppercase tracking-[0.32em] text-signal">Founder · XR product lead</p>
+        <h1 class="max-w-3xl text-5xl font-semibold leading-[1.04] tracking-tight text-paper sm:text-6xl">
+          I build premium XR products, multiplayer systems, and immersive training experiences that ship on real hardware.
+        </h1>
+        <p class="max-w-2xl text-lg leading-8 text-muted">
+          17+ years of software experience, 6 years focused on XR and games. I lead a 6-person studio shipping live arena VR, enterprise training platforms, and open-world Unity experiences on Quest, HoloLens, Varjo, and Steam.
+        </p>
+
+        <div class="grid gap-4 sm:grid-cols-2 xl:max-w-2xl">
+          <div class="panel p-5">
+            <p class="text-xs uppercase tracking-[0.28em] text-muted">Clients</p>
+            <p class="mt-3 text-lg font-semibold text-paper">Enterprises, studios, and agencies</p>
+          </div>
+          <div class="panel p-5">
+            <p class="text-xs uppercase tracking-[0.28em] text-muted">Focus</p>
+            <p class="mt-3 text-lg font-semibold text-paper">XR engineering, multiplayer, and performance optimization</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-4">
+          <a
+            href="/projects/"
+            class="rounded-full bg-signal px-6 py-3 text-sm font-semibold text-paper no-underline shadow-lg shadow-signal/10 transition hover:bg-signal-dark hover:text-paper"
+          >
+            See the work
+          </a>
+          <a
+            href="/contact/"
+            class="rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-paper no-underline transition hover:border-signal"
+          >
+            Work together
+          </a>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="glass-card p-8">
+          <WireframeHero size={340} />
+        </div>
+        <div class="pointer-events-none absolute -right-8 -bottom-8 hidden rounded-full bg-signal/15 blur-3xl md:block h-24 w-24"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-6 pb-20">
+    <div class="glass-card p-6 md:p-8">
+      <div class="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+        <div>
+          <p class="text-xs uppercase tracking-[0.3em] text-signal">Expertise</p>
+          <h2 class="mt-3 text-2xl font-semibold text-paper">Technical leadership for XR products, simulation, and multiplayer systems.</h2>
+        </div>
+        <a
+          href="/contact/"
+          class="inline-flex rounded-full bg-signal px-5 py-3 text-sm font-semibold text-paper shadow-lg shadow-signal/15 transition hover:bg-signal/90 hover:text-paper"
+        >
+          Talk strategy
+        </a>
+      </div>
+      <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {['LBE VR live in 3 venues', 'Steam demo live', 'Enterprise training', '90fps Quest performance'].map((item) => (
+          <div class="rounded-3xl border border-white/10 bg-white/5 px-4 py-4">
+            <p class="text-sm font-medium text-paper">{item}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-6 pb-20">
+    <ul class="flex flex-wrap gap-3" aria-label="Core technical stack">
+      {
+        [
+          'Unity 3D',
+          'OpenXR',
+          'AR Foundation',
+          'XR Interaction Toolkit',
+          'Photon Fusion',
+          'URP / HDRP',
+          'C#',
+        ].map((item) => (
+          <li class="tag">{item}</li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-6 pb-20">
+    <div class="flex items-baseline justify-between">
+      <h2 class="text-xl font-semibold text-paper">Selected work</h2>
+      <a href="/projects/" class="text-sm font-semibold text-signal transition hover:text-signal/90">All projects &rarr;</a>
+    </div>
+    <div class="mt-6 grid gap-6 sm:grid-cols-2">
+      {featured.map((project, i) => <ProjectCard project={project} index={i + 1} />)}
+    </div>
+  </section>
+</BaseLayout>

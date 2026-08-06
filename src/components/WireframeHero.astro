@@ -1,0 +1,109 @@
+---
+export interface Props {
+  size?: number;
+}
+
+const { size = 240 } = Astro.props;
+---
+
+<figure class="mx-auto w-fit">
+  <canvas
+    id="wireframe-hero"
+    width={size}
+    height={size}
+    class="block"
+    role="img"
+    aria-label="A small real-time 3D wireframe, rendered live in this page with plain canvas and no libraries"
+    data-fallback="/wireframe-fallback.svg"
+  ></canvas>
+  <noscript>
+    <img src="/wireframe-fallback.svg" width={size} height={size} alt="Wireframe sphere illustration" />
+  </noscript>
+  <figcaption class="mt-3 text-center font-mono text-[11px] uppercase tracking-wide text-muted">
+    live render &middot; &lt;canvas&gt; &middot; zero dependencies
+  </figcaption>
+</figure>
+
+<script>
+  const canvas = document.getElementById('wireframe-hero');
+
+  if (canvas instanceof HTMLCanvasElement) {
+    const ctx = canvas.getContext('2d');
+
+    if (ctx) {
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+
+      // Icosahedron: 12 vertices, 30 edges.
+      const t = (1 + Math.sqrt(5)) / 2;
+      const verts: [number, number, number][] = [
+        [-1, t, 0], [1, t, 0], [-1, -t, 0], [1, -t, 0],
+        [0, -1, t], [0, 1, t], [0, -1, -t], [0, 1, -t],
+        [t, 0, -1], [t, 0, 1], [-t, 0, -1], [-t, 0, 1],
+      ];
+      const edges: [number, number][] = [
+        [0, 1], [0, 5], [0, 7], [0, 10], [0, 11],
+        [1, 5], [1, 7], [1, 8], [1, 9],
+        [2, 3], [2, 4], [2, 6], [2, 10], [2, 11],
+        [3, 4], [3, 6], [3, 8], [3, 9],
+        [4, 5], [4, 9], [4, 11],
+        [5, 9], [5, 11],
+        [6, 7], [6, 8], [6, 10],
+        [7, 8], [7, 10],
+        [8, 9],
+        [10, 11],
+      ];
+
+      let angleX = 0.5;
+      let angleY = 0;
+      const scale = canvas.width / 4.6;
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+
+      function project([x, y, z]: [number, number, number]): [number, number] {
+        const cosY = Math.cos(angleY);
+        const sinY = Math.sin(angleY);
+        const x1 = x * cosY - z * sinY;
+        const z1 = x * sinY + z * cosY;
+
+        const cosX = Math.cos(angleX);
+        const sinX = Math.sin(angleX);
+        const y1 = y * cosX - z1 * sinX;
+        const z2 = y * sinX + z1 * cosX;
+
+        const perspective = 4 / (4 + z2);
+        return [cx + x1 * scale * perspective, cy + y1 * scale * perspective];
+      }
+
+      function draw() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = '#1D4ED8';
+        ctx.lineWidth = 1;
+        ctx.globalAlpha = 0.85;
+
+        const projected = verts.map(project);
+        for (const [a, b] of edges) {
+          const [ax, ay] = projected[a];
+          const [bx, by] = projected[b];
+          ctx.beginPath();
+          ctx.moveTo(ax, ay);
+          ctx.lineTo(bx, by);
+          ctx.stroke();
+        }
+      }
+
+      if (prefersReducedMotion) {
+        draw();
+      } else {
+        const loop = () => {
+          angleY += 0.006;
+          draw();
+          requestAnimationFrame(loop);
+        };
+        loop();
+      }
+    }
+  }
+</script>

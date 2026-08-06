@@ -1,0 +1,64 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  /** Set true on pages that shouldn't be indexed (none currently, kept for completeness). */
+  noindex?: boolean;
+}
+
+const { title, description, noindex = false } = Astro.props;
+const siteUrl = Astro.site ?? (new URL('/', Astro.url)).origin;
+const ld = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Akaash Garg",
+  "url": siteUrl,
+  "description": description
+};
+const pageTitle = title === 'Akaash Garg' ? title : `${title} · Akaash Garg`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="theme-color" content="#05060d" />
+    <meta property="og:site_name" content="Akaash Garg" />
+
+    <meta property="og:image" content="/images/projects/ruins-of-the-forgotten-1.svg" />
+    <meta property="og:image:alt" content="Akaash Garg — project preview" />
+    <meta name="twitter:image" content="/images/projects/ruins-of-the-forgotten-1.svg" />
+    <link rel="preload" as="image" href="/images/projects/free-roam-multiplayer-vr-arena-1.avif" type="image/avif" />
+
+    <meta name="generator" content={Astro.generator} />
+    <script type="application/ld+json">{JSON.stringify(ld)}</script>
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Header />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

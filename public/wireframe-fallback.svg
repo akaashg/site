@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Wireframe sphere illustration">
+  <g fill="none" stroke="#1D4ED8" stroke-width="1" opacity="0.85">
+    <circle cx="120" cy="120" r="90" />
+    <ellipse cx="120" cy="120" rx="90" ry="30" />
+    <ellipse cx="120" cy="120" rx="90" ry="60" />
+    <ellipse cx="120" cy="120" rx="30" ry="90" />
+    <ellipse cx="120" cy="120" rx="60" ry="90" />
+    <line x1="30" y1="120" x2="210" y2="120" />
+    <line x1="120" y1="30" x2="120" y2="210" />
+  </g>
+</svg>

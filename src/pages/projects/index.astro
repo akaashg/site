@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const allProjects = await getCollection('projects', ({ data }) => !data.draft);
+const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Projects"
+  description="XR and full-stack projects by Akaash Garg: multiplayer VR, AR collaboration, and simulation systems shipped for enterprise clients and gaming teams."
+>
+  <section class="mx-auto max-w-5xl px-6 pt-16 pb-8 sm:pt-24">
+    <div class="space-y-5">
+      <p class="font-mono text-xs uppercase tracking-[0.3em] text-signal">Project work</p>
+      <h1 class="text-4xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-5xl">Selected case studies</h1>
+      <p class="max-w-prose text-base leading-8 text-muted sm:text-lg">
+        Enterprise XR systems and immersive games built for real budgets. Each case study explains the challenge, technology, and the performance outcomes I delivered.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-6 pb-20">
+    <div class="grid gap-6 sm:grid-cols-2">
+      {projects.map((project, i) => <ProjectCard project={project} index={i + 1} />)}
+    </div>
+  </section>
+</BaseLayout>
