@@ -5,6 +5,20 @@ dist/
 # dependencies
 node_modules/
 
+# Lighthouse CI generated output
+.lighthouseci/*
+!.lighthouseci/ci-config.json
+.lighthouseci/chrome-user-data/
+
+# local LHCI logs
+lhci-local-output*.txt
+
+# npm logs and install outputs
+npm-debug.log*
+npm-*.log*
+npm-tslib-install-log.txt
+npm-update-output.txt
+
 # env
 .env
 .env.production
