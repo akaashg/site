@@ -3,107 +3,152 @@ export interface Props {
   size?: number;
 }
 
-const { size = 240 } = Astro.props;
+const { size = 340 } = Astro.props;
 ---
 
-<figure class="mx-auto w-fit">
-  <canvas
-    id="wireframe-hero"
-    width={size}
-    height={size}
-    class="block"
-    role="img"
-    aria-label="A small real-time 3D wireframe, rendered live in this page with plain canvas and no libraries"
-    data-fallback="/wireframe-fallback.svg"
-  ></canvas>
-  <noscript>
-    <img src="/wireframe-fallback.svg" width={size} height={size} alt="Wireframe sphere illustration" />
-  </noscript>
-  <figcaption class="mt-3 text-center font-mono text-[11px] uppercase tracking-wide text-muted">
-    live render &middot; &lt;canvas&gt; &middot; zero dependencies
-  </figcaption>
+<figure class="spatial-viewer mx-auto" style={`--viewer-size: ${size}px`} aria-label="Interactive three-dimensional spatial field">
+  <canvas class="spatial-canvas" aria-label="Three-dimensional spatial field. Drag to explore."></canvas>
+  <div class="viewer-hud" aria-hidden="true"><span>XR / spatial field</span><span>Drag to explore</span></div>
 </figure>
 
-<script>
-  const canvas = document.getElementById('wireframe-hero');
+<script is:inline type="module">
+  import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js';
+
+  const canvas = document.querySelector('.spatial-canvas');
 
   if (canvas instanceof HTMLCanvasElement) {
-    const ctx = canvas.getContext('2d');
+    const initialSize = canvas.parentElement?.clientWidth ?? 340;
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.setSize(initialSize, initialSize, false);
 
-    if (ctx) {
-      const prefersReducedMotion = window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
-      ).matches;
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x05060d, 0.095);
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+    const target = new THREE.Vector3(0, 0.35, 0);
+    let radius = 8.2;
+    let azimuth = -0.7;
+    let elevation = 0.48;
 
-      // Icosahedron: 12 vertices, 30 edges.
-      const t = (1 + Math.sqrt(5)) / 2;
-      const verts: [number, number, number][] = [
-        [-1, t, 0], [1, t, 0], [-1, -t, 0], [1, -t, 0],
-        [0, -1, t], [0, 1, t], [0, -1, -t], [0, 1, -t],
-        [t, 0, -1], [t, 0, 1], [-t, 0, -1], [-t, 0, 1],
-      ];
-      const edges: [number, number][] = [
-        [0, 1], [0, 5], [0, 7], [0, 10], [0, 11],
-        [1, 5], [1, 7], [1, 8], [1, 9],
-        [2, 3], [2, 4], [2, 6], [2, 10], [2, 11],
-        [3, 4], [3, 6], [3, 8], [3, 9],
-        [4, 5], [4, 9], [4, 11],
-        [5, 9], [5, 11],
-        [6, 7], [6, 8], [6, 10],
-        [7, 8], [7, 10],
-        [8, 9],
-        [10, 11],
-      ];
+    const world = new THREE.Group();
+    world.rotation.y = -0.15;
+    scene.add(world);
 
-      let angleX = 0.5;
-      let angleY = 0;
-      const scale = canvas.width / 4.6;
-      const cx = canvas.width / 2;
-      const cy = canvas.height / 2;
+    function terrainHeight(x, z) {
+      return Math.sin(x * 0.82) * 0.16 + Math.cos(z * 0.7) * 0.12 + Math.sin((x + z) * 0.55) * 0.09;
+    }
 
-      function project([x, y, z]: [number, number, number]): [number, number] {
-        const cosY = Math.cos(angleY);
-        const sinY = Math.sin(angleY);
-        const x1 = x * cosY - z * sinY;
-        const z1 = x * sinY + z * cosY;
-
-        const cosX = Math.cos(angleX);
-        const sinX = Math.sin(angleX);
-        const y1 = y * cosX - z1 * sinX;
-        const z2 = y * sinX + z1 * cosX;
-
-        const perspective = 4 / (4 + z2);
-        return [cx + x1 * scale * perspective, cy + y1 * scale * perspective];
-      }
-
-      function draw() {
-        if (!ctx) return;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = '#1D4ED8';
-        ctx.lineWidth = 1;
-        ctx.globalAlpha = 0.85;
-
-        const projected = verts.map(project);
-        for (const [a, b] of edges) {
-          const [ax, ay] = projected[a];
-          const [bx, by] = projected[b];
-          ctx.beginPath();
-          ctx.moveTo(ax, ay);
-          ctx.lineTo(bx, by);
-          ctx.stroke();
-        }
-      }
-
-      if (prefersReducedMotion) {
-        draw();
-      } else {
-        const loop = () => {
-          angleY += 0.006;
-          draw();
-          requestAnimationFrame(loop);
-        };
-        loop();
+    const terrainLines = [];
+    const divisions = 13;
+    const span = 6.4;
+    const step = span / (divisions - 1);
+    for (let row = 0; row < divisions; row += 1) {
+      const z = -span / 2 + row * step;
+      for (let column = 0; column < divisions - 1; column += 1) {
+        const x = -span / 2 + column * step;
+        terrainLines.push(x, terrainHeight(x, z), z, x + step, terrainHeight(x + step, z), z);
       }
     }
+    for (let column = 0; column < divisions; column += 1) {
+      const x = -span / 2 + column * step;
+      for (let row = 0; row < divisions - 1; row += 1) {
+        const z = -span / 2 + row * step;
+        terrainLines.push(x, terrainHeight(x, z), z, x, terrainHeight(x, z + step), z + step);
+      }
+    }
+    const terrainGeometry = new THREE.BufferGeometry();
+    terrainGeometry.setAttribute('position', new THREE.Float32BufferAttribute(terrainLines, 3));
+    const terrain = new THREE.LineSegments(terrainGeometry, new THREE.LineBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.52 }));
+    world.add(terrain);
+
+    const base = new THREE.Mesh(
+      new THREE.RingGeometry(1.05, 1.1, 48),
+      new THREE.MeshBasicMaterial({ color: 0xa78bfa, transparent: true, opacity: 0.6, side: THREE.DoubleSide }),
+    );
+    base.rotation.x = -Math.PI / 2;
+    base.position.y = terrainHeight(0, 0) + 0.012;
+    world.add(base);
+
+    const beacon = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(0.66, 2),
+      new THREE.MeshBasicMaterial({ color: 0xe0f2fe, wireframe: true, transparent: true, opacity: 0.9 }),
+    );
+    beacon.position.y = 1.2;
+    world.add(beacon);
+
+    [0.9, 1.35, 1.8].forEach((radius, index) => {
+      const ring = new THREE.Mesh(
+        new THREE.TorusGeometry(radius, 0.012, 4, 48),
+        new THREE.MeshBasicMaterial({ color: index === 1 ? 0xa78bfa : 0x7dd3fc, transparent: true, opacity: 0.45 - index * 0.08 }),
+      );
+      ring.rotation.x = Math.PI / 2;
+      ring.position.y = 1.2;
+      world.add(ring);
+    });
+
+    const nodes = new THREE.Group();
+    const nodeGeometry = new THREE.OctahedronGeometry(0.11, 0);
+    const nodeMaterial = new THREE.MeshBasicMaterial({ color: 0xf0abfc, wireframe: true, transparent: true, opacity: 0.82 });
+    [[-2.2, -1.5], [-1.4, 1.7], [1.9, -1.6], [2.45, 1.15], [0.4, 2.35]].forEach(([x, z]) => {
+      const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
+      node.position.set(x, terrainHeight(x, z) + 0.28, z);
+      nodes.add(node);
+    });
+    world.add(nodes);
+
+    let pointerDown = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    function draw() {
+      camera.position.set(
+        radius * Math.cos(elevation) * Math.sin(azimuth),
+        radius * Math.sin(elevation) + 0.55,
+        radius * Math.cos(elevation) * Math.cos(azimuth),
+      );
+      camera.lookAt(target);
+      renderer.render(scene, camera);
+    }
+
+    canvas.addEventListener('pointerdown', (event) => {
+      pointerDown = true;
+      lastX = event.clientX;
+      lastY = event.clientY;
+      canvas.setPointerCapture(event.pointerId);
+    });
+    canvas.addEventListener('pointermove', (event) => {
+      if (!pointerDown) return;
+      azimuth -= (event.clientX - lastX) * 0.009;
+      elevation = THREE.MathUtils.clamp(elevation + (event.clientY - lastY) * 0.009, 0.12, 1.05);
+      lastX = event.clientX;
+      lastY = event.clientY;
+      draw();
+    });
+    canvas.addEventListener('pointerup', () => { pointerDown = false; });
+    canvas.addEventListener('pointercancel', () => { pointerDown = false; });
+    canvas.addEventListener('wheel', (event) => {
+      event.preventDefault();
+      radius = THREE.MathUtils.clamp(radius + event.deltaY * 0.008, 5.7, 11);
+      draw();
+    }, { passive: false });
+
+    const observer = new ResizeObserver(() => {
+      const nextSize = canvas.parentElement?.clientWidth ?? initialSize;
+      renderer.setSize(nextSize, nextSize, false);
+      camera.aspect = 1;
+      camera.updateProjectionMatrix();
+      draw();
+    });
+    observer.observe(canvas.parentElement);
+    draw();
   }
 </script>
+
+<style>
+  .spatial-viewer { position: relative; width: min(100%, var(--viewer-size)); aspect-ratio: 1; overflow: hidden; border-radius: 1.5rem; border: 1px solid rgb(125 211 252 / 0.15); background: radial-gradient(circle at 50% 40%, rgb(30 41 59 / 0.7), rgb(5 6 13 / 0.15) 65%); }
+  .spatial-canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+  .spatial-canvas:active { cursor: grabbing; }
+  .viewer-hud { position: absolute; inset: auto 1rem 0.9rem; display: flex; justify-content: space-between; font: 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.12em; text-transform: uppercase; color: rgb(186 230 253 / 0.7); pointer-events: none; }
+  .viewer-hud span:last-child { color: rgb(167 139 250 / 0.72); }
+  @media (prefers-reduced-motion: reduce) { .viewer-hud span:last-child { display: none; } }
+</style>
