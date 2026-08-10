@@ -60,5 +60,46 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <slot />
     </main>
     <Footer />
+
+    <script>
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const revealTargets = Array.from(document.querySelectorAll('[data-animate]'));
+
+      if (prefersReducedMotion) {
+        revealTargets.forEach((target) => {
+          if (target instanceof HTMLElement) {
+            target.classList.add('is-visible');
+          }
+        });
+      } else if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2, rootMargin: '0px 0px -8% 0px' }
+        );
+
+        revealTargets.forEach((target) => {
+          if (target instanceof HTMLElement) {
+            const delay = Number(target.dataset.animateDelay ?? 0);
+            if (Number.isFinite(delay) && delay > 0) {
+              target.style.transitionDelay = `${delay}ms`;
+            }
+            observer.observe(target);
+          }
+        });
+      } else {
+        revealTargets.forEach((target) => {
+          if (target instanceof HTMLElement) {
+            target.classList.add('is-visible');
+          }
+        });
+      }
+    </script>
   </body>
 </html>

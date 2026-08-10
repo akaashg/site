@@ -11,6 +11,19 @@ order: 8
 
 Remote and hybrid classrooms lose the parts of in-person teaching that are hardest to replace — a teacher walking a 3D model, students collaborating around the same object — unless the virtual classroom actually puts everyone in the same shared space instead of on a grid of video tiles.
 
+<div class="my-8 overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/20 shadow-[0_24px_80px_rgba(15,23,42,0.25)]">
+  <div class="aspect-video w-full">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/TrSPepYXo4A?rel=0&modestbranding=1"
+      title="VR School demo video"
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+      class="h-full w-full"
+    ></iframe>
+  </div>
+</div>
+
 ## What I built
 
 An educational VR platform that turns lessons into shared, interactive virtual sessions across Oculus Quest, HP and HTC headsets, and Android devices, so schools aren't locked into a single hardware vendor. Built in Unity with Photon Networking for the multi-user session layer, React and Three.js for companion web tooling, and Blender-authored environments and VR SDK integrations across the supported headsets, giving educators and students shared spaces for immersive teaching, learning, and collaboration regardless of which device they log in from.

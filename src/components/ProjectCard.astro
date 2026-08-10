@@ -10,9 +10,14 @@ export interface Props {
 const { project, index } = Astro.props;
 const { title, company, role, timeframe, summary, stack, outcome } = project.data;
 const label = typeof index === 'number' ? String(index).padStart(2, '0') : null;
+const revealDelay = typeof index === 'number' ? Math.min((index - 1) * 120, 360) : 0;
 ---
 
-<article class="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-surface/90 p-6 transition duration-300 hover:-translate-y-0.5 hover:border-signal/30 hover:bg-white/5">
+<article
+  class="scroll-reveal group relative overflow-hidden rounded-[2rem] border border-white/10 bg-surface/90 p-6 transition duration-300 hover:-translate-y-0.5 hover:border-signal/30 hover:bg-white/5"
+  data-animate
+  data-animate-delay={revealDelay}
+>
   {label && (
     <span class="absolute right-4 top-4 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.68rem] uppercase tracking-[0.28em] text-muted">
       {label}

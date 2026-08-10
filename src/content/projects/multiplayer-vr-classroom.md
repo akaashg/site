@@ -2,9 +2,13 @@
 title: Multiplayer VR Classroom
 company: 2 Dude Studios
 role: Senior XR Engineer
-timeframe: 2023–Present
-stack: [Unity 3D, Photon Fusion, XR Interaction Toolkit, Meta Quest]
-summary: Instructor-led, step-based multiplayer VR training environment — a direct precedent for medical, industrial, and clinical simulation training.
+timeframe: 2023-Present
+stack:
+  - Unity 3D
+  - Photon Fusion
+  - XR Interaction Toolkit
+  - Meta Quest
+summary: "Instructor-led, step-based multiplayer VR training environment - a direct precedent for medical, industrial, and clinical simulation training."
 order: 5
 draft: true
 ---
