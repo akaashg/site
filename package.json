@@ -9,6 +9,7 @@
     "build": "astro build",
     "generate:images": "node ./scripts/generate-images.js",
     "lhci": "lhci autorun --config ./.lighthouseci/ci-config.json --upload.target=temporary-public-storage",
+    "lhci-local": "lhci autorun --config ./.lighthouseci/ci-config.json --upload.target=temporary-public-storage",
     "preview": "astro preview",
     "check": "astro check"
   },
@@ -16,16 +17,16 @@
     "@astrojs/tailwind": "^5.1.2",
     "astro": "^4.16.0",
     "intl-messageformat": "^11.2.13",
-    "tailwindcss": "^3.4.13",
-    "tslib": "^2.8.1"
+    "tailwindcss": "^3.4.13"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
+    "@lhci/cli": "^0.15.1",
     "glob": "^10.3.0",
+    "http-server": "^14.1.1",
     "lighthouse": "^13.4.1",
     "sharp": "^0.32.0",
+    "tslib": "^2.8.1",
     "typescript": "^5.6.3"
-    "@lhci/cli": "^0.10.0",
-    "http-server": "^14.1.1"
   }
 }

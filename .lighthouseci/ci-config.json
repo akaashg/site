@@ -2,11 +2,15 @@
   "ci": {
     "collect": {
       "startServerCommand": "npx http-server ./dist -p 8080",
+      "startServerReadyPattern": "Available on",
       "url": [
         "http://127.0.0.1:8080/",
         "http://127.0.0.1:8080/projects/free-roam-vr-arena/"
       ],
-      "numberOfRuns": 3
+      "numberOfRuns": 3,
+      "settings": {
+        "chromeFlags": "--no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir=.lighthouseci/chrome-user-data"
+      }
     },
     "assert": {
       "assertions": {

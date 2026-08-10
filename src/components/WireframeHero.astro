@@ -3,107 +3,239 @@ export interface Props {
   size?: number;
 }
 
-const { size = 240 } = Astro.props;
+const { size = 340 } = Astro.props;
 ---
 
-<figure class="mx-auto w-fit">
-  <canvas
-    id="wireframe-hero"
-    width={size}
-    height={size}
-    class="block"
-    role="img"
-    aria-label="A small real-time 3D wireframe, rendered live in this page with plain canvas and no libraries"
-    data-fallback="/wireframe-fallback.svg"
-  ></canvas>
-  <noscript>
-    <img src="/wireframe-fallback.svg" width={size} height={size} alt="Wireframe sphere illustration" />
-  </noscript>
-  <figcaption class="mt-3 text-center font-mono text-[11px] uppercase tracking-wide text-muted">
-    live render &middot; &lt;canvas&gt; &middot; zero dependencies
-  </figcaption>
+<figure class="xr-viewer mx-auto" style={`--viewer-size: ${size}px`} aria-label="Interactive three-dimensional XR environment">
+  <canvas class="xr-canvas" aria-label="Three-dimensional spatial environment. Drag to explore."></canvas>
+  <div class="viewer-capabilities" aria-label="Explore capabilities">
+    <a class="viewer-capability" data-portal="build" href="/projects/retail-ar/">
+      <span>01</span><strong>Build</strong><small>XR applications</small>
+    </a>
+    <a class="viewer-capability" data-portal="connect" href="/projects/social-vr-xtraspace/">
+      <span>02</span><strong>Connect</strong><small>Multiplayer systems</small>
+    </a>
+    <a class="viewer-capability" data-portal="optimise" href="/projects/free-roam-vr-arena/">
+      <span>03</span><strong>Optimise</strong><small>Real-time performance</small>
+    </a>
+  </div>
+  <div class="viewer-hud" aria-hidden="true">
+    <span>XR / spatial sandbox</span>
+    <span class="viewer-instruction">Drag to explore</span>
+  </div>
 </figure>
 
-<script>
-  const canvas = document.getElementById('wireframe-hero');
+<script is:inline type="module">
+  import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js';
+
+  const canvas = document.querySelector('.xr-canvas');
+  const capabilityLinks = document.querySelectorAll('.viewer-capability');
 
   if (canvas instanceof HTMLCanvasElement) {
-    const ctx = canvas.getContext('2d');
+    const size = canvas.parentElement?.clientWidth ?? 340;
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.setSize(size, size, false);
 
-    if (ctx) {
-      const prefersReducedMotion = window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
-      ).matches;
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x05060d, 0.09);
 
-      // Icosahedron: 12 vertices, 30 edges.
-      const t = (1 + Math.sqrt(5)) / 2;
-      const verts: [number, number, number][] = [
-        [-1, t, 0], [1, t, 0], [-1, -t, 0], [1, -t, 0],
-        [0, -1, t], [0, 1, t], [0, -1, -t], [0, 1, -t],
-        [t, 0, -1], [t, 0, 1], [-t, 0, -1], [-t, 0, 1],
-      ];
-      const edges: [number, number][] = [
-        [0, 1], [0, 5], [0, 7], [0, 10], [0, 11],
-        [1, 5], [1, 7], [1, 8], [1, 9],
-        [2, 3], [2, 4], [2, 6], [2, 10], [2, 11],
-        [3, 4], [3, 6], [3, 8], [3, 9],
-        [4, 5], [4, 9], [4, 11],
-        [5, 9], [5, 11],
-        [6, 7], [6, 8], [6, 10],
-        [7, 8], [7, 10],
-        [8, 9],
-        [10, 11],
-      ];
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+    const target = new THREE.Vector3(0, 0.35, 0);
+    let radius = 8.3;
+    let azimuth = -0.7;
+    let elevation = 0.42;
 
-      let angleX = 0.5;
-      let angleY = 0;
-      const scale = canvas.width / 4.6;
-      const cx = canvas.width / 2;
-      const cy = canvas.height / 2;
+    const world = new THREE.Group();
+    scene.add(world);
 
-      function project([x, y, z]: [number, number, number]): [number, number] {
-        const cosY = Math.cos(angleY);
-        const sinY = Math.sin(angleY);
-        const x1 = x * cosY - z * sinY;
-        const z1 = x * sinY + z * cosY;
+    const grid = new THREE.GridHelper(12, 24, 0x67e8f9, 0x334155);
+    grid.material.transparent = true;
+    grid.material.opacity = 0.46;
+    world.add(grid);
 
-        const cosX = Math.cos(angleX);
-        const sinX = Math.sin(angleX);
-        const y1 = y * cosX - z1 * sinX;
-        const z2 = y * sinX + z1 * cosX;
+    const ring = new THREE.Mesh(
+      new THREE.RingGeometry(2.35, 2.39, 64),
+      new THREE.MeshBasicMaterial({ color: 0xa78bfa, transparent: true, opacity: 0.5, side: THREE.DoubleSide }),
+    );
+    ring.rotation.x = -Math.PI / 2;
+    ring.position.y = 0.012;
+    world.add(ring);
 
-        const perspective = 4 / (4 + z2);
-        return [cx + x1 * scale * perspective, cy + y1 * scale * perspective];
-      }
+    const portalMaterial = new THREE.MeshBasicMaterial({ color: 0x7dd3fc, wireframe: true, transparent: true, opacity: 0.72 });
+    const portalDepthMaterial = new THREE.MeshBasicMaterial({ color: 0xa78bfa, wireframe: true, transparent: true, opacity: 0.42 });
+    const portals = new Map();
+    const portalRoutes = {
+      build: '/projects/retail-ar/',
+      connect: '/projects/social-vr-xtraspace/',
+      optimise: '/projects/free-roam-vr-arena/',
+    };
 
-      function draw() {
-        if (!ctx) return;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = '#1D4ED8';
-        ctx.lineWidth = 1;
-        ctx.globalAlpha = 0.85;
-
-        const projected = verts.map(project);
-        for (const [a, b] of edges) {
-          const [ax, ay] = projected[a];
-          const [bx, by] = projected[b];
-          ctx.beginPath();
-          ctx.moveTo(ax, ay);
-          ctx.lineTo(bx, by);
-          ctx.stroke();
-        }
-      }
-
-      if (prefersReducedMotion) {
-        draw();
-      } else {
-        const loop = () => {
-          angleY += 0.006;
-          draw();
-          requestAnimationFrame(loop);
-        };
-        loop();
-      }
+    function makePortal(id, x, z, scale, rotation) {
+      const portal = new THREE.Group();
+      const frame = new THREE.Mesh(new THREE.TorusGeometry(1, 0.055, 6, 28), portalMaterial.clone());
+      frame.scale.y = 1.3;
+      frame.position.y = 1.45;
+      const inner = new THREE.Mesh(new THREE.TorusGeometry(0.76, 0.025, 6, 28), portalDepthMaterial.clone());
+      inner.scale.y = 1.3;
+      inner.position.y = 1.45;
+      const stem = new THREE.LineSegments(
+        new THREE.EdgesGeometry(new THREE.BoxGeometry(0.04, 1.35, 0.04)),
+        new THREE.LineBasicMaterial({ color: 0x7dd3fc, transparent: true, opacity: 0.65 }),
+      );
+      stem.position.y = 0.67;
+      portal.add(frame, inner, stem);
+      portal.position.set(x, 0, z);
+      portal.rotation.y = rotation;
+      portal.scale.setScalar(scale);
+      const materials = [frame.material, inner.material, stem.material];
+      materials.forEach((material) => { material.userData.baseOpacity = material.opacity; });
+      [frame, inner, stem].forEach((part) => { part.userData.portalId = id; });
+      portal.userData = { baseScale: scale, materials };
+      world.add(portal);
+      portals.set(id, portal);
+      return portal;
     }
+
+    makePortal('build', 0, -0.35, 1.15, 0);
+    makePortal('connect', -2.55, -1.15, 0.57, 0.38);
+    makePortal('optimise', 2.7, -1.5, 0.48, -0.32);
+
+    const nodeGeometry = new THREE.IcosahedronGeometry(0.17, 1);
+    const nodeMaterial = new THREE.MeshBasicMaterial({ color: 0xf0abfc, wireframe: true });
+    [
+      [-1.25, 0.55, -0.3], [1.42, 0.82, -0.75], [-2.05, 0.35, 1.15], [2.25, 0.3, 1.25],
+    ].forEach(([x, y, z]) => {
+      const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
+      node.position.set(x, y, z);
+      world.add(node);
+    });
+
+    const horizon = new THREE.LineSegments(
+      new THREE.EdgesGeometry(new THREE.BoxGeometry(7.7, 0.02, 7.7, 8, 1, 8)),
+      new THREE.LineBasicMaterial({ color: 0x64748b, transparent: true, opacity: 0.2 }),
+    );
+    horizon.position.y = 0.01;
+    world.add(horizon);
+
+    let pointerDown = false;
+    let lastX = 0;
+    let lastY = 0;
+    let pressPortal = null;
+    let dragDistance = 0;
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+
+    function portalAtPointer(event) {
+      const rect = canvas.getBoundingClientRect();
+      pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+      const hit = raycaster.intersectObjects(Array.from(portals.values()), true)
+        .find((intersection) => intersection.object.userData.portalId);
+      return hit?.object.userData.portalId ?? null;
+    }
+
+    function highlightPortal(id) {
+      portals.forEach((portal, key) => {
+        const active = id === key;
+        portal.scale.setScalar(portal.userData.baseScale * (active ? 1.08 : 1));
+        portal.userData.materials.forEach((material) => {
+          material.opacity = material.userData.baseOpacity * (active ? 1.45 : 1);
+        });
+      });
+      canvas.style.cursor = id ? 'pointer' : pointerDown ? 'grabbing' : 'grab';
+      draw();
+    }
+
+    canvas.addEventListener('pointerdown', (event) => {
+      pointerDown = true;
+      pressPortal = portalAtPointer(event);
+      dragDistance = 0;
+      lastX = event.clientX;
+      lastY = event.clientY;
+      canvas.setPointerCapture(event.pointerId);
+    });
+
+    canvas.addEventListener('pointermove', (event) => {
+      if (!pointerDown) {
+        highlightPortal(portalAtPointer(event));
+        return;
+      }
+      dragDistance += Math.abs(event.clientX - lastX) + Math.abs(event.clientY - lastY);
+      azimuth -= (event.clientX - lastX) * 0.009;
+      elevation = THREE.MathUtils.clamp(elevation + (event.clientY - lastY) * 0.009, 0.1, 1.05);
+      lastX = event.clientX;
+      lastY = event.clientY;
+      draw();
+    });
+
+    canvas.addEventListener('pointerup', () => {
+      pointerDown = false;
+      if (pressPortal && dragDistance < 8) window.location.href = portalRoutes[pressPortal];
+      pressPortal = null;
+      highlightPortal(null);
+    });
+    canvas.addEventListener('pointercancel', () => { pointerDown = false; pressPortal = null; highlightPortal(null); });
+    canvas.addEventListener('wheel', (event) => {
+      event.preventDefault();
+      radius = THREE.MathUtils.clamp(radius + event.deltaY * 0.008, 5.7, 11);
+      draw();
+    }, { passive: false });
+
+    function updateCamera() {
+      camera.position.set(
+        radius * Math.cos(elevation) * Math.sin(azimuth),
+        radius * Math.sin(elevation) + 0.55,
+        radius * Math.cos(elevation) * Math.cos(azimuth),
+      );
+      camera.lookAt(target);
+    }
+
+    function draw() {
+      updateCamera();
+      renderer.render(scene, camera);
+    }
+
+    const observer = new ResizeObserver(() => {
+      const nextSize = canvas.parentElement?.clientWidth ?? size;
+      renderer.setSize(nextSize, nextSize, false);
+      camera.aspect = 1;
+      camera.updateProjectionMatrix();
+      draw();
+    });
+    observer.observe(canvas.parentElement);
+    capabilityLinks.forEach((link) => {
+      const portalId = link.dataset.portal;
+      link.addEventListener('mouseenter', () => highlightPortal(portalId));
+      link.addEventListener('focus', () => highlightPortal(portalId));
+      link.addEventListener('mouseleave', () => highlightPortal(null));
+      link.addEventListener('blur', () => highlightPortal(null));
+    });
+    draw();
   }
 </script>
+
+<style>
+  .xr-viewer {
+    position: relative;
+    width: min(100%, var(--viewer-size));
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    border: 1px solid rgb(125 211 252 / 0.15);
+    background: radial-gradient(circle at 50% 40%, rgb(30 41 59 / 0.7), rgb(5 6 13 / 0.15) 65%);
+  }
+
+  .xr-canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+  .xr-canvas:active { cursor: grabbing; }
+  .viewer-capabilities { position: absolute; inset: 1rem 1rem auto; display: grid; gap: 0.35rem; }
+  .viewer-capability { display: grid; grid-template-columns: 1.7rem 1fr; column-gap: 0.35rem; align-items: baseline; width: fit-content; padding: 0.42rem 0.55rem; border: 1px solid transparent; border-radius: 0.55rem; background: rgb(5 6 13 / 0.38); color: rgb(226 232 240 / 0.78); font: 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.08em; text-decoration: none; text-transform: uppercase; transition: border-color 160ms ease, background 160ms ease, color 160ms ease; }
+  .viewer-capability span { color: rgb(167 139 250 / 0.8); }
+  .viewer-capability strong { font-weight: 600; }
+  .viewer-capability small { grid-column: 2; margin-top: 0.18rem; color: rgb(148 163 184 / 0.9); font-size: 9px; letter-spacing: 0.04em; text-transform: none; }
+  .viewer-capability:hover, .viewer-capability:focus-visible { border-color: rgb(125 211 252 / 0.38); background: rgb(15 23 42 / 0.82); color: #e0f2fe; outline: none; }
+  .viewer-hud { position: absolute; inset: auto 1rem 0.9rem; display: flex; justify-content: space-between; font: 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.12em; text-transform: uppercase; color: rgb(186 230 253 / 0.7); pointer-events: none; }
+  .viewer-instruction { color: rgb(167 139 250 / 0.72); }
+  @media (prefers-reduced-motion: reduce) { .viewer-instruction { display: none; } }
+</style>
