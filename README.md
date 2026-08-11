@@ -70,7 +70,7 @@ file, no secrets, no FTP.
 | Repository | `github.com/akaashg/site`, branch `main` |
 | Build command | `npm run build` |
 | Deploy command | `npx wrangler deploy` |
-| Node version | read from `.nvmrc` (20) |
+| Node version | read from `.nvmrc` (22 — wrangler requires >=22) |
 
 `wrangler.jsonc` points the deploy at `./dist` and sets
 `not_found_handling: "404-page"` so a missing path returns the generated
