@@ -23,13 +23,16 @@ const CONFIG = {
     src: 'https://plausible.io/js/script.outbound-links.tagged-events.js',
   },
   /**
-   * Umami Cloud. Add the site at cloud.umami.is, then paste the Website ID
-   * from Settings -> Websites here. Until it is filled in, no script loads and
-   * `track()` no-ops, so the site behaves exactly as it does now.
+   * Umami Cloud. Website ID from Settings -> Websites.
+   *
+   * `domains` restricts collection to these hosts, which keeps local dev and
+   * preview builds out of the stats. Drop the workers.dev entry once
+   * akaashgarg.com is attached and the temporary URL is retired.
    */
   umami: {
-    websiteId: '',
+    websiteId: '9c22491d-8e73-4d82-8a9b-42b057d9acb8',
     src: 'https://cloud.umami.is/script.js',
+    domains: 'akaashgarg.com,personal-website.akaash-garg.workers.dev',
   },
   /** Cloudflare Web Analytics: the token from the dashboard beacon snippet. */
   cloudflare: {
@@ -46,7 +49,13 @@ const CONFIG = {
 
 {
   PROVIDER === 'umami' && CONFIG.umami.websiteId && (
-    <script is:inline defer data-website-id={CONFIG.umami.websiteId} src={CONFIG.umami.src} />
+    <script
+      is:inline
+      defer
+      data-website-id={CONFIG.umami.websiteId}
+      data-domains={CONFIG.umami.domains}
+      src={CONFIG.umami.src}
+    />
   )
 }
 
