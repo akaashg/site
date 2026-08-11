@@ -59,23 +59,35 @@ Posts to Web3Forms (`src/pages/contact.astro`). The access key is public by
 design. The form also POSTs natively without JS, and falls back to a `mailto:`
 link if the API is unreachable.
 
-## Deploy — Cloudflare Pages
+## Deploy — Cloudflare Workers (static assets)
 
-Static output, so it needs a file server and nothing else. Cloudflare Pages
-runs the build itself: connect the repo once and every push to `main` deploys.
-No workflow file, no secrets, no FTP.
+Static output, so it needs a file server and nothing else. Cloudflare builds
+from the repo: connect it once and every push to `main` deploys. No workflow
+file, no secrets, no FTP.
 
 | Setting | Value |
 |---|---|
 | Repository | `github.com/akaashg/site`, branch `main` |
-| Framework preset | Astro |
 | Build command | `npm run build` |
-| Output directory | `dist` |
+| Deploy command | `npx wrangler deploy` |
 | Node version | read from `.nvmrc` (20) |
 
-`public/_headers` carries the cache and security rules; Cloudflare applies it
-automatically. Preview URLs are created per branch, and any past deployment can
-be restored with one click.
+`wrangler.jsonc` points the deploy at `./dist` and sets
+`not_found_handling: "404-page"` so a missing path returns the generated
+`404.html` with a real 404 status.
+
+There is **no Worker script** — every request is served straight from the asset
+store, so nothing is billed as a Worker invocation. `public/_headers` is parsed
+by Workers and applied to asset responses (it is not itself served).
+
+Validate the config locally without deploying:
+
+```
+npm run build && npx wrangler deploy --dry-run
+```
+
+Cloudflare Pages would also work for this site, but new projects are now
+steered to the Workers flow above.
 
 ### Why not Hostinger's Git integration
 

@@ -1,0 +1,19 @@
+{
+  // Deploys the built site to Cloudflare Workers as static assets.
+  // There is no Worker script: every request is served straight from ./dist,
+  // so nothing is billed as a Worker invocation.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "personal-website",
+  "compatibility_date": "2026-08-11",
+  "assets": {
+    "directory": "./dist",
+
+    // Serve the generated 404.html with a real 404 status. Without this a
+    // missing path returns a bare Cloudflare error page, and "single-page-
+    // application" would wrongly return index.html with a 200.
+    "not_found_handling": "404-page"
+
+    // html_handling defaults to "auto-trailing-slash", which matches Astro's
+    // directory-style output (/about -> /about/index.html).
+  }
+}
