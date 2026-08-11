@@ -1,0 +1,97 @@
+---
+/**
+ * Client feedback from freelance engagements, quoted verbatim from the public
+ * Freelancer.com profile and linked back so every quote is verifiable.
+ *
+ * Deliberately omitted: project budgets and the platform's aggregate score.
+ * The engagements these came from were small mobile-game and Unity jobs, and
+ * surfacing those figures anchors a reader far below the enterprise work this
+ * site sells. The link carries the full context for anyone who wants it.
+ *
+ * Replace these with LinkedIn recommendations from enterprise clients as they
+ * come in -- those are stronger proof for the buyers this site targets.
+ */
+
+export interface Props {
+  /** Tighter spacing when the section follows another card grid. */
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+
+const PROFILE_URL = 'https://www.freelancer.com/u/akaashgarg';
+
+/**
+ * Quoted verbatim. Chosen for transferability -- feedback about communication,
+ * professionalism and delivery reads across domains, where "great mobile game"
+ * would undercut the enterprise XR positioning of the rest of the site.
+ * Country is included because it substantiates the overseas-client claim.
+ */
+const testimonials = [
+  {
+    quote:
+      'Akaash provided a perfect and professional experience from start to finish. He was very quick to communicate and clarify all my questions. I would definitely hire him again.',
+    name: 'Sachin',
+    context: 'India · hired twice',
+  },
+  {
+    quote:
+      "I'm very satisfied with the work Akaash put into the project. He was very polite and quick to respond. Very rare to find talented developers like him.",
+    name: 'Raj',
+    context: 'India',
+  },
+  {
+    quote: 'Best of best to work with. Open to discuss and creative. Highly recommended.',
+    name: 'Kudret',
+    context: 'United States · hired three times',
+  },
+];
+---
+
+<section class={`mx-auto max-w-5xl px-6 ${compact ? 'pb-20' : 'py-20'}`}>
+  <div class="flex flex-wrap items-baseline justify-between gap-3 scroll-reveal" data-animate>
+    <div>
+      <h2 class="text-xl font-semibold text-paper">What clients say</h2>
+      <p class="mt-2 text-sm leading-6 text-muted">
+        Several of these clients came back for further projects.
+      </p>
+    </div>
+    <a
+      href={PROFILE_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-block py-2 text-sm font-semibold text-signal transition hover:text-signal/90"
+    >
+      Verified reviews on Freelancer.com &rarr;
+    </a>
+  </div>
+
+  <div class="mt-6 grid gap-4 md:grid-cols-3">
+    {
+      testimonials.map((item, index) => (
+        <figure
+          class="panel flex h-full flex-col p-6 scroll-reveal"
+          data-animate
+          data-animate-delay={index * 90 + 60}
+        >
+          <div class="flex gap-1 text-signal" aria-label="Rated 5 out of 5">
+            {[0, 1, 2, 3, 4].map(() => (
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z" />
+              </svg>
+            ))}
+          </div>
+          <blockquote class="mt-4 flex-1 text-base leading-7 text-paper">
+            <p>&ldquo;{item.quote}&rdquo;</p>
+          </blockquote>
+          <figcaption class="mt-5 border-t border-white/10 pt-4">
+            <span class="block text-sm font-semibold text-paper">{item.name}</span>
+            <span class="mt-1 block font-mono text-xs uppercase tracking-[0.18em] text-muted">
+              {item.context}
+            </span>
+          </figcaption>
+        </figure>
+      ))
+    }
+  </div>
+</section>
