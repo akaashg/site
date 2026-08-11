@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const CAL_URL = 'https://cal.com/akaash-garg-xvijkt/hi';
+
+/* Numbering is derived from position so adding a service never desyncs the ids. */
+const services = [
+  {
+    name: 'VR application development',
+    lead: 'Multiplayer and single-user VR products built in Unity, shipped to standalone headsets.',
+    detail:
+      'Free-roam and room-scale experiences, instructor-led training, simulation, and location-based entertainment. Delivered on Meta Quest 2/3/Pro, HTC Vive, Varjo, and SteamVR.',
+    proof: 'Free-roam arena software running in 3 commercial venues at 90fps standalone.',
+  },
+  {
+    name: 'AR application development',
+    lead: 'Mobile and headset AR for product visualization, design review, and field work.',
+    detail:
+      'AR Foundation, ARKit, and ARCore on iOS and Android, plus HoloLens and passthrough MR. Includes photogrammetry capture-to-runtime pipelines, spatial anchors, and hand tracking.',
+    proof: 'CollaboratAR held 8K source texture fidelity on mobile hardware.',
+  },
+  {
+    name: 'Multiplayer systems engineering',
+    lead: 'Networked architecture that stays synchronized under real-world latency.',
+    detail:
+      'Photon Fusion, Photon PUN, and Mirror. Server-authoritative state, client-side prediction and interpolation, reconciliation, latency compensation, and dedicated server hosting.',
+    proof: 'Sub-100ms latency bridging a Unity VR client to a proprietary Java backend.',
+  },
+  {
+    name: 'XR performance optimization',
+    lead: 'Getting an existing build inside the frame budget it keeps missing.',
+    detail:
+      'GPU and CPU profiling with Unity Profiler and RenderDoc, draw-call batching, LOD systems, texture atlasing, Draco mesh compression, object pooling and GC pressure, custom HLSL and ShaderGraph work across URP and HDRP.',
+    proof: 'Standalone Quest builds held to a 90fps budget with physics and avatar sync.',
+  },
+  {
+    name: 'Game development',
+    lead: 'Unity games from prototype to store release, on PC and mobile.',
+    detail:
+      'Gameplay systems, procedural generation, wildlife and enemy AI, animation state machines, custom shaders, and the full Steamworks pipeline through build, depot, store page, and age-rating submission. Shipped across racing, roguelite, RPG, simulation, survival, and runner genres.',
+    proof: 'Ruins of the Forgotten: public Steam demo live, Early Access Q3 2026.',
+  },
+  {
+    name: 'Enterprise XR training products',
+    lead: 'Turning regulatory and operational curricula into rehearsable scenarios.',
+    detail:
+      'Branching decision paths, performance scoring, digital twins of real facilities and equipment, SOP and hazard modules, LMS/HRMS integration, and offline deployment for remote sites.',
+    proof: 'Multi-user VR team training built for logistics, manufacturing, and safety drills.',
+  },
+  {
+    name: 'Gamified training solutions',
+    lead: 'Game mechanics applied to training people actually finish.',
+    detail:
+      'Regulatory and compliance curricula rebuilt as branching scenario modules with performance scoring, progression, and measurable outcomes — replacing slide-based courseware with situations a trainee rehearses rather than reads.',
+    proof: 'Gamified VR compliance training delivered in place of slide-based courseware.',
+  },
+  {
+    name: 'Technical leadership & architecture',
+    lead: 'Founder-level ownership when a team needs direction, not just hands.',
+    detail:
+      'Architecture decisions, code review, sprint planning, hiring input, vendor and client communication, and delivery accountability. Available as fractional lead alongside an in-house team.',
+    proof: 'Leads a 6-person delivery team across concurrent client engagements.',
+  },
+];
+
+const engagements = [
+  {
+    name: 'Fixed-scope project',
+    best: 'A defined deliverable with a deadline.',
+    shape: 'Scoped brief, milestone schedule, fixed fee. Best when the requirements are already clear.',
+  },
+  {
+    name: 'Monthly retainer',
+    best: 'Ongoing engineering capacity.',
+    shape: 'A reserved block of delivery time each month, with continuity across roadmap changes.',
+  },
+  {
+    name: 'Technical audit / rescue',
+    best: 'A build that misses frame budget or desyncs.',
+    shape: 'A short diagnostic engagement producing a prioritized findings report and a fix plan.',
+  },
+];
+
+const industries = [
+  'Manufacturing',
+  'Logistics',
+  'Healthcare & medical simulation',
+  'Location-based entertainment',
+  'Retail & product visualization',
+  'Games & interactive',
+];
+
+const faqs = [
+  {
+    q: 'How do engagements usually start?',
+    a: 'A 30-minute call to establish scope, constraints, and hardware target. If it is a fit, you get a written scope with milestones and a fee before any work begins.',
+  },
+  {
+    q: 'Do you work with existing in-house teams?',
+    a: 'Yes. A large share of the work is embedding alongside an internal team — owning the XR-specific architecture and performance while your engineers keep the surrounding product.',
+  },
+  {
+    q: 'Which headsets and platforms do you target?',
+    a: 'Meta Quest 2/3/Pro, Microsoft HoloLens, HTC Vive, Varjo, SteamVR on PC, plus iOS and Android for AR. Steam releases include the full Steamworks pipeline.',
+  },
+  {
+    q: 'Can you take a product from prototype to store release?',
+    a: 'Yes — including build pipelines, store certification, age-rating submission, and post-launch QA. Ruins of the Forgotten went through the complete Steamworks release path.',
+  },
+  {
+    q: 'What time zone do you work in?',
+    a: 'Based in Bangalore, India (IST) and available for remote work worldwide, with regular overlap for European and US client calls.',
+  },
+  {
+    q: 'Who owns the code and the IP?',
+    a: 'You do. Client work transfers in full on delivery, and engagements can run under your NDA and contract paperwork.',
+  },
+];
+---
+
+<BaseLayout
+  title="Services"
+  description="XR engineering services: Unity VR and AR development, multiplayer systems, performance optimization, game development, gamified training solutions, and technical leadership for Quest, HoloLens, Varjo, and SteamVR."
+>
+  <section class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
+    <div class="space-y-6 scroll-reveal" data-animate>
+      <p class="font-mono text-xs uppercase tracking-[0.28em] text-signal">Services</p>
+      <h1 class="max-w-4xl text-4xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-5xl">
+        XR engineering that ships on real hardware, inside the frame budget.
+      </h1>
+      <p class="max-w-prose text-base leading-8 text-muted sm:text-lg">
+        I take on the engineering that decides whether an XR product launches: multiplayer that stays
+        synchronized, rendering that holds 90fps on standalone headsets, and delivery that survives
+        client deadlines. Eight services below, three ways to engage.
+      </p>
+      <div class="flex flex-wrap gap-4 pt-2">
+        <a
+          href={CAL_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded-full bg-signal px-6 py-3 text-sm font-semibold text-paper no-underline shadow-lg shadow-signal/15 transition hover:bg-signal-dark hover:text-paper"
+        >
+          Book a 30-minute call
+        </a>
+        <a
+          href="/contact/#brief"
+          class="rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-paper no-underline transition hover:border-signal"
+        >
+          Send a project brief
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-16 grid gap-6 md:grid-cols-2">
+      {services.map((service, index) => (
+        <article class="glass-card flex flex-col p-6 scroll-reveal" data-animate data-animate-delay={index * 80}>
+          <p class="font-mono text-xs tracking-[0.3em] text-signal">{String(index + 1).padStart(2, '0')}</p>
+          <h2 class="mt-4 text-xl font-semibold text-paper">{service.name}</h2>
+          <p class="mt-3 text-base leading-7 text-paper">{service.lead}</p>
+          <p class="mt-3 flex-1 text-sm leading-7 text-muted">{service.detail}</p>
+          <p class="mt-5 border-t border-white/10 pt-4 font-mono text-xs leading-6 uppercase tracking-[0.14em] text-signal">
+            {service.proof}
+          </p>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-16 scroll-reveal" data-animate>
+      <h2 class="text-2xl font-semibold text-paper">How engagements are structured</h2>
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        {engagements.map((item) => (
+          <div class="panel flex flex-col p-6">
+            <h3 class="text-base font-semibold text-paper">{item.name}</h3>
+            <p class="mt-3 font-mono text-xs uppercase tracking-[0.18em] text-signal">{item.best}</p>
+            <p class="mt-4 text-sm leading-7 text-muted">{item.shape}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 max-w-prose text-sm leading-7 text-muted">
+        Fees depend on scope, hardware target, and timeline. Bring a brief to the first call and you
+        get a written figure — not a range that moves later.
+      </p>
+    </div>
+
+    <div class="mt-16 glass-card p-8 scroll-reveal" data-animate>
+      <h2 class="text-2xl font-semibold text-paper">Industries I build for</h2>
+      <ul class="mt-6 flex flex-wrap gap-3" aria-label="Industries served">
+        {industries.map((item) => <li class="tag">{item}</li>)}
+      </ul>
+    </div>
+
+    <div class="mt-16 scroll-reveal" data-animate>
+      <h2 class="text-2xl font-semibold text-paper">Common questions</h2>
+      <dl class="mt-6 space-y-4">
+        {faqs.map((faq) => (
+          <div class="panel p-6">
+            <dt class="text-base font-semibold text-paper">{faq.q}</dt>
+            <dd class="mt-3 text-sm leading-7 text-muted">{faq.a}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+
+    <div class="mt-16 glass-card p-8 text-center scroll-reveal" data-animate>
+      <h2 class="text-2xl font-semibold text-paper">Have something in mind?</h2>
+      <p class="mx-auto mt-4 max-w-prose text-base leading-8 text-muted">
+        Tell me the hardware target, the deadline, and what is currently blocking you. If I am not the
+        right fit, I will say so on the first call.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a
+          href={CAL_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded-full bg-signal px-6 py-3 text-sm font-semibold text-paper no-underline shadow-lg shadow-signal/15 transition hover:bg-signal-dark hover:text-paper"
+        >
+          Book a 30-minute call
+        </a>
+        <a
+          href="/projects/"
+          class="rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-paper no-underline transition hover:border-signal"
+        >
+          See the case studies
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

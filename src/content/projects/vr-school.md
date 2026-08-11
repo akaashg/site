@@ -28,17 +28,44 @@ Remote and hybrid classrooms lose the parts of in-person teaching that are harde
 
 An educational VR platform that turns lessons into shared, interactive virtual sessions across Oculus Quest, HP and HTC headsets, and Android devices, so schools aren't locked into a single hardware vendor. Built in Unity with Photon Networking for the multi-user session layer, React and Three.js for companion web tooling, and Blender-authored environments and VR SDK integrations across the supported headsets, giving educators and students shared spaces for immersive teaching, learning, and collaboration regardless of which device they log in from.
 
-## Visual
+## Screenshots
 
-<figure>
-	<picture>
-		<source type="image/avif" srcset="/images/projects/vr-school-400.avif 400w, /images/projects/vr-school-800.avif 800w, /images/projects/vr-school-1.avif 1200w" sizes="(max-width: 900px) 100vw, 900px" />
-		<source type="image/webp" srcset="/images/projects/vr-school-400.webp 400w, /images/projects/vr-school-800.webp 800w, /images/projects/vr-school-1.webp 1200w" sizes="(max-width: 900px) 100vw, 900px" />
-		<source srcset="/images/projects/vr-school-400.svg 400w, /images/projects/vr-school-800.svg 800w, /images/projects/vr-school-1.svg 1200w" sizes="(max-width: 900px) 100vw, 900px" type="image/svg+xml" />
-		<img src="/images/projects/vr-school-1.webp" alt="VR School — placeholder image" loading="lazy" width="1200" height="675" class="w-full rounded" />
-	</picture>
-	<figcaption class="sr-only">Placeholder image — replace with a screenshot of a shared classroom session.</figcaption>
-</figure>
+<div class="shot-grid">
+  <figure>
+    <picture>
+      <source type="image/avif" srcset="/images/projects/vr-school-shot-1-800.avif 800w, /images/projects/vr-school-shot-1-1600.avif 1600w" sizes="(max-width: 640px) 100vw, 440px" />
+      <source type="image/webp" srcset="/images/projects/vr-school-shot-1-800.webp 800w, /images/projects/vr-school-shot-1-1600.webp 1600w" sizes="(max-width: 640px) 100vw, 440px" />
+      <img src="/images/projects/vr-school-shot-1-800.webp" alt="VR headset view of a classroom with desks and chairs, a tracked hand holding a board" loading="lazy" width="1024" height="1024" />
+    </picture>
+    <figcaption>Classroom environment from the headset.</figcaption>
+  </figure>
+  <figure>
+    <picture>
+      <source type="image/avif" srcset="/images/projects/vr-school-shot-2-800.avif 800w, /images/projects/vr-school-shot-2-1600.avif 1600w" sizes="(max-width: 640px) 100vw, 440px" />
+      <source type="image/webp" srcset="/images/projects/vr-school-shot-2-800.webp 800w, /images/projects/vr-school-shot-2-1600.webp 1600w" sizes="(max-width: 640px) 100vw, 440px" />
+      <img src="/images/projects/vr-school-shot-2-800.webp" alt="Tracked hands holding a marker in front of a whiteboard in the classroom" loading="lazy" width="1024" height="1024" />
+    </picture>
+    <figcaption>Hand-tracked marker pickup.</figcaption>
+  </figure>
+  <figure>
+    <picture>
+      <source type="image/avif" srcset="/images/projects/vr-school-shot-3-800.avif 800w, /images/projects/vr-school-shot-3-1600.avif 1600w" sizes="(max-width: 640px) 100vw, 440px" />
+      <source type="image/webp" srcset="/images/projects/vr-school-shot-3-800.webp 800w, /images/projects/vr-school-shot-3-1600.webp 1600w" sizes="(max-width: 640px) 100vw, 440px" />
+      <img src="/images/projects/vr-school-shot-3-800.webp" alt="A hand drawing a blue shape on a virtual whiteboard" loading="lazy" width="1024" height="1024" />
+    </picture>
+    <figcaption>Drawing on the shared whiteboard.</figcaption>
+  </figure>
+  <figure>
+    <picture>
+      <source type="image/avif" srcset="/images/projects/vr-school-shot-4-800.avif 800w, /images/projects/vr-school-shot-4-1600.avif 1600w" sizes="(max-width: 640px) 100vw, 440px" />
+      <source type="image/webp" srcset="/images/projects/vr-school-shot-4-800.webp 800w, /images/projects/vr-school-shot-4-1600.webp 1600w" sizes="(max-width: 640px) 100vw, 440px" />
+      <img src="/images/projects/vr-school-shot-4-800.webp" alt="A virtual whiteboard with two blue shapes drawn on it" loading="lazy" width="1024" height="1024" />
+    </picture>
+    <figcaption>Persistent strokes on the board surface.</figcaption>
+  </figure>
+</div>
+
+<p class="shot-credit">Screenshots from the akaashgarg.com portfolio.</p>
 
 ## Outcome
 

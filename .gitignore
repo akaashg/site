@@ -25,3 +25,6 @@ npm-update-output.txt
 
 # editor
 .DS_Store
+
+# per-machine Claude Code permissions; .claude/launch.json is shared
+.claude/settings.local.json

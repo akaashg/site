@@ -31,13 +31,66 @@ Colors and fonts live in `tailwind.config.mjs`: `paper`/`ink`/`muted`/`line`
 for the palette, one `signal` accent color, and two font stacks (`sans` +
 `mono`, both system fonts — zero font-loading weight).
 
-## Deploy
+## Asset generation
 
-Static output — works on Vercel or Netlify with zero config. Point
-akaashgarg.com's DNS at whichever you pick.
+These are not part of `npm run build` — run them when their inputs change and
+commit the output.
+
+```
+npm run generate:og          # 1200x630 social share card
+npm run generate:cards       # branded cards for projects with no screenshots
+npm run fetch:store-media    # re-pull store screenshots (Play / Steam)
+```
+
+## Analytics
+
+`src/components/Analytics.astro` is provider-agnostic and inert until
+configured. Set the Umami Cloud Website ID in `CONFIG.umami.websiteId`; until
+then no script loads and `window.track()` no-ops.
+
+Conversion events: `Brief submitted` (with engagement + timeline), `Booking
+click`, `Email click`, `LinkedIn click`, `Resume download`, `Store link click`.
+Outbound clicks are tracked automatically — only the form success needs
+explicit wiring.
+
+## Contact form
+
+Posts to Web3Forms (`src/pages/contact.astro`). The access key is public by
+design. The form also POSTs natively without JS, and falls back to a `mailto:`
+link if the API is unreachable.
+
+## Deploy — Cloudflare Pages
+
+Static output, so it needs a file server and nothing else. Cloudflare Pages
+runs the build itself: connect the repo once and every push to `main` deploys.
+No workflow file, no secrets, no FTP.
+
+| Setting | Value |
+|---|---|
+| Repository | `github.com/akaashg/site`, branch `main` |
+| Framework preset | Astro |
+| Build command | `npm run build` |
+| Output directory | `dist` |
+| Node version | read from `.nvmrc` (20) |
+
+`public/_headers` carries the cache and security rules; Cloudflare applies it
+automatically. Preview URLs are created per branch, and any past deployment can
+be restored with one click.
+
+### Why not Hostinger's Git integration
+
+It runs `git pull` without a build step. Astro needs `npm run build`, and
+`dist/` is gitignored, so connecting the repo directly would publish source
+files and no website.
+
+Hostinger remains useful for email and other projects. If the site ever needs to
+move back there, `deploy/hostinger.htaccess` holds the Apache config — HTTPS
+redirect, www → non-www canonicalisation, `ErrorDocument 404`, cache headers,
+compression, and `.avif` / `.webp` MIME types. Copy it to `dist/.htaccess`
+after building and upload the **contents** of `dist/` into `public_html/`. It is
+deliberately kept out of `public/` so it is not served as a public file.
 
 ## Before this goes fully live
 
-Every case study has one or more `TODO:` markers for real screenshots,
-diagrams, or outcome specifics — search the repo for `TODO` before
-publishing. See `ROADMAP.md` (one level up) for the full plan.
+Search for `TODO` — remaining markers are in case studies that still need real
+outcome specifics. Testimonials are the biggest outstanding gap.

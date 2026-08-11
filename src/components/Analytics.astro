@@ -1,0 +1,102 @@
+---
+/**
+ * Privacy-first analytics with conversion-event tracking.
+ *
+ * Inert until PROVIDER is set: no script loads, no `track()` calls go
+ * anywhere, and the site ships exactly as it does today. Set PROVIDER plus the
+ * matching config below to switch it on.
+ *
+ * Every provider here is cookieless, so no consent banner is required under
+ * GDPR or India's DPDP Act. Google Analytics would change that.
+ */
+
+type Provider = 'none' | 'plausible' | 'umami' | 'cloudflare';
+
+/* `as Provider` keeps the union type: a plain annotated const narrows to the
+   literal 'none', which makes the other branches unreachable to TypeScript. */
+const PROVIDER = 'umami' as Provider;
+
+const CONFIG = {
+  /** Plausible: the domain exactly as registered in your dashboard. */
+  plausible: {
+    domain: 'akaashgarg.com',
+    src: 'https://plausible.io/js/script.outbound-links.tagged-events.js',
+  },
+  /**
+   * Umami Cloud. Add the site at cloud.umami.is, then paste the Website ID
+   * from Settings -> Websites here. Until it is filled in, no script loads and
+   * `track()` no-ops, so the site behaves exactly as it does now.
+   */
+  umami: {
+    websiteId: '',
+    src: 'https://cloud.umami.is/script.js',
+  },
+  /** Cloudflare Web Analytics: the token from the dashboard beacon snippet. */
+  cloudflare: {
+    token: '',
+  },
+};
+---
+
+{
+  PROVIDER === 'plausible' && (
+    <script is:inline defer data-domain={CONFIG.plausible.domain} src={CONFIG.plausible.src} />
+  )
+}
+
+{
+  PROVIDER === 'umami' && CONFIG.umami.websiteId && (
+    <script is:inline defer data-website-id={CONFIG.umami.websiteId} src={CONFIG.umami.src} />
+  )
+}
+
+{
+  PROVIDER === 'cloudflare' && CONFIG.cloudflare.token && (
+    <script
+      is:inline
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon={`{"token": "${CONFIG.cloudflare.token}"}`}
+    />
+  )
+}
+
+<script is:inline>
+  (() => {
+    /**
+     * Provider-agnostic event shim. Everything on the site calls
+     * `window.track(name, props)`; this forwards to whichever provider is
+     * loaded and silently no-ops when none is.
+     */
+    window.track = function track(name, props) {
+      try {
+        if (typeof window.plausible === 'function') {
+          window.plausible(name, props ? { props } : undefined);
+        } else if (window.umami && typeof window.umami.track === 'function') {
+          window.umami.track(name, props);
+        }
+      } catch {
+        /* Analytics must never break a page interaction. */
+      }
+    };
+
+    /* Auto-track the conversion path so pages don't each need wiring. */
+    document.addEventListener('click', (event) => {
+      const link = event.target instanceof Element ? event.target.closest('a') : null;
+      if (!link) return;
+      const href = link.getAttribute('href') || '';
+
+      if (href.includes('cal.com')) {
+        window.track('Booking click');
+      } else if (href.startsWith('mailto:')) {
+        window.track('Email click');
+      } else if (href.endsWith('.pdf')) {
+        window.track('Resume download');
+      } else if (href.includes('play.google.com') || href.includes('steampowered.com')) {
+        window.track('Store link click', { store: href.includes('steam') ? 'Steam' : 'Google Play' });
+      } else if (href.includes('linkedin.com')) {
+        window.track('LinkedIn click');
+      }
+    });
+  })();
+</script>

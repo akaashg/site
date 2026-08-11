@@ -16,13 +16,14 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, company, role, timeframe, stack, summary, outcome } = project.data;
+const { title, company, role, timeframe, stack, summary, outcome, liveUrl, liveLabel, availability } =
+  project.data;
 const { Content } = await project.render();
 ---
 
 <BaseLayout title={title} description={summary}>
   <article class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
-    <a href="/projects/" class="text-sm text-signal transition hover:text-signal/90">&larr; Back to case studies</a>
+    <a href="/projects/" class="inline-block py-2 text-sm text-signal transition hover:text-signal/90">&larr; Back to case studies</a>
 
     <div class="mt-6 grid gap-12 lg:grid-cols-[1fr_320px]">
       <div class="space-y-6">
@@ -48,6 +49,27 @@ const { Content } = await project.render();
       </div>
 
       <aside class="panel space-y-8 p-8">
+        {(liveUrl || availability) && (
+          <div>
+            <p class="text-sm uppercase tracking-[0.3em] text-signal">Availability</p>
+            {liveUrl && (
+              <a
+                href={liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-4 inline-flex items-center gap-2 rounded-full bg-signal px-5 py-3 text-sm font-semibold text-paper no-underline transition hover:bg-signal-dark hover:text-paper"
+              >
+                {liveLabel ?? 'View it live'}
+                <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M7 17 17 7" />
+                  <path d="M8 7h9v9" />
+                </svg>
+              </a>
+            )}
+            {availability && <p class="mt-3 text-sm leading-7 text-muted">{availability}</p>}
+          </div>
+        )}
+
         <div>
           <p class="text-sm uppercase tracking-[0.3em] text-signal">Case focus</p>
           <div class="mt-4 space-y-3 text-sm leading-7 text-paper">
@@ -96,5 +118,44 @@ const { Content } = await project.render();
   }
   .prose-case-study code {
     @apply rounded bg-line/60 px-1.5 py-0.5 font-mono text-sm;
+  }
+
+  /* Screenshot galleries. Landscape captures sit two-up; portrait phone
+     captures sit three-up so they don't tower over the body copy. */
+  .prose-case-study .shot-grid {
+    @apply mt-6 grid list-none gap-4 p-0 sm:grid-cols-2;
+  }
+
+  .prose-case-study .shot-grid--portrait {
+    @apply grid-cols-2 sm:grid-cols-3;
+  }
+
+  .prose-case-study .shot-grid figure {
+    @apply m-0;
+  }
+
+  .prose-case-study .shot-grid img {
+    @apply w-full rounded-xl border border-white/10 bg-surface;
+  }
+
+  .prose-case-study .shot-grid figcaption {
+    @apply mt-2 text-xs leading-5 text-muted;
+  }
+
+  .prose-case-study .shot-credit {
+    @apply mt-3 text-xs leading-5 text-muted;
+  }
+
+  /* Full-width branded card for projects with no publishable capture. */
+  .prose-case-study .shot-figure {
+    @apply mt-6 m-0;
+  }
+
+  .prose-case-study .shot-figure img {
+    @apply w-full rounded-xl border border-white/10 bg-surface;
+  }
+
+  .prose-case-study .shot-figure figcaption {
+    @apply mt-2 text-xs leading-5 text-muted;
   }
 </style>

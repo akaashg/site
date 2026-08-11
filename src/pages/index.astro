@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import WireframeHero from '../components/WireframeHero.astro';
+import SpaceHero from '../components/SpaceHero.astro';
 
 const allProjects = await getCollection('projects', ({ data }) => !data.draft);
 const featured = allProjects.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
@@ -12,10 +12,13 @@ const featured = allProjects.sort((a, b) => a.data.order - b.data.order).slice(0
   title="Akaash Garg"
   description="Founder & technical lead at 2 Dude Studios. 17+ years building enterprise XR, multiplayer VR, and AR experiences with real-time performance on Quest, HoloLens, Varjo, and SteamVR."
 >
-  <section class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+  <!-- overflow-x-clip contains the decorative glow below, which sits -right-8
+       outside the card and otherwise forces a horizontal scrollbar at ~1024px.
+       `clip` (not `hidden`) avoids creating a scroll container. -->
+  <section class="mx-auto max-w-6xl overflow-x-clip px-6 py-16 sm:py-24">
     <div class="grid gap-12 lg:grid-cols-[1.4fr_420px] lg:items-center">
      <div class="space-y-8 scroll-reveal" data-animate>
-        <p class="font-mono text-xs uppercase tracking-[0.32em] text-signal">Founder · XR product lead</p>
+        <p class="font-mono text-xs uppercase tracking-[0.32em] text-signal">Lead XR engineer · Studio co-founder</p>
         <h1 class="max-w-3xl text-5xl font-semibold leading-[1.04] tracking-tight text-paper sm:text-6xl">
           I build premium XR products, multiplayer systems, and immersive training experiences that ship on real hardware.
         </h1>
@@ -56,7 +59,7 @@ const featured = allProjects.sort((a, b) => a.data.order - b.data.order).slice(0
 
      <div class="relative scroll-reveal" data-animate data-animate-delay="140">
        <div class="glass-card p-8">
-         <WireframeHero size={340} />
+         <SpaceHero size={340} />
        </div>
        <div class="pointer-events-none absolute -right-8 -bottom-8 hidden rounded-full bg-signal/15 blur-3xl md:block h-24 w-24"></div>
      </div>
@@ -107,8 +110,39 @@ const featured = allProjects.sort((a, b) => a.data.order - b.data.order).slice(0
 
   <section class="mx-auto max-w-5xl px-6 pb-20">
    <div class="flex items-baseline justify-between scroll-reveal" data-animate data-animate-delay="60">
+     <h2 class="text-xl font-semibold text-paper">How I can help</h2>
+     <a href="/services/" class="inline-block py-2 text-sm font-semibold text-signal transition hover:text-signal/90">All services &rarr;</a>
+   </div>
+   <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+     {
+       [
+         { name: 'VR application development', detail: 'Multiplayer, training, and LBE experiences on standalone headsets.' },
+         { name: 'AR application development', detail: 'Mobile and headset AR for visualization, review, and field work.' },
+         { name: 'Multiplayer systems', detail: 'Server-authoritative state, prediction, and latency compensation.' },
+         { name: 'Performance optimization', detail: 'Getting an existing build inside its frame budget.' },
+         { name: 'Game development', detail: 'Unity games from prototype to Steam and mobile release.' },
+         { name: 'Enterprise XR training', detail: 'Digital twins, branching scenarios, and compliance reporting.' },
+         { name: 'Gamified training solutions', detail: 'Scored, branching scenarios in place of slide decks.' },
+         { name: 'Technical leadership', detail: 'Founder-level architecture and delivery ownership.' },
+       ].map((service, index) => (
+         <a
+           href="/services/"
+           class="panel block p-5 no-underline transition hover:border-signal/40 scroll-reveal"
+           data-animate
+           data-animate-delay={index * 70 + 60}
+         >
+           <p class="text-base font-semibold text-paper">{service.name}</p>
+           <p class="mt-2 text-sm leading-6 text-muted">{service.detail}</p>
+         </a>
+       ))
+     }
+   </div>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-6 pb-20">
+   <div class="flex items-baseline justify-between scroll-reveal" data-animate data-animate-delay="60">
      <h2 class="text-xl font-semibold text-paper">Selected work</h2>
-     <a href="/projects/" class="text-sm font-semibold text-signal transition hover:text-signal/90">All projects &rarr;</a>
+     <a href="/projects/" class="inline-block py-2 text-sm font-semibold text-signal transition hover:text-signal/90">All projects &rarr;</a>
    </div>
    <div class="mt-6 grid gap-6 sm:grid-cols-2">
      {featured.map((project, i) => <ProjectCard project={project} index={i + 1} />)}

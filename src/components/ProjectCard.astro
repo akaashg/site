@@ -5,9 +5,16 @@ import TechTag from './TechTag.astro';
 export interface Props {
   project: CollectionEntry<'projects'>;
   index?: number;
+  /**
+   * Heading level for the card title. Defaults to h3, which is correct when
+   * the grid sits under a section h2. The projects index has no intermediate
+   * h2, so it passes h2 to keep the outline from skipping a level.
+   */
+  headingLevel?: 'h2' | 'h3';
 }
 
-const { project, index } = Astro.props;
+const { project, index, headingLevel = 'h3' } = Astro.props;
+const Heading = headingLevel;
 const { title, company, role, timeframe, summary, stack, outcome } = project.data;
 const label = typeof index === 'number' ? String(index).padStart(2, '0') : null;
 const revealDelay = typeof index === 'number' ? Math.min((index - 1) * 120, 360) : 0;
@@ -26,7 +33,7 @@ const revealDelay = typeof index === 'number' ? Math.min((index - 1) * 120, 360)
 
   <div class="space-y-4">
     <a href={`/projects/${project.slug}/`} class="no-underline">
-      <h3 class="text-lg text-paper transition-colors group-hover:text-signal">{title}</h3>
+      <Heading class="text-lg text-paper transition-colors group-hover:text-signal">{title}</Heading>
     </a>
     <p class="font-mono text-xs uppercase tracking-[0.24em] text-muted">
       {role} · {company} · {timeframe}
@@ -40,7 +47,10 @@ const revealDelay = typeof index === 'number' ? Math.min((index - 1) * 120, 360)
     </ul>
   </div>
 
-  <a href={`/projects/${project.slug}/`} class="mt-6 inline-flex text-sm font-semibold text-signal transition hover:text-signal/90">
+  <a
+    href={`/projects/${project.slug}/`}
+    class="-mx-2 mt-4 inline-flex items-center px-2 py-2.5 text-sm font-semibold text-signal no-underline transition hover:text-signal/90"
+  >
     Read the case study &rarr;
   </a>
 </article>

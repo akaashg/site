@@ -2,90 +2,352 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const CAL_URL = 'https://cal.com/akaash-garg-xvijkt/hi';
+const EMAIL = 'akaash.garg@gmail.com';
+
+/**
+ * Web3Forms delivers the project brief to EMAIL.
+ *
+ * The access key is public by design -- Web3Forms expects it in client-side
+ * markup and it only permits submissions to the address it was registered
+ * with. Rotate it from the Web3Forms dashboard if it ever attracts abuse.
+ */
+const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
+const WEB3FORMS_KEY = '38526bb6-3221-4db6-a1d9-74cebb55c983';
+
+const engagementOptions = [
+  'Fixed-scope project',
+  'Monthly retainer',
+  'Technical audit / rescue',
+  'Full-time or long-term role',
+  'Not sure yet',
+];
+
+const timelineOptions = ['Starting now', 'Within 1 month', '1-3 months out', 'Just exploring'];
 ---
 
 <BaseLayout
   title="Contact"
-  description="Book time with Akaash Garg for XR/Unity engineering work — full-time, contract, or retainer."
+  description="Start an XR engagement with Akaash Garg — Unity VR/AR development, multiplayer systems, and performance work. Book a 30-minute call or send a project brief."
 >
   <section class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
-    <div class="space-y-6">
+    <div class="space-y-6 scroll-reveal" data-animate>
       <p class="font-mono text-xs uppercase tracking-[0.28em] text-signal">Contact</p>
-      <h1 class="text-4xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-5xl">Start a premium XR engagement.</h1>
+      <h1 class="text-4xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-5xl">
+        Start an XR engagement.
+      </h1>
       <p class="max-w-prose text-base leading-8 text-muted sm:text-lg">
-        I partner with founders, CTOs, and product teams to deliver XR products that are polished, performant, and built for real-world use.
+        I partner with founders, CTOs, and product teams to deliver XR products that are polished,
+        performant, and built for real-world use. Book a call, or send a brief and I will reply with
+        whether it is a fit.
       </p>
+      <div class="flex flex-wrap gap-4 pt-2">
+        <a
+          href={CAL_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded-full bg-signal px-6 py-3 text-sm font-semibold text-paper no-underline shadow-lg shadow-signal/15 transition hover:bg-signal-dark hover:text-paper"
+        >
+          Book a 30-minute call
+        </a>
+        <a
+          href={`mailto:${EMAIL}`}
+          class="rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-paper no-underline transition hover:border-signal"
+        >
+          Email me directly
+        </a>
+      </div>
     </div>
 
-    <div class="mt-10 grid gap-8 lg:grid-cols-[1fr_320px]">
+    <div class="mt-12 grid gap-8 lg:grid-cols-[1fr_320px]">
+      <div id="brief" class="glass-card scroll-mt-24 p-8 scroll-reveal" data-animate>
+        <h2 class="text-2xl font-semibold text-paper">Send a project brief</h2>
+        <p class="mt-3 text-sm leading-7 text-muted">
+          The more of this you fill in, the more useful my first reply is. Nothing here is required
+          except your email and the brief itself.
+        </p>
+
+        <form
+          class="mt-8 space-y-5"
+          data-brief-form
+          data-brief-email={EMAIL}
+          action={FORM_ENDPOINT}
+          method="post"
+        >
+          <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+          <input type="hidden" name="from_name" value="akaashgarg.com project brief" />
+          <input type="hidden" name="subject" value="XR project brief" data-brief-subject />
+
+          {/* Web3Forms discards any submission where this stays filled. */}
+          <label class="brief-honeypot">
+            Leave this field empty
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+          </label>
+
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label class="form-label" for="name">Name</label>
+              <input class="form-field" id="name" name="name" type="text" autocomplete="name" />
+            </div>
+            <div>
+              <label class="form-label" for="email">Email <span class="text-signal">*</span></label>
+              <input class="form-field" id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+          </div>
+
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label class="form-label" for="company">Company</label>
+              <input class="form-field" id="company" name="company" type="text" autocomplete="organization" />
+            </div>
+            <div>
+              <label class="form-label" for="engagement">Engagement type</label>
+              <select class="form-field" id="engagement" name="engagement">
+                {engagementOptions.map((option) => <option value={option}>{option}</option>)}
+              </select>
+            </div>
+          </div>
+
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label class="form-label" for="platform">Target hardware</label>
+              <input
+                class="form-field"
+                id="platform"
+                name="platform"
+                type="text"
+                placeholder="Quest 3, HoloLens, iOS/Android, PC…"
+              />
+            </div>
+            <div>
+              <label class="form-label" for="timeline">Timeline</label>
+              <select class="form-field" id="timeline" name="timeline">
+                {timelineOptions.map((option) => <option value={option}>{option}</option>)}
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="form-label" for="message">What are you building, and what is blocking it? <span class="text-signal">*</span></label>
+            <textarea class="form-field min-h-[9rem]" id="message" name="message" rows="6" required></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="rounded-full bg-signal px-6 py-3 text-sm font-semibold text-paper shadow-lg shadow-signal/15 transition hover:bg-signal-dark disabled:cursor-not-allowed disabled:opacity-60"
+            data-brief-submit
+          >
+            Send brief
+          </button>
+
+          <p class="text-xs leading-6 text-muted" data-brief-note>
+            Sent straight to my inbox. I reply within two business days.
+          </p>
+
+          <p class="brief-status" role="status" aria-live="polite" data-brief-status hidden></p>
+        </form>
+      </div>
+
       <div class="space-y-6">
-        <div class="glass-card rounded-[2rem] border border-white/10 bg-white/5 p-8 shadow-glow">
-          <p class="text-sm uppercase tracking-[0.28em] text-signal">What I take on</p>
-          <ul class="mt-6 space-y-4 text-base leading-8 text-muted">
-            <li>Senior XR engineering and product delivery</li>
-            <li>Enterprise training, simulation, and real-time collaboration</li>
-            <li>Multiplayer systems, performance tuning, and launch-ready polish</li>
+        <div class="panel p-8 scroll-reveal" data-animate data-animate-delay="80">
+          <h2 class="text-lg font-semibold text-paper">Availability</h2>
+          <dl class="mt-6 space-y-5 text-sm leading-7 text-muted">
+            <div>
+              <dt class="font-medium text-paper">Status</dt>
+              <dd>Taking new engagements.</dd>
+            </div>
+            <div>
+              <dt class="font-medium text-paper">Based in</dt>
+              <dd>Bangalore, India (IST) — remote worldwide, with overlap for EU and US calls.</dd>
+            </div>
+            <div>
+              <dt class="font-medium text-paper">Client base</dt>
+              <dd>India and overseas.</dd>
+            </div>
+            <div>
+              <dt class="font-medium text-paper">Engagements</dt>
+              <dd>Fixed-scope projects, monthly retainers, technical audits, and senior roles.</dd>
+            </div>
+            <div>
+              <dt class="font-medium text-paper">Languages</dt>
+              <dd>English, Hindi.</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="panel p-8 scroll-reveal" data-animate data-animate-delay="140">
+          <h2 class="text-lg font-semibold text-paper">Direct</h2>
+          <ul class="mt-4 space-y-2 font-mono text-sm text-muted">
+            <li><a href={`mailto:${EMAIL}`} class="inline-block py-1.5 text-muted transition hover:text-signal">{EMAIL}</a></li>
+            <li><a href="https://www.linkedin.com/in/akaashgarg/" class="inline-block py-1.5 text-muted transition hover:text-signal" rel="me">linkedin.com/in/akaashgarg</a></li>
+            <li><a href="https://xrapp.dev/" class="inline-block py-1.5 text-muted transition hover:text-signal">xrapp.dev</a></li>
+            <li><a href="https://2dudestudios.com/" class="inline-block py-1.5 text-muted transition hover:text-signal">2dudestudios.com</a></li>
           </ul>
         </div>
-
-        <div class="flex flex-wrap gap-3">
-          <a
-            href={CAL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="rounded-full bg-signal px-6 py-3 text-sm font-semibold text-paper no-underline shadow-lg shadow-signal/15 transition hover:bg-signal/90 hover:text-paper"
-          >
-            Book a consultation
-          </a>
-          <a
-            href="mailto:akaash.garg@gmail.com"
-            class="rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-paper no-underline transition hover:border-signal"
-          >
-            Email me
-          </a>
-        </div>
-      </div>
-
-      <div class="panel p-8">
-        <h2 class="text-lg font-semibold text-paper">Details</h2>
-        <dl class="mt-6 space-y-5 text-sm leading-7 text-muted">
-          <div>
-            <dt class="font-medium text-paper">Availability</dt>
-            <dd>Full-time, contract, or retainer.</dd>
-          </div>
-          <div>
-            <dt class="font-medium text-paper">Specialty</dt>
-            <dd>XR product delivery, multiplayer, and performance engineering.</dd>
-          </div>
-          <div>
-            <dt class="font-medium text-paper">Primary tools</dt>
-            <dd>Unity, OpenXR, Photon Fusion, AR Foundation, Node.js, React.</dd>
-          </div>
-          <div>
-            <dt class="font-medium text-paper">Ideal clients</dt>
-            <dd>Enterprises, startups, agencies, and gaming studios.</dd>
-          </div>
-        </dl>
       </div>
     </div>
 
-    <div class="mt-12 rounded-[2rem] border border-white/10 bg-white/5 p-8">
+    <div class="mt-12 rounded-[2rem] border border-white/10 bg-white/5 p-8 scroll-reveal" data-animate>
       <h2 class="text-xl font-semibold text-paper">Retainer engagements</h2>
-      <p class="mt-4 text-base leading-8 text-muted">
-        I support teams with ongoing XR engineering: hands-on Unity, OpenXR, AR Foundation, and multiplayer systems. This is the same delivery model behind the case studies on this site, but continuous instead of one-off.
+      <p class="mt-4 max-w-prose text-base leading-8 text-muted">
+        I support teams with ongoing XR engineering: hands-on Unity, OpenXR, AR Foundation, and
+        multiplayer systems. This is the same delivery model behind the case studies on this site, but
+        continuous instead of one-off.
       </p>
-      <p class="mt-4 text-base leading-8 text-muted">
-        Book a call to discuss scope, timeline, and fit.
-      </p>
-    </div>
-
-    <div class="mt-12 panel p-8">
-      <h2 class="text-lg font-semibold text-paper">Direct</h2>
-      <ul class="mt-4 space-y-2 font-mono text-sm text-muted">
-        <li><a href="mailto:akaash.garg@gmail.com" class="text-muted transition hover:text-signal">akaash.garg@gmail.com</a></li>
-        <li><a href="https://linkedin.com/in/akaashgarg" class="text-muted transition hover:text-signal" rel="me">linkedin.com/in/akaashgarg</a></li>
-        <li><a href="https://2dudestudios.com/" class="text-muted transition hover:text-signal">2dudestudios.com</a></li>
-      </ul>
+      <a
+        href="/services/"
+        class="mt-6 inline-flex rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-paper no-underline transition hover:border-signal"
+      >
+        See how engagements are structured
+      </a>
     </div>
   </section>
 </BaseLayout>
+
+<script is:inline>
+  (() => {
+    const form = document.querySelector('[data-brief-form]');
+    if (!(form instanceof HTMLFormElement)) return;
+
+    const button = form.querySelector('[data-brief-submit]');
+    const status = form.querySelector('[data-brief-status]');
+    const subjectField = form.querySelector('[data-brief-subject]');
+    const email = form.dataset.briefEmail;
+
+    const setStatus = (state, html) => {
+      if (!status) return;
+      status.hidden = false;
+      status.dataset.state = state;
+      status.innerHTML = html;
+    };
+
+    form.addEventListener('submit', async (event) => {
+      /* Without JS the browser POSTs natively and Web3Forms renders its own
+         confirmation page, so this handler is an enhancement, not a gate. */
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const data = new FormData(form);
+      const value = (key) => String(data.get(key) ?? '').trim();
+
+      /* Give the notification email a subject that identifies the lead. */
+      const subject = value('company')
+        ? `XR project brief — ${value('company')}`
+        : 'XR project brief';
+      if (subjectField) subjectField.value = subject;
+      data.set('subject', subject);
+
+      const original = button ? button.textContent : '';
+      if (button) {
+        button.textContent = 'Sending…';
+        button.disabled = true;
+      }
+      setStatus('pending', 'Sending your brief…');
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' },
+        });
+        const result = await response.json().catch(() => ({}));
+
+        if (response.ok && result.success !== false) {
+          form.reset();
+          setStatus('ok', 'Thanks — your brief is in. I reply within two business days.');
+          /* The conversion that matters. Tagged so the dashboard can show
+             which engagement types and timelines actually come through. */
+          if (typeof window.track === 'function') {
+            window.track('Brief submitted', {
+              engagement: value('engagement'),
+              timeline: value('timeline'),
+            });
+          }
+        } else {
+          setStatus(
+            'error',
+            `That did not go through${result.message ? ` (${result.message})` : ''}. Email me directly at <a href="mailto:${email}">${email}</a>.`,
+          );
+        }
+      } catch {
+        setStatus(
+          'error',
+          `Could not reach the form service. Email me directly at <a href="mailto:${email}">${email}</a>.`,
+        );
+      } finally {
+        if (button) {
+          button.textContent = original;
+          button.disabled = false;
+        }
+      }
+    });
+  })();
+</script>
+
+<style>
+  .form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #94a3b8;
+  }
+
+  .form-field {
+    width: 100%;
+    border-radius: 0.9rem;
+    border: 1px solid rgb(255 255 255 / 0.1);
+    background: rgb(11 17 32 / 0.9);
+    padding: 0.7rem 0.9rem;
+    color: #eff1ff;
+    /* Must stay >= 16px: iOS Safari zooms the page when focusing a smaller field. */
+    font-size: 1rem;
+    transition: border-color 160ms ease, background 160ms ease;
+  }
+
+  .form-field::placeholder { color: rgb(148 163 184 / 0.7); }
+
+  .form-field:hover { border-color: rgb(255 255 255 / 0.2); }
+
+  .form-field:focus {
+    border-color: #7c3aed;
+    background: rgb(11 17 32 / 1);
+    outline: none;
+  }
+
+  /* The native dropdown list needs a dark palette too. */
+  .form-field option { background: #0b1120; color: #eff1ff; }
+
+  /* Honeypot: off-screen rather than display:none, which some bots detect. */
+  .brief-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .brief-status {
+    margin-top: 0.25rem;
+    border-radius: 0.9rem;
+    border: 1px solid rgb(255 255 255 / 0.1);
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #94a3b8;
+  }
+
+  .brief-status[data-state='ok'] {
+    border-color: rgb(74 222 128 / 0.35);
+    background: rgb(74 222 128 / 0.08);
+    color: #bbf7d0;
+  }
+
+  .brief-status[data-state='error'] {
+    border-color: rgb(248 113 113 / 0.4);
+    background: rgb(248 113 113 / 0.08);
+    color: #fecaca;
+  }
+
+  .brief-status a { color: inherit; }
+</style>

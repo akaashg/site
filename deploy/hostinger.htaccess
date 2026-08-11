@@ -1,0 +1,62 @@
+# Apache config for Hostinger (or any shared host running Apache).
+# Copied into dist/ at build time and uploaded with the rest of the site.
+# Cloudflare Pages ignores this file; it reads public/_headers instead.
+
+# ---------------------------------------------------------------------------
+# Canonical URL: force HTTPS and strip www, so every page has one address.
+# Both matter for SEO -- duplicate hosts split ranking signals.
+# ---------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# Astro builds directory-style URLs (/about/index.html), so a missing page
+# should render the generated 404 rather than Apache's default.
+ErrorDocument 404 /404.html
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # Fingerprinted assets never change under the same name.
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  <FilesMatch "\.(webp|avif|png|jpg|jpeg|svg|pdf)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+
+  # HTML must revalidate so edits appear on the next request.
+  <FilesMatch "\.(html|xml|txt)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# Correct types for the formats this site serves, in case the host is stale.
+<IfModule mod_mime.c>
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddType application/xml .xml
+</IfModule>
+
+# Don't serve dotfiles.
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>

@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+/**
+ * Astro emits this as dist/404.html. Cloudflare Pages serves it automatically;
+ * on Apache it is wired up by the ErrorDocument rule in
+ * deploy/hostinger.htaccess.
+ */
+---
+
+<BaseLayout
+  title="Page not found"
+  description="That page does not exist. Browse the XR case studies, services, or get in touch."
+  noindex={true}
+>
+  <section class="mx-auto max-w-3xl px-6 py-24 text-center sm:py-32">
+    <p class="font-mono text-xs uppercase tracking-[0.32em] text-signal">Error 404</p>
+    <h1 class="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-5xl">
+      This one drifted out of orbit.
+    </h1>
+    <p class="mx-auto mt-6 max-w-prose text-base leading-8 text-muted sm:text-lg">
+      The page you were after does not exist, or it moved while the site was being rebuilt.
+      Everything below is still where it should be.
+    </p>
+
+    <div class="mt-10 flex flex-wrap justify-center gap-4">
+      <a
+        href="/projects/"
+        class="rounded-full bg-signal px-6 py-3 text-sm font-semibold text-paper no-underline shadow-lg shadow-signal/15 transition hover:bg-signal-dark hover:text-paper"
+      >
+        See the case studies
+      </a>
+      <a
+        href="/"
+        class="rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-paper no-underline transition hover:border-signal"
+      >
+        Back to home
+      </a>
+    </div>
+
+    <ul class="mt-12 flex flex-wrap justify-center gap-3" aria-label="Main sections">
+      {
+        [
+          { href: '/services/', label: 'Services' },
+          { href: '/projects/', label: 'Projects' },
+          { href: '/about/', label: 'About' },
+          { href: '/contact/', label: 'Contact' },
+        ].map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="inline-block rounded-full border border-white/10 bg-surface px-4 py-2 text-xs uppercase tracking-[0.2em] text-muted no-underline transition hover:border-signal hover:text-paper"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

@@ -1,5 +1,5 @@
 ---
-title: Real-Time Multi-User AR Design Review Platform
+title: CollaboratAR — Multi-User AR Design Review
 company: CodeXAR
 role: Lead Unity Developer, Real-Time Multi-User AR
 timeframe: Jan 2022 - Dec 2022
@@ -14,6 +14,21 @@ Enterprise stakeholders reviewing physical products often need to travel or ship
 ## What I built
 
 I led a 5-person team building a real-time multi-user AR collaboration tool in Unity with AR Foundation, Mirror Networking, and Draco mesh compression. Stakeholders could review the same complex 3D asset from different locations, while the mobile rendering pipeline targeted 8K real-time quality through shader optimization, texture atlasing, Draco compression, and LOD systems. I also coordinated iOS and Android build pipelines and certification cycles.
+
+## Screenshots
+
+<div class="shot-grid">
+  <figure>
+    <picture>
+      <source type="image/avif" srcset="/images/projects/ar-design-review-platform-shot-1-800.avif 800w, /images/projects/ar-design-review-platform-shot-1-1600.avif 1600w" sizes="(max-width: 640px) 100vw, 440px" />
+      <source type="image/webp" srcset="/images/projects/ar-design-review-platform-shot-1-800.webp 800w, /images/projects/ar-design-review-platform-shot-1-1600.webp 1600w" sizes="(max-width: 640px) 100vw, 440px" />
+      <img src="/images/projects/ar-design-review-platform-shot-1-800.webp" alt="Tablet showing a patterned jacket placed in a room in AR, with AR, voice, share and annotation controls" loading="lazy" width="1600" height="1287" />
+    </picture>
+    <figcaption>A scanned garment placed in a room, with voice and annotation controls for review sessions.</figcaption>
+  </figure>
+</div>
+
+<p class="shot-credit">Screenshots from the akaashgarg.com portfolio.</p>
 
 ## Outcome
 

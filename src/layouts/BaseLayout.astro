@@ -1,6 +1,8 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Starfield from '../components/Starfield.astro';
+import Analytics from '../components/Analytics.astro';
 import '../styles/global.css';
 
 export interface Props {
@@ -8,19 +10,64 @@ export interface Props {
   description: string;
   /** Set true on pages that shouldn't be indexed (none currently, kept for completeness). */
   noindex?: boolean;
+  /** Site-root-relative path to a 1200x630 raster share card. */
+  ogImage?: string;
 }
 
-const { title, description, noindex = false } = Astro.props;
-const siteUrl = Astro.site ?? (new URL('/', Astro.url)).origin;
-const ld = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Akaash Garg",
-  "url": siteUrl,
-  "description": description
-};
+const { title, description, noindex = false, ogImage = '/images/og-default.png' } = Astro.props;
+const siteUrl = Astro.site ?? new URL('/', Astro.url);
 const pageTitle = title === 'Akaash Garg' ? title : `${title} · Akaash Garg`;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+
+/* Social crawlers reject relative og:image paths — these must be absolute. */
+const ogImageURL = new URL(ogImage, siteUrl);
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${siteUrl}#akaash`,
+      name: 'Akaash Garg',
+      url: siteUrl.toString(),
+      image: ogImageURL.toString(),
+      jobTitle: 'Lead XR Engineer',
+      email: 'mailto:akaash.garg@gmail.com',
+      description,
+      knowsAbout: [
+        'Extended Reality',
+        'Virtual Reality Development',
+        'Augmented Reality Development',
+        'Unity 3D',
+        'Multiplayer Networking',
+        'Real-time Rendering Performance',
+      ],
+      sameAs: ['https://www.linkedin.com/in/akaashgarg/', 'https://2dudestudios.com/'],
+    },
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${siteUrl}#services`,
+      name: 'Akaash Garg — XR Engineering',
+      url: new URL('/services/', siteUrl).toString(),
+      image: ogImageURL.toString(),
+      description:
+        'Enterprise XR engineering: Unity VR/AR product delivery, multiplayer systems, and standalone-headset performance optimization.',
+      areaServed: 'Worldwide',
+      availableLanguage: ['English', 'Hindi'],
+      provider: { '@id': `${siteUrl}#akaash` },
+      serviceType: [
+        'VR application development',
+        'AR application development',
+        'Multiplayer systems engineering',
+        'XR performance optimization',
+        'Game development',
+        'Enterprise XR training products',
+        'Gamified training solutions',
+        'Technical leadership and XR consulting',
+      ],
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -45,18 +92,24 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="theme-color" content="#05060d" />
     <meta property="og:site_name" content="Akaash Garg" />
 
-    <meta property="og:image" content="/images/projects/ruins-of-the-forgotten-1.svg" />
-    <meta property="og:image:alt" content="Akaash Garg — project preview" />
-    <meta name="twitter:image" content="/images/projects/ruins-of-the-forgotten-1.svg" />
-    <link rel="preload" as="image" href="/images/projects/free-roam-multiplayer-vr-arena-1.avif" type="image/avif" />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Akaash Garg — Lead XR Engineer. Enterprise XR, multiplayer systems, and 90fps standalone." />
+    <meta name="twitter:image" content={ogImageURL} />
 
     <meta name="generator" content={Astro.generator} />
-    <script type="application/ld+json">{JSON.stringify(ld)}</script>
+    <!-- set:html is required: a <script> with a type attribute is treated as
+         inline by Astro, and inline scripts do not interpolate expressions. -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(ld)} />
+    <Analytics />
   </head>
   <body class="flex min-h-screen flex-col">
     <a href="#main" class="skip-link">Skip to content</a>
+    <Starfield />
     <Header />
-    <main id="main" class="flex-1">
+    <main id="main" class="relative z-10 flex-1">
       <slot />
     </main>
     <Footer />

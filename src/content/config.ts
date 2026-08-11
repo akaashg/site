@@ -17,6 +17,15 @@ const projects = defineCollection({
     // differently" section -- that lives in the body copy)
     outcome: z.string().max(200).optional(),
 
+    // Store / demo link for anything publicly playable, surfaced as a button
+    // on the case study. Omit for client work that was never public or has
+    // since been delisted -- use `availability` to explain that instead.
+    liveUrl: z.string().url().optional(),
+    liveLabel: z.string().optional(),
+
+    // Short status line shown next to the live link (e.g. "Delisted 2024")
+    availability: z.string().optional(),
+
     // Manual sort order on the projects index (lower = higher)
     order: z.number().default(0),
 

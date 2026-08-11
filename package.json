@@ -8,10 +8,13 @@
     "start": "astro dev",
     "build": "astro build",
     "generate:images": "node ./scripts/generate-images.js",
+    "generate:og": "node ./scripts/generate-og.js",
     "lhci": "lhci autorun --config ./.lighthouseci/ci-config.json --upload.target=temporary-public-storage",
     "lhci-local": "lhci autorun --config ./.lighthouseci/ci-config.json --upload.target=temporary-public-storage",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "fetch:store-media": "node ./scripts/fetch-store-media.js",
+    "generate:cards": "node ./scripts/generate-project-cards.js"
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.1.2",

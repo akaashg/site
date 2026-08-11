@@ -15,17 +15,36 @@ Retail AR uses Unity's plane tracking to place furniture or electronics on real-
 
 An AR proof of concept combining ARCore and ARKit plane-tracking support with an event-driven Unity architecture, so product models drop convincingly onto real-world surfaces and respond to the same interaction events regardless of platform. Blender-authored assets stand in for catalog items. The goal was to make product try-outs part of the shopping flow itself — letting a customer size a couch or a TV in their own living room — rather than a separate visualization tool bolted onto checkout.
 
-## Visual
+## Screenshots
 
-<figure>
-	<picture>
-		<source type="image/avif" srcset="/images/projects/retail-ar-400.avif 400w, /images/projects/retail-ar-800.avif 800w, /images/projects/retail-ar-1.avif 1200w" sizes="(max-width: 900px) 100vw, 900px" />
-		<source type="image/webp" srcset="/images/projects/retail-ar-400.webp 400w, /images/projects/retail-ar-800.webp 800w, /images/projects/retail-ar-1.webp 1200w" sizes="(max-width: 900px) 100vw, 900px" />
-		<source srcset="/images/projects/retail-ar-400.svg 400w, /images/projects/retail-ar-800.svg 800w, /images/projects/retail-ar-1.svg 1200w" sizes="(max-width: 900px) 100vw, 900px" type="image/svg+xml" />
-		<img src="/images/projects/retail-ar-1.webp" alt="Retail AR — placeholder image" loading="lazy" width="1200" height="675" class="w-full rounded" />
-	</picture>
-	<figcaption class="sr-only">Placeholder image — replace with an in-app screenshot of a placed product.</figcaption>
-</figure>
+<div class="shot-grid shot-grid--portrait">
+  <figure>
+    <picture>
+      <source type="image/avif" srcset="/images/projects/retail-ar-shot-1-800.avif 800w, /images/projects/retail-ar-shot-1-1600.avif 1600w" sizes="(max-width: 640px) 100vw, 440px" />
+      <source type="image/webp" srcset="/images/projects/retail-ar-shot-1-800.webp 800w, /images/projects/retail-ar-shot-1-1600.webp 1600w" sizes="(max-width: 640px) 100vw, 440px" />
+      <img src="/images/projects/retail-ar-shot-1-800.webp" alt="Mobile product catalogue listing chairs with category filters and prices" loading="lazy" width="1080" height="2400" />
+    </picture>
+    <figcaption>Catalogue with category filters.</figcaption>
+  </figure>
+  <figure>
+    <picture>
+      <source type="image/avif" srcset="/images/projects/retail-ar-shot-2-800.avif 800w, /images/projects/retail-ar-shot-2-1600.avif 1600w" sizes="(max-width: 640px) 100vw, 440px" />
+      <source type="image/webp" srcset="/images/projects/retail-ar-shot-2-800.webp 800w, /images/projects/retail-ar-shot-2-1600.webp 1600w" sizes="(max-width: 640px) 100vw, 440px" />
+      <img src="/images/projects/retail-ar-shot-2-800.webp" alt="Product detail screen for a chair with a View in AR button" loading="lazy" width="1080" height="2400" />
+    </picture>
+    <figcaption>Product detail, with the handoff into AR.</figcaption>
+  </figure>
+  <figure>
+    <picture>
+      <source type="image/avif" srcset="/images/projects/retail-ar-shot-3-800.avif 800w, /images/projects/retail-ar-shot-3-1600.avif 1600w" sizes="(max-width: 640px) 100vw, 440px" />
+      <source type="image/webp" srcset="/images/projects/retail-ar-shot-3-800.webp 800w, /images/projects/retail-ar-shot-3-1600.webp 1600w" sizes="(max-width: 640px) 100vw, 440px" />
+      <img src="/images/projects/retail-ar-shot-3-800.webp" alt="AR camera view placing a virtual office chair on a real floor beside a physical chair, with colour swatches and a Buy button" loading="lazy" width="1080" height="2400" />
+    </picture>
+    <figcaption>Plane-tracked placement in the room, with colourway switching and buy.</figcaption>
+  </figure>
+</div>
+
+<p class="shot-credit">Screenshots from the akaashgarg.com portfolio.</p>
 
 ## Outcome
 
