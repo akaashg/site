@@ -25,14 +25,13 @@ const CONFIG = {
   /**
    * Umami Cloud. Website ID from Settings -> Websites.
    *
-   * `domains` restricts collection to these hosts, which keeps local dev and
-   * preview builds out of the stats. Drop the workers.dev entry once
-   * akaashgarg.com is attached and the temporary URL is retired.
+   * `domains` restricts collection to the production host, so local dev, the
+   * workers.dev URL, and preview builds never appear in the stats.
    */
   umami: {
     websiteId: '9c22491d-8e73-4d82-8a9b-42b057d9acb8',
     src: 'https://cloud.umami.is/script.js',
-    domains: 'akaashgarg.com,personal-website.akaash-garg.workers.dev',
+    domains: 'akaashgarg.com',
   },
   /** Cloudflare Web Analytics: the token from the dashboard beacon snippet. */
   cloudflare: {
