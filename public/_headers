@@ -19,6 +19,15 @@
 /favicon.svg
   Cache-Control: public, max-age=2592000
 
+# Astro prerenders endpoints to plain files and drops the Content-Type set in
+# the route, so /llms.txt would be served as bare `text/plain`. Without an
+# explicit charset a client falls back to windows-1252 and the em dashes in the
+# case-study titles arrive as mojibake. Declared here because this is the only
+# layer that still gets a say after the build.
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=0, must-revalidate
+
 # HTML must revalidate so content edits go live on the next request.
 /*.html
   Cache-Control: public, max-age=0, must-revalidate

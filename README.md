@@ -53,6 +53,27 @@ click`, `Email click`, `LinkedIn click`, `Resume download`, `Store link click`.
 Outbound clicks are tracked automatically — only the form success needs
 explicit wiring.
 
+## Crawlers — search and AI
+
+`public/robots.txt` allows everything, with AI agents named explicitly so the
+intent is legible rather than implied by a bare wildcard. To opt out of any of
+them later, flip that group's `Allow` to `Disallow` — deleting the group is not
+enough, since it would fall back to the permissive `*` rule.
+
+`src/pages/llms.txt.ts` generates `/llms.txt` ([llmstxt.org](https://llmstxt.org)):
+a plain-markdown map of the site with a one-line summary per page and per case
+study. It is generated from the content collection, like the sitemap, so adding
+a case study updates it automatically — there is no second list to maintain.
+
+Both files plus `sitemap.xml` and the JSON-LD in `BaseLayout.astro` are the
+whole surface. Pages are static HTML with no client-side rendering, so crawlers
+that do not run JavaScript still see the full content.
+
+One deploy-level detail: Astro prerenders endpoints to files and drops the
+`Content-Type` set in the route, so `/llms.txt` gets an explicit
+`charset=utf-8` in `public/_headers`. Without it the em dashes in case-study
+titles can decode as mojibake.
+
 ## Contact form
 
 Posts to Web3Forms (`src/pages/contact.astro`). The access key is public by
