@@ -22,6 +22,9 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 /* Social crawlers reject relative og:image paths — these must be absolute. */
 const ogImageURL = new URL(ogImage, siteUrl);
 
+/* The Person node wants an actual photo of the person, not the share card. */
+const portraitURL = new URL('/images/profile-picture/akaash-garg-portrait-560.webp', siteUrl);
+
 const ld = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -30,7 +33,13 @@ const ld = {
       '@id': `${siteUrl}#akaash`,
       name: 'Akaash Garg',
       url: siteUrl.toString(),
-      image: ogImageURL.toString(),
+      image: {
+        '@type': 'ImageObject',
+        url: portraitURL.toString(),
+        width: 560,
+        height: 896,
+        caption: 'Akaash Garg, lead XR engineer',
+      },
       jobTitle: 'Lead XR Engineer',
       email: 'mailto:akaash.garg@gmail.com',
       description,

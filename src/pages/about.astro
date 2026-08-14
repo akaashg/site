@@ -7,23 +7,49 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   description="Akaash Garg — founder & technical lead at 2 Dude Studios. 17+ years in software, currently focused on multiplayer XR simulation for medical, industrial, and enterprise training."
 >
   <section class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
-    <div class="space-y-8">
-      <div class="space-y-4">
-        <p class="font-mono text-xs uppercase tracking-[0.28em] text-signal">About</p>
-        <h1 class="text-4xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-5xl">
-          Lead XR engineer, studio co-founder, and product technologist for enterprise and games.
-        </h1>
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-center lg:gap-12">
+      <div class="space-y-8">
+        <div class="space-y-4">
+          <p class="font-mono text-xs uppercase tracking-[0.28em] text-signal">About</p>
+          <h1 class="text-4xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-5xl">
+            Lead XR engineer, studio co-founder, and product technologist for enterprise and games.
+          </h1>
+        </div>
+        <p class="max-w-prose text-base leading-8 text-muted sm:text-lg">
+          I lead a 6-person XR studio building premium enterprise training, simulation, and game experiences. With 17+ years in software and 6 years specialized in XR, I ship Unity products that combine performance, polish, and real business outcomes.
+        </p>
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-[0.18em] text-muted">
+          <span class="flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-signal" aria-hidden="true"></span>
+            Available for new engagements
+          </span>
+          <span>Bangalore, India (IST) · Remote worldwide</span>
+        </div>
       </div>
-      <p class="max-w-prose text-base leading-8 text-muted sm:text-lg">
-        I lead a 6-person XR studio building premium enterprise training, simulation, and game experiences. With 17+ years in software and 6 years specialized in XR, I ship Unity products that combine performance, polish, and real business outcomes.
-      </p>
-      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-[0.18em] text-muted">
-        <span class="flex items-center gap-2">
-          <span class="h-2 w-2 rounded-full bg-signal" aria-hidden="true"></span>
-          Available for new engagements
-        </span>
-        <span>Bangalore, India (IST) · Remote worldwide</span>
-      </div>
+
+      <figure class="relative mx-auto w-full max-w-[300px] lg:mx-0">
+        <div class="portrait-frame">
+          <img
+            src="/images/profile-picture/akaash-garg-portrait-280.webp"
+            srcset="
+              /images/profile-picture/akaash-garg-portrait-280.webp 280w,
+              /images/profile-picture/akaash-garg-portrait-560.webp 560w
+            "
+            sizes="300px"
+            width="280"
+            height="448"
+            alt="Akaash Garg, lead XR engineer, standing with his arms folded"
+            class="portrait-image"
+            decoding="async"
+            fetchpriority="high"
+          />
+          <figcaption class="portrait-hud" aria-hidden="true">
+            <span>Akaash Garg</span>
+            <span>Bangalore · IST</span>
+          </figcaption>
+        </div>
+        <div class="pointer-events-none absolute -bottom-6 -left-6 hidden h-24 w-24 rounded-full bg-signal/15 blur-3xl md:block" aria-hidden="true"></div>
+      </figure>
     </div>
 
     <div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -166,3 +192,58 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* Same slate + violet wash as the home-page orbit viewer, so the portrait
+     reads as part of the hero system rather than a pasted-in photo. The lift
+     also matters for legibility: the cutout is a black t-shirt, which would
+     disappear against the near-black page background. */
+  .portrait-frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    border: 1px solid rgb(125 211 252 / 0.15);
+    background:
+      radial-gradient(circle at 50% 34%, rgb(51 65 85 / 0.8), rgb(5 6 13 / 0.2) 64%),
+      radial-gradient(circle at 78% 12%, rgb(124 58 237 / 0.3), transparent 52%);
+    box-shadow: 0 24px 120px rgb(124 58 237 / 0.14);
+    /* Headroom above the head; the figure bleeds off the bottom edge. */
+    padding-top: 2rem;
+  }
+
+  .portrait-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    /* Violet rim separates the dark silhouette from the frame. */
+    filter: drop-shadow(0 0 22px rgb(124 58 237 / 0.45));
+  }
+
+  /* Grounds the bottom crop so the figure fades into the frame instead of
+     ending on a hard cut. */
+  .portrait-frame::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 22%;
+    background: linear-gradient(to top, rgb(5 6 13 / 0.75), transparent);
+    pointer-events: none;
+  }
+
+  .portrait-hud {
+    position: absolute;
+    inset: auto 1rem 0.9rem;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font: 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgb(186 230 253 / 0.7);
+  }
+
+  .portrait-hud span:last-child {
+    color: rgb(167 139 250 / 0.72);
+  }
+</style>
