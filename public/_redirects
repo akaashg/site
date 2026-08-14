@@ -1,0 +1,9 @@
+# Cloudflare reads this file from the build output root, same as _headers.
+# Rules are matched top-to-bottom; the first match wins.
+
+# /portfolio has never been a route on this site — the case studies live under
+# /projects/. The published resume PDF and the older WordPress-era links both
+# point at /portfolio, so those land on a 404 without this. 301 because the
+# move is permanent and the old path has no content of its own to preserve.
+/portfolio    /projects/  301
+/portfolio/*  /projects/  301
