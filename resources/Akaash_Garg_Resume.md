@@ -9,7 +9,7 @@ akaash.garg@gmail.com · linkedin.com/in/akaashgarg · akaashgarg.com
 
 ## PROFESSIONAL SUMMARY
 
-Hands-on XR engineer and studio founder with 17+ years building and shipping software — moving into game development in 2019 and XR in 2020, with 6 years now specialized in Unity 3D and immersive technology. Expertise in AR/VR/MR frameworks (OpenXR, AR Foundation, XR Interaction Toolkit), multiplayer networking with Photon Fusion and Mirror, rendering pipelines (URP/HDRP), shader programming, and GPU optimization across Meta Quest, HoloLens, HTC Vive, and Varjo. Founded 2 Dude Studios and leads a 6-person team shipping location-based entertainment VR now running in commercial arenas, enterprise XR training, and *Ruins of the Forgotten*, an open-world survival game with a playable public demo on Steam. Previously led a multiplayer VR platform extending a 50M+ user IP and a photogrammetry-driven AR collaboration tool, after 13 years running a full-stack digital studio — combining product ownership and client accountability with daily engineering across gameplay, networking, and rendering.
+Hands-on XR engineer and studio founder with 17+ years building and shipping software — moving into game development in 2019 and XR in 2020, with 6 years now specialized in Unity 3D and immersive technology. Expertise in AR/VR/MR frameworks (OpenXR, AR Foundation, XR Interaction Toolkit), multiplayer networking with Photon Fusion and Mirror, rendering pipelines (URP/HDRP), shader programming, and GPU optimization across Meta Quest, HoloLens, HTC Vive, and Varjo. Founded 2 Dude Studios and leads a 6-person team shipping location-based entertainment VR now running in commercial arenas, enterprise XR training, and *Ruins of the Forgotten*, an open-world survival game with a playable public demo on Steam. Previously led a multiplayer VR platform extending a 50M+ user IP and a photogrammetry-driven AR collaboration tool, after 12 years running a full-stack digital studio — combining product ownership and client accountability with daily engineering across gameplay, networking, and rendering.
 
 ---
 
@@ -46,12 +46,12 @@ Hands-on XR engineer and studio founder with 17+ years building and shipping sof
 - Coordinated cross-platform deployment across iOS and Android — build pipelines, certification cycles, and post-launch QA across a distributed user base.
 
 ### Founder & Lead Developer · Cyber Cerebs
-*2008 – 2021 · Delhi, India*
+*2009 – 2021 · Delhi, India*
 *Full-service digital studio — full-stack product development and delivery.*
 
 - Grew a solo practice into an 8+ person studio delivering 50+ digital products across hospitality, sports, travel, and fleet services for clients in India and overseas.
 - **Pivoted the studio into interactive development — game development from 2019, XR from 2020** — self-directing the transition from web and full-stack delivery into Unity, shipping mobile and PC titles across racing, roguelite, RPG, simulation, and infinite-runner genres before moving to XR full time.
-- Owned technical hiring, client engagement, concurrent delivery timelines, and P&L across a multi-vertical portfolio over 13 years.
+- Owned technical hiring, client engagement, concurrent delivery timelines, and P&L across a multi-vertical portfolio over 12 years.
 
 ---
 
