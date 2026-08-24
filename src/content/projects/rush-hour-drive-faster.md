@@ -9,7 +9,7 @@ outcome: Live on Google Play with 1K+ downloads. Rebuilt on Unity 6.2 to stay cu
 liveUrl: https://play.google.com/store/apps/details?id=com.AkaashGarg.Faster
 liveLabel: Get it on Google Play
 availability: Live on Google Play. Rated 3+. Last updated December 2025.
-order: 11
+order: 12
 ---
 
 A driving game built around realistic car physics only holds up if traffic and mode variety actually change how you have to drive — otherwise a "realistic car controller" is just a tech demo with no game wrapped around it.

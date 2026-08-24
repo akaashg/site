@@ -6,7 +6,7 @@ timeframe: 2023-Present
 stack: [Unity 3D, Photon Fusion, XR Interaction Toolkit, Meta Quest]
 summary: Instructor-led, step-based multiplayer VR training environment for medical, industrial, and clinical simulation training.
 outcome: "Built a 3-part training foundation: instructor guidance, sequenced tasks, and synchronized multi-user interactions on Meta Quest."
-order: 16
+order: 17
 draft: true
 ---
 

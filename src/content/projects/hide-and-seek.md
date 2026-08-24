@@ -9,7 +9,7 @@ outcome: Live on Google Play with 500+ downloads, actively maintained through An
 liveUrl: https://play.google.com/store/apps/details?id=com.DudeStudios.HideNSeek
 liveLabel: Get it on Google Play
 availability: Live on Google Play. Rated 3+. Last updated December 2025.
-order: 12
+order: 13
 ---
 
 Hide-and-seek is a two-sided game, and most digital versions only build one side of it well. This one is playable from either position in single player.

@@ -6,7 +6,7 @@ timeframe: Portfolio project
 stack: [Unity, XR Interaction Toolkit, Photon PUN 2, Photon Voice, OpenXR, Oculus SDK, SteamVR]
 summary: Social VR platform for avatar-based meetups, events, and collaboration with spatial audio and interactive 3D environments.
 outcome: Creates a shared, inclusive virtual space for personal and professional connection.
-order: 9
+order: 10
 ---
 
 Social VR platforms live or die on presence — avatars and spatial audio have to feel like being in a room with someone, not a voice chat with a floating model attached, and that has to hold up across whichever headset, or phone, a given user happens to own.

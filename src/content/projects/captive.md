@@ -6,7 +6,7 @@ timeframe: Level Up Circle Beginner Jam #1
 stack: [Unity, Event-Driven Architecture, Finite State Machines, Blender, Asset Store]
 summary: Roguelite stealth-puzzle game about escaping a factory by linking hot and cold generators while avoiding guards.
 outcome: Uses reusable event-driven puzzle systems and raycast-based enemy field of vision.
-order: 14
+order: 15
 ---
 
 Stealth games depend on guard behavior actually reading as fair — if line-of-sight is faked or guard states don't telegraph clearly, players stop trusting the stealth system and start treating detection as random.

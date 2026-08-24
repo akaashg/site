@@ -9,7 +9,7 @@ outcome: Live on Google Play, rebuilt on IL2CPP/ARM64 with 16 KB page-size suppo
 liveUrl: https://play.google.com/store/apps/details?id=com.AkaashGarg.ABSAnotherBattleSimulator
 liveLabel: Get it on Google Play
 availability: Live on Google Play. Rated 3+. Last updated December 2025.
-order: 13
+order: 14
 ---
 
 Formation-based battle simulators live or die on whether building an army actually feels legible — if formation planning doesn't visibly change how a fight plays out, "watch armies clash" is just a spectacle with no strategy underneath it.

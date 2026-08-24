@@ -6,7 +6,7 @@ timeframe: AI and Games Jam 2021
 stack: [Unity, Goal-Oriented Action Planning, Behavior Trees, Finite State Machines, Blender]
 summary: AI-driven RPG vertical slice with ten NPC types whose goals and behaviours react to changing game events.
 outcome: Built an extensible NPC system intended to scale beyond the jam prototype.
-order: 15
+order: 16
 ---
 
 NPC behavior that's scripted per-scene stops scaling past a handful of characters — ten NPC types that each need to react to the same set of world events only stays manageable if the AI system is built on goals and preconditions instead of hand-authored scripts per character.

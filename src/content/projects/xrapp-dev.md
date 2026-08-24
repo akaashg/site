@@ -6,7 +6,7 @@ timeframe: In development
 stack: [Unity 3D, PERN stack, PostgreSQL, Node.js, React, Photon, Meta Quest]
 summary: Enterprise VR training platform for multiplayer, instructor-led sessions with digital-twin simulations and AI-powered training analytics.
 outcome: Targets manufacturing, logistics, and healthcare training, with LMS/HRMS integration and offline deployment for remote sites.
-order: 2
+order: 6
 ---
 
 Enterprise training tools tend to fail in one of two ways: the content is a slide deck

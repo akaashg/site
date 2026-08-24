@@ -6,7 +6,7 @@ timeframe: Portfolio project
 stack: [Unity, Unreal Engine, Photon Networking, Three.js, CesiumJS, Blender, Autodesk Revit]
 summary: Configurable VR simulation framework for physics-driven training, education, and immersive operational experiences.
 outcome: Provides reusable interaction and simulation foundations across XR use cases.
-order: 10
+order: 11
 ---
 
 Training and simulation projects tend to get rebuilt from scratch every time the use case changes — different physics rig, different world data, different engine — because most VR frameworks are built for one simulation, not a family of them.

@@ -6,7 +6,7 @@ timeframe: Portfolio project
 stack: [Unity, Photon Networking, React, Three.js, Blender, VR SDK]
 summary: Immersive educational platform that connects physical and virtual classrooms across VR headsets and Android devices.
 outcome: Supports interactive teaching, learning, and collaboration in shared virtual spaces.
-order: 8
+order: 9
 ---
 
 Remote and hybrid classrooms lose the parts of in-person teaching that are hardest to replace — a teacher walking a 3D model, students collaborating around the same object — unless the virtual classroom actually puts everyone in the same shared space instead of on a grid of video tiles.

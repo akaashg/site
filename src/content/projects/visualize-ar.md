@@ -6,7 +6,7 @@ timeframe: Portfolio project
 stack: [Unity, Three.js, WebXR, ARCore, ARKit, Node.js, Django, PostgreSQL]
 summary: Augmented visualization system for exploring 3D graphs, heatmaps, and interactive dashboards in spatial context.
 outcome: Brings real-time visual data into an immersive AR workflow.
-order: 7
+order: 8
 ---
 
 Raw data dashboards flatten the thing they're trying to explain — a heatmap or a 3D graph reads differently in spatial context than on a 2D chart, but getting there means marrying a real-time data backend to an AR rendering pipeline that can't lag behind the numbers.

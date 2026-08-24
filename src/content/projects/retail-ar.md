@@ -6,7 +6,7 @@ timeframe: Portfolio project
 stack: [Unity, AR Foundation, ARCore, ARKit, Blender]
 summary: AR retail proof of concept that lets customers place furniture or electronics in their own space before purchase.
 outcome: Demonstrates plane-tracked product placement for furniture and electronics retail.
-order: 6
+order: 7
 ---
 
 Retail AR uses Unity's plane tracking to place furniture or electronics on real-world surfaces. It was designed as a proof of concept for retail clients who need customers to judge a product's size and style before buying — a decision that usually stalls without seeing the item at real scale in the room it'll live in.
