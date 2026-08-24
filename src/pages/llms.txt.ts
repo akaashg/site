@@ -13,7 +13,7 @@ import { getCollection } from 'astro:content';
  */
 
 const SUMMARY =
-  'Akaash Garg is a Lead XR Engineer and the founder and technical lead at 2 Dude Studios, ' +
+  'Akaash Garg is the Lead XR Engineer at 2 Dude Studios, ' +
   'based in Bangalore, India and working remotely worldwide. 17+ years in software, currently ' +
   'focused on enterprise XR: Unity VR/AR product delivery, multiplayer systems, and ' +
   'standalone-headset performance on Quest, HoloLens, Varjo, and SteamVR.';
@@ -52,7 +52,7 @@ const PAGES: Array<{ path: string; name: string; description: string }> = [
 ];
 
 const FACTS = [
-  'Role: Lead XR Engineer; founder and technical lead, 2 Dude Studios',
+  'Role: Lead XR Engineer, 2 Dude Studios',
   'Based in: Bangalore, India (IST) — remote worldwide, with overlap for EU and US calls',
   'Client base: India, the United States, and the United Kingdom',
   'Engagements: fixed-scope projects, monthly retainers, technical audits and rescues, and senior or long-term roles',
