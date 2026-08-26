@@ -72,16 +72,56 @@ const CONFIG = {
 <script is:inline>
   (() => {
     /**
+     * First-touch campaign attribution.
+     *
+     * Umami tags UTM parameters onto the pageview they arrive on, so an event
+     * fired later in the visit -- a booking click, a submitted brief -- lands
+     * with no campaign attached and can't be credited to the link that drove
+     * it. Reading them once and merging them into every event closes that gap.
+     */
+    const CAMPAIGN_KEY = 'ag:campaign';
+    const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+
+    const campaign = (() => {
+      try {
+        /* First touch wins: the campaign that opened the session keeps the
+           credit, so a later link with its own tags can't overwrite it. */
+        const stored = sessionStorage.getItem(CAMPAIGN_KEY);
+        if (stored) return JSON.parse(stored);
+
+        const params = new URLSearchParams(window.location.search);
+        const found = {};
+        UTM_KEYS.forEach((key) => {
+          const value = params.get(key);
+          /* Capped: these become dashboard dimensions, and one mangled link
+             with a 300-character value would earn its own useless row. */
+          if (value) found[key] = value.slice(0, 100);
+        });
+
+        if (!Object.keys(found).length) return {};
+        sessionStorage.setItem(CAMPAIGN_KEY, JSON.stringify(found));
+        return found;
+      } catch {
+        /* sessionStorage throws in private mode and with storage blocked. */
+        return {};
+      }
+    })();
+
+    /**
      * Provider-agnostic event shim. Everything on the site calls
      * `window.track(name, props)`; this forwards to whichever provider is
      * loaded and silently no-ops when none is.
      */
     window.track = function track(name, props) {
       try {
+        /* An event's own props win, in the unlikely case of a name collision. */
+        const payload = { ...campaign, ...props };
+        const data = Object.keys(payload).length ? payload : undefined;
+
         if (typeof window.plausible === 'function') {
-          window.plausible(name, props ? { props } : undefined);
+          window.plausible(name, data ? { props: data } : undefined);
         } else if (window.umami && typeof window.umami.track === 'function') {
-          window.umami.track(name, props);
+          window.umami.track(name, data);
         }
       } catch {
         /* Analytics must never break a page interaction. */
