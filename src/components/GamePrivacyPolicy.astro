@@ -14,14 +14,19 @@ export interface Props {
   storeUrl: string;
   /** The support address shown on that game's listing — they differ. */
   email: string;
-  /** Listing shows "Contains ads", which needs its own disclosure section. */
-  ads: boolean;
+  /**
+   * Set for the games whose listing shows "Contains ads". Naming the network
+   * here rather than hardcoding it means a future game on a different network
+   * cannot silently inherit the wrong disclosure.
+   */
+  adNetwork?: { name: string; policyUrl: string };
   /** Listing shows "Committed to follow the Play Families Policy". */
   familiesPolicy?: boolean;
   updated: string;
 }
 
-const { game, packageId, storeUrl, email, ads, familiesPolicy = false, updated } = Astro.props;
+const { game, packageId, storeUrl, email, adNetwork, familiesPolicy = false, updated } = Astro.props;
+const ads = Boolean(adNetwork);
 ---
 
 <section class="mx-auto max-w-3xl px-6 py-16 sm:py-24">
@@ -35,8 +40,8 @@ const { game, packageId, storeUrl, email, ads, familiesPolicy = false, updated }
     <h2 class="text-sm uppercase tracking-[0.28em] text-signal">In short</h2>
     <p class="mt-4 text-base leading-8 text-paper">
       {game} collects no personal information. There is no account, no sign-in, and no profile.
-      {ads
-        ? 'The only data that leaves your device comes from the third-party network that serves the ads in the game.'
+      {adNetwork
+        ? `The only data that leaves your device goes to ${adNetwork.name}, which serves the ads in the game.`
         : 'Nothing about you leaves your device.'}
     </p>
   </div>
@@ -59,19 +64,22 @@ const { game, packageId, storeUrl, email, ads, familiesPolicy = false, updated }
       uninstall the game.
     </p>
 
-    {ads && (
+    {adNetwork && (
       <>
         <h2>Advertising</h2>
         <p>
-          {game} is supported by advertising served by a third-party ad network. To deliver ads and limit how
-          often the same one is shown, that network may process technical information from your device — most
-          commonly the Android Advertising ID, along with coarse device and connection details. That processing
-          is governed by the ad network's own privacy policy rather than this one.
+          {game} is supported by ads served through <strong>{adNetwork.name}</strong>. To deliver those ads and
+          limit how often the same one is shown, {adNetwork.name} may process technical information from your
+          device — including the Android Advertising ID, device and connection details, and your interactions
+          with the ads themselves. That processing is governed by the
+          <a href={adNetwork.policyUrl} rel="noopener noreferrer">{adNetwork.name} privacy policy for players</a>,
+          not by this one.
         </p>
         <p>
-          You can reset or delete your Android Advertising ID at any time under
-          <strong>Settings → Privacy → Ads</strong> on your device, which stops it being linked to earlier
-          ad activity.
+          Ads cannot be switched off inside the game, but you can limit personalised ones. Tap the
+          <strong>Data Privacy</strong> icon shown on an ad to reach {adNetwork.name}'s own controls, and reset
+          or delete your Android Advertising ID under <strong>Settings → Privacy → Ads</strong> to stop it being
+          linked to earlier ad activity.
         </p>
       </>
     )}
@@ -95,7 +103,8 @@ const { game, packageId, storeUrl, email, ads, familiesPolicy = false, updated }
     <p>
       I do not sell, rent, or share any information with third parties, because none is collected in the first
       place.
-      {ads && ' The ad network described above operates inside the app under its own privacy policy; I receive nothing about you from it beyond aggregate delivery statistics.'}
+      {adNetwork &&
+        ` ${adNetwork.name} operates inside the app under its own privacy policy, as described above; I receive nothing about you from it beyond aggregate delivery statistics.`}
     </p>
 
     <h2>Data retention and deletion</h2>

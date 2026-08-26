@@ -12,7 +12,10 @@ import GamePrivacyPolicy from '../components/GamePrivacyPolicy.astro';
     packageId="com.AkaashGarg.ABSAnotherBattleSimulator"
     storeUrl="https://play.google.com/store/apps/details?id=com.AkaashGarg.ABSAnotherBattleSimulator"
     email="support@akaashgarg.com"
-    ads={true}
+    adNetwork={{
+      name: 'Unity Ads',
+      policyUrl: 'https://unity.com/legal/game-player-and-app-user-privacy-policy',
+    }}
     updated="25 August 2026"
   />
 </BaseLayout>
