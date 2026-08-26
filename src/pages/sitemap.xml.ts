@@ -11,6 +11,10 @@ const STATIC_ROUTES: Array<{ path: string; priority: string; changefreq: string 
   { path: '/projects/', priority: '0.8', changefreq: 'monthly' },
   { path: '/about/', priority: '0.7', changefreq: 'yearly' },
   { path: '/contact/', priority: '0.9', changefreq: 'yearly' },
+  /* Linked from each game's Play listing, so they must stay crawlable. */
+  { path: '/abs-another-battle-simulator-privacy-policy/', priority: '0.3', changefreq: 'yearly' },
+  { path: '/hide-and-seek-privacy-policy/', priority: '0.3', changefreq: 'yearly' },
+  { path: '/rush-hour-privacy-policy/', priority: '0.3', changefreq: 'yearly' },
 ];
 
 export const GET: APIRoute = async ({ site }) => {

@@ -1,0 +1,168 @@
+---
+/**
+ * Privacy policy for one of the published Android games.
+ *
+ * Each game's Play listing links to a policy URL on this domain, so these
+ * pages must stay reachable — a 404 here is a store-compliance problem, not
+ * just a broken link. The copy matches what each listing declares under Data
+ * safety: no data collected, nothing shared.
+ */
+export interface Props {
+  /** Exactly as the Play listing names it. */
+  game: string;
+  packageId: string;
+  storeUrl: string;
+  /** The support address shown on that game's listing — they differ. */
+  email: string;
+  /** Listing shows "Contains ads", which needs its own disclosure section. */
+  ads: boolean;
+  /** Listing shows "Committed to follow the Play Families Policy". */
+  familiesPolicy?: boolean;
+  updated: string;
+}
+
+const { game, packageId, storeUrl, email, ads, familiesPolicy = false, updated } = Astro.props;
+---
+
+<section class="mx-auto max-w-3xl px-6 py-16 sm:py-24">
+  <p class="font-mono text-xs uppercase tracking-[0.28em] text-signal">Privacy policy</p>
+  <h1 class="mt-4 text-4xl font-semibold leading-[1.08] tracking-tight text-paper sm:text-5xl">{game}</h1>
+  <p class="mt-5 font-mono text-xs uppercase tracking-[0.18em] text-muted">
+    Last updated {updated} · <span class="normal-case tracking-normal">{packageId}</span>
+  </p>
+
+  <div class="panel mt-10 p-6 sm:p-8">
+    <h2 class="text-sm uppercase tracking-[0.28em] text-signal">In short</h2>
+    <p class="mt-4 text-base leading-8 text-paper">
+      {game} collects no personal information. There is no account, no sign-in, and no profile.
+      {ads
+        ? 'The only data that leaves your device comes from the third-party network that serves the ads in the game.'
+        : 'Nothing about you leaves your device.'}
+    </p>
+  </div>
+
+  <div class="policy mt-12">
+    <h2>Who this covers</h2>
+    <p>
+      This policy applies to the Android game <strong>{game}</strong> (<code>{packageId}</code>), published on
+      Google Play by Akaash Garg. It does not cover any other app, website, or service.
+    </p>
+
+    <h2>Information the game collects</h2>
+    <p>
+      None. The game asks for no personal information, and there is no server of mine for it to be sent to.
+      No name, email address, phone number, contacts, location, or account of any kind is requested or recorded.
+    </p>
+    <p>
+      Progress, settings, and preferences are written to your device's local storage so the game can remember
+      where you left off. That data stays on your device, is never transmitted to me, and is removed when you
+      uninstall the game.
+    </p>
+
+    {ads && (
+      <>
+        <h2>Advertising</h2>
+        <p>
+          {game} is supported by advertising served by a third-party ad network. To deliver ads and limit how
+          often the same one is shown, that network may process technical information from your device — most
+          commonly the Android Advertising ID, along with coarse device and connection details. That processing
+          is governed by the ad network's own privacy policy rather than this one.
+        </p>
+        <p>
+          You can reset or delete your Android Advertising ID at any time under
+          <strong>Settings → Privacy → Ads</strong> on your device, which stops it being linked to earlier
+          ad activity.
+        </p>
+      </>
+    )}
+
+    <h2>Children's privacy</h2>
+    <p>
+      The game is rated for ages 3 and up.
+      {familiesPolicy && ' It participates in the Google Play Families Policy.'}
+      I do not knowingly collect personal information from anyone, children included — the game collects none
+      from any player. If you believe a child has somehow provided personal information through this game,
+      contact me at <a href={`mailto:${email}`}>{email}</a> and I will look into it.
+    </p>
+
+    <h2>Permissions</h2>
+    <p>
+      The game requests only what Android needs in order to run it{ads ? ', plus network access to fetch ads' : ''}.
+      It does not request access to your contacts, location, camera, microphone, or personal files.
+    </p>
+
+    <h2>Sharing</h2>
+    <p>
+      I do not sell, rent, or share any information with third parties, because none is collected in the first
+      place.
+      {ads && ' The ad network described above operates inside the app under its own privacy policy; I receive nothing about you from it beyond aggregate delivery statistics.'}
+    </p>
+
+    <h2>Data retention and deletion</h2>
+    <p>
+      Since nothing is collected, there is nothing held about you to retain, export, or delete. Uninstalling the
+      game removes the locally stored progress and settings from your device. If you have a question about your
+      data, email me and I will answer it.
+    </p>
+
+    <h2>Distribution</h2>
+    <p>
+      The game is distributed through <a href={storeUrl} rel="noopener noreferrer">Google Play</a>. Your
+      download, purchase, and account activity on the store are handled by Google under
+      <a href="https://policies.google.com/privacy" rel="noopener noreferrer">Google's privacy policy</a>,
+      which is separate from this one.
+    </p>
+
+    <h2>Changes to this policy</h2>
+    <p>
+      If the game's data practices change, this page changes with them, and the "last updated" date at the top
+      will say so. Continued use of the game after an update means the revised policy applies.
+    </p>
+  </div>
+
+  <div class="mt-12 rounded-[2rem] border border-white/10 bg-white/5 p-6 sm:p-8">
+    <h2 class="text-sm uppercase tracking-[0.28em] text-signal">Contact</h2>
+    <p class="mt-4 text-base leading-8 text-muted">
+      Questions about this policy or the game's handling of data:
+    </p>
+    <div class="mt-5 flex flex-wrap gap-3">
+      <a
+        href={`mailto:${email}`}
+        class="rounded-full bg-signal px-5 py-3 text-sm font-semibold text-paper no-underline transition hover:bg-signal-dark hover:text-paper"
+      >
+        {email}
+      </a>
+      <a
+        href={storeUrl}
+        rel="noopener noreferrer"
+        class="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-paper no-underline transition hover:border-signal"
+      >
+        View on Google Play
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Long-form legal copy: set the rhythm once rather than repeating utility
+     classes on forty elements. */
+  .policy h2 {
+    @apply mt-10 text-xl font-semibold text-paper;
+  }
+
+  .policy h2:first-child {
+    @apply mt-0;
+  }
+
+  .policy p {
+    @apply mt-4 text-base leading-8 text-muted;
+  }
+
+  .policy code {
+    @apply rounded bg-line/60 px-1.5 py-0.5 font-mono text-sm text-paper;
+  }
+
+  .policy strong {
+    @apply font-semibold text-paper;
+  }
+</style>

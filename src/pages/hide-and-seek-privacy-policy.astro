@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GamePrivacyPolicy from '../components/GamePrivacyPolicy.astro';
+---
+
+<BaseLayout
+  title="Privacy Policy — Hide and Seek"
+  description="Privacy policy for Hide and Seek on Google Play. The game collects no personal information and shares nothing with third parties."
+>
+  <GamePrivacyPolicy
+    game="Hide and Seek"
+    packageId="com.DudeStudios.HideNSeek"
+    storeUrl="https://play.google.com/store/apps/details?id=com.DudeStudios.HideNSeek"
+    email="dev@akaashgarg.com"
+    ads={false}
+    familiesPolicy={true}
+    updated="25 August 2026"
+  />
+</BaseLayout>

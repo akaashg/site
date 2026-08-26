@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GamePrivacyPolicy from '../components/GamePrivacyPolicy.astro';
+---
+
+<BaseLayout
+  title="Privacy Policy — Rush Hour"
+  description="Privacy policy for Rush Hour on Google Play. The game collects no personal information; ads are served by a third-party network."
+>
+  <GamePrivacyPolicy
+    game="Rush Hour"
+    packageId="com.AkaashGarg.Faster"
+    storeUrl="https://play.google.com/store/apps/details?id=com.AkaashGarg.Faster"
+    email="support@akaashgarg.com"
+    ads={true}
+    updated="25 August 2026"
+  />
+</BaseLayout>

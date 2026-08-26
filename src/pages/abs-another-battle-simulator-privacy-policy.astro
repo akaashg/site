@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GamePrivacyPolicy from '../components/GamePrivacyPolicy.astro';
+---
+
+<BaseLayout
+  title="Privacy Policy — ABS - Another Battle Simulator"
+  description="Privacy policy for ABS - Another Battle Simulator on Google Play. The game collects no personal information; ads are served by a third-party network."
+>
+  <GamePrivacyPolicy
+    game="ABS - Another Battle Simulator"
+    packageId="com.AkaashGarg.ABSAnotherBattleSimulator"
+    storeUrl="https://play.google.com/store/apps/details?id=com.AkaashGarg.ABSAnotherBattleSimulator"
+    email="support@akaashgarg.com"
+    ads={true}
+    updated="25 August 2026"
+  />
+</BaseLayout>
