@@ -2,11 +2,13 @@
 title: Photon Enemy AI — Networked Unity AI Framework
 company: 2 Dude Studios
 role: Lead XR Engineer
-timeframe: In development - Unity Asset Store release pending
-stack: [Unity 3D, C#, Photon Fusion 2, ScriptableObjects, Finite State Machines, UI Toolkit]
-summary: Networked enemy AI framework for Unity - a Photon Fusion 2 state machine over a Fusion-agnostic ability core that also runs single-player with no networking in the scene.
-outcome: The core assembly compiles against an empty reference list, so the same ability layer serves networked and single-player projects without a port.
-availability: Pre-release. Packaged for the Unity Asset Store; listing pending.
+timeframe: Shipped - v1.0.0
+stack: [Unity 6, C#, Photon Fusion 2, ScriptableObjects, Finite State Machines, AI Navigation, UI Toolkit]
+summary: Finite-state-machine enemy AI for Unity 6 that ships two runtimes from one codebase - networked on Photon Fusion 2, or fully standalone for single-player with no networking in the scene.
+outcome: Released at v1.0.0 with public documentation. The core assembly builds against an empty reference list, so the same behaviour serves networked and single-player projects without a port.
+liveUrl: https://2-dude-studios.github.io/Enemy-AI-Photon-Fusion-Docs/
+liveLabel: Read the documentation
+availability: Version 1.0.0 released. Unity 6000.0 LTS or newer; Photon Fusion 2 and its FSM addon are needed only for the networked runtime.
 order: 2
 ---
 
@@ -14,18 +16,20 @@ Enemy AI written directly against a networking layer is stuck there. The valuabl
 
 ## What I built
 
-A layered enemy AI framework for Unity, networked with Photon Fusion 2. Behaviour lives in a Fusion-agnostic ability layer — sense, patrol, rush, attack, injured, health — that reaches the state machine only through a plain-C# blackboard and two events. The networked layer owns state authority, health sync, and spawn/despawn, and nothing below it is allowed to know Fusion exists.
+A finite-state-machine enemy AI package for Unity 6, built for Photon Fusion 2 host-mode multiplayer and shipping two runtimes from one codebase. `EnemyAI.Core` holds the behaviour — senses, patrol, chase, attack, injured and healing abilities, the blackboard, and the ScriptableObject configuration layer — and depends on nothing. `EnemyAI.Standalone` runs that same AI in a single-player scene with no networking present. `EnemyAI.Fusion` adds the networked enemy, state machine, spawning and target management.
 
-That boundary is enforced by the compiler rather than by convention: the core assembly builds against an empty reference list, so a Fusion type cannot enter it without a build error. A standalone runtime references the core alone and runs the full patrol, pursue, and attack loop with no networking present at all.
+The split is enforced by the compiler rather than by convention: Core builds against an empty reference list, so a Fusion type cannot enter it without a build error. The networked assemblies detect Fusion and the FSM addon and enable themselves — there are no scripting defines to set, and until both are installed the package simply runs single-player, with no errors and no missing scripts.
 
-Around 70% of tunable behaviour lives in ScriptableObjects rather than code — stats, senses, combat, healing, patrol — composed per enemy, so archetypes get configured instead of written.
+## Behaviour
 
-## Archetypes and tooling
+Enemies notice you gradually rather than instantly: awareness rises while a target is visible and decays when it isn't, crossing one threshold to investigate and a second to commit. They hear footsteps too, attenuated by blocker layers. Beyond that — patrol by waypoint or random area, melee with an optional jump-lunge, hitscan ranged fire with kiting and cover-seeking, an alert bus that raises nearby allies on detection or on an ally's death, fleeing triggered by low health or being outnumbered, regeneration between fights, abilities swapped while the enemy is still alive, and ragdoll on death simulated per peer so it costs no bandwidth.
 
-Melee, ranged, and cover-seeking shooter archetypes; a wave system with per-wave enemy composition; and health-threshold boss phases that swap abilities at runtime. Detection is a graded meter rather than a binary flag, and enemies call nearby allies to alert, flee under configurable triggers, and ragdoll on death.
+All of it is configured through ScriptableObjects and an editor window. Five archetypes ship as presets with sample scenes in both runtimes: a melee baseline, Stealth (narrow cone, slow to notice and quick to forget), Shooter (holds its distance and falls back to cover), Waves (horde fodder that calls for help and never retreats), and Boss (health-threshold phases that swap abilities at runtime).
 
-The editor side ships a UI Toolkit configurator that builds an enemy prefab from an archetype, a scene validator, range and field-of-view gizmos, and a demo-scene scaffolder.
+## Editor tooling
+
+The tooling targets the failures that are silent rather than loud. A setup window checks the project for the layers, tags and settings the AI needs and fixes them at a button press, never unprompted. The Enemy Configurator turns an archetype plus some tuning into ScriptableObjects and a ready-to-use prefab in one click — each enemy in its own folder, re-opened and updated in place. Scene Doctor checks an open scene for the mistakes that make an enemy do nothing at all, such as no NavMesh, no target provider, an animator on the wrong object or no cover geometry, with a jump-to-culprit button on every finding. A demo-scene builder puts a playable test scene around any enemy prefab with the NavMesh already baked.
 
 ## Outcome
 
-Feature-complete and play-verified in-editor across both the networked and standalone runtimes, with documentation written and the package made self-contained. What remains is a clean-project import test and the store listing itself.
+Released as version 1.0.0 with public documentation and video walkthroughs, validated against Photon Fusion 2.0.12 and 2.1.3 and the Fusion FSM addon 2.0.5. Enemy authority comes from Fusion itself and players become targets as soon as their target component spawns, so the package drops into a project's own launcher instead of requiring the demo bootstrapper.
