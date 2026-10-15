@@ -36,7 +36,8 @@ function stars(seed) {
 /* Free-roam arena: co-located players sharing one tracked space. */
 function arenaMotif(cx, cy) {
   const players = [
-    [-150, -60], [40, -110], [130, 30], [-60, 90], [-190, 70],
+    [-168, -112], [-56, -112], [56, -112], [168, -112],
+    [-168, 112], [-56, 112], [56, 112], [168, 112],
   ];
   let grid = '';
   for (let i = -4; i <= 4; i += 1) {
@@ -44,10 +45,15 @@ function arenaMotif(cx, cy) {
     grid += `<line x1="${cx - 240}" y1="${cy + i * 41}" x2="${cx + 240}" y2="${cy + i * 41}" stroke="#67e8f9" stroke-width="1" opacity="0.16"/>`;
   }
   let links = '';
-  for (let i = 0; i < players.length; i += 1) {
-    for (let j = i + 1; j < players.length; j += 1) {
-      links += `<line x1="${cx + players[i][0]}" y1="${cy + players[i][1]}" x2="${cx + players[j][0]}" y2="${cy + players[j][1]}" stroke="#a78bfa" stroke-width="1.3" opacity="0.3"/>`;
-    }
+  players.forEach(([x, y]) => {
+    links += `<line x1="${cx + x}" y1="${cy + y}" x2="${cx}" y2="${cy}" stroke="#a78bfa" stroke-width="1.3" opacity="0.26"/>`;
+  });
+  /* The calibration print at mat centre: ring plus radial lines. */
+  let marker = `<circle cx="${cx}" cy="${cy}" r="30" fill="none" stroke="#67e8f9" stroke-width="2" opacity="0.7"/>
+                <circle cx="${cx}" cy="${cy}" r="6" fill="#67e8f9" opacity="0.9"/>`;
+  for (let i = 0; i < 4; i += 1) {
+    const a = (i / 4) * Math.PI * 2 + Math.PI / 4;
+    marker += `<line x1="${(cx + Math.cos(a) * 30).toFixed(1)}" y1="${(cy + Math.sin(a) * 30).toFixed(1)}" x2="${(cx + Math.cos(a) * 50).toFixed(1)}" y2="${(cy + Math.sin(a) * 50).toFixed(1)}" stroke="#67e8f9" stroke-width="1.8" opacity="0.6"/>`;
   }
   const nodes = players
     .map(
@@ -56,7 +62,7 @@ function arenaMotif(cx, cy) {
          <circle cx="${cx + x}" cy="${cy + y}" r="5" fill="#f0abfc"/>`,
     )
     .join('');
-  return `<rect x="${cx - 245}" y="${cy - 170}" width="490" height="340" rx="26" fill="none" stroke="#67e8f9" stroke-width="2" opacity="0.42"/>${grid}${links}${nodes}`;
+  return `<rect x="${cx - 245}" y="${cy - 170}" width="490" height="340" rx="26" fill="none" stroke="#67e8f9" stroke-width="2" opacity="0.42"/>${grid}${links}${marker}${nodes}`;
 }
 
 /* xrapp.dev: instructor-led cohort around one authoritative session. */
@@ -105,9 +111,9 @@ const CARDS = [
   {
     slug: 'free-roam-vr-arena',
     eyebrow: 'LOCATION-BASED ENTERTAINMENT',
-    title: 'Free-Roam Multiplayer',
-    title2: 'VR Arena',
-    facts: ['3 commercial venues', '90fps standalone', 'Multi-headset co-location'],
+    title: 'LBE VR',
+    title2: 'Free-Roam Arena',
+    facts: ['8 players, one floor mat', '72fps standalone Quest', 'Mat-anchored co-location'],
     motif: arenaMotif,
     seed: 4101,
   },
