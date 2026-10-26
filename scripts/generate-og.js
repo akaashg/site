@@ -85,11 +85,11 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${
   ${planet(940, 315, 132)}
 
   <g font-family="Segoe UI, Arial, Helvetica, sans-serif">
-    <text x="80" y="150" fill="#a78bfa" font-size="25" font-weight="600" letter-spacing="7">LEAD XR ENGINEER</text>
+    <text x="80" y="150" fill="#a78bfa" font-size="25" font-weight="600" letter-spacing="5">FULL-STACK SYSTEMS ARCHITECT</text>
     <text x="80" y="252" fill="#EFF1FF" font-size="76" font-weight="700">Akaash Garg</text>
-    <text x="80" y="326" fill="#EFF1FF" font-size="35" font-weight="600">Enterprise XR, multiplayer</text>
-    <text x="80" y="374" fill="#EFF1FF" font-size="35" font-weight="600">systems, and 72fps standalone.</text>
-    <text x="80" y="452" fill="#94A3B8" font-size="25">Unity · OpenXR · Photon Fusion · Meta Quest</text>
+    <text x="80" y="326" fill="#EFF1FF" font-size="35" font-weight="600">Authoritative multiplayer,</text>
+    <text x="80" y="374" fill="#EFF1FF" font-size="35" font-weight="600">offline-first data, 72fps.</text>
+    <text x="80" y="452" fill="#94A3B8" font-size="25">Unity · Photon Fusion · Node · PostgreSQL</text>
     <rect x="78" y="502" width="6" height="46" rx="3" fill="#7C3AED"/>
     <text x="104" y="536" fill="#bae6fd" font-size="26" font-weight="600" letter-spacing="2">akaashgarg.com</text>
   </g>

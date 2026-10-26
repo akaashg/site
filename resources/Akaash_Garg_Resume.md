@@ -1,6 +1,6 @@
 # AKAASH GARG
 
-**Founder & Lead XR Developer** · Unity · Photon · OpenXR · AR Foundation · 17+ yrs Software · 6 yrs XR & Games
+**Full-Stack Systems Architect** · Real-Time & Distributed Systems · Unity · Photon · Node · PostgreSQL · 17+ yrs Software
 
 Bangalore, India · Available for remote work worldwide
 akaash.garg@gmail.com · linkedin.com/in/akaashgarg · akaashgarg.com
@@ -9,7 +9,7 @@ akaash.garg@gmail.com · linkedin.com/in/akaashgarg · akaashgarg.com
 
 ## PROFESSIONAL SUMMARY
 
-Hands-on XR engineer and studio founder with 17+ years building and shipping software — moving into game development in 2019 and XR in 2020, with 6 years now specialized in Unity 3D and immersive technology. Expertise in AR/VR/MR frameworks (OpenXR, AR Foundation, XR Interaction Toolkit), multiplayer networking with Photon Fusion and Mirror, rendering pipelines (URP/HDRP), shader programming, and GPU optimization across Meta Quest, HoloLens, HTC Vive, and Varjo. Founded 2 Dude Studios and leads a 6-person team shipping location-based entertainment VR now running in commercial arenas, enterprise XR training, and *Ruins of the Forgotten*, an open-world survival game with a playable public demo on Steam. Previously led a multiplayer VR platform extending a 50M+ user IP and a photogrammetry-driven AR collaboration tool, after 12 years running a full-stack digital studio — combining product ownership and client accountability with daily engineering across gameplay, networking, and rendering.
+Full-stack systems architect with 17+ years shipping software — 12 years of web, mobile, and backend delivery as a studio founder, then six years architecting real-time distributed systems where the client runs on a fixed frame budget. Designs the whole stack: server-authoritative state models with client-side prediction and reconciliation (Photon Fusion, Mirror), PostgreSQL schemas and Node/Express APIs, offline-first ingestion that survives unreliable connectivity, and Unity clients held inside a 13.9ms budget on standalone hardware. Founded 2 Dude Studios and leads a 6-person team across three concurrent products: a free-roam location-based VR arena, an enterprise training platform on the PERN stack, and *Ruins of the Forgotten*, an open-world survival game with a public Steam demo. Previously architected the integration between a Unity VR client and a proprietary Java backend at sub-100ms for a 50M+ user IP, and led a 5-person team on a photogrammetry-driven multi-user AR platform. Combines architecture ownership and client accountability with daily hands-on engineering.
 
 ---
 
@@ -22,7 +22,7 @@ Hands-on XR engineer and studio founder with 17+ years building and shipping sof
 - **Founded the studio and lead a 6-person team** — 2 junior developers, a designer, a QA tester, and a business developer — owning architecture decisions, code review, sprint planning, hiring, and client delivery while remaining hands-on across gameplay, networking, and rendering every week.
 - **Built *Ruins of the Forgotten*, an open-world survival game with a playable public demo on Steam** *(Early Access launch Q3 2026)* — owning gameplay systems, procedurally generated island terrain, day/night simulation, wildlife AI behaviour, animation state machines, custom shaders, and the full Steamworks pipeline through build, depot, store page, and age-rating submission. → store.steampowered.com/app/2726410
 - **Engineered a networked enemy AI system on Photon** — server-authoritative behaviour trees and state machines with client-side prediction and interpolation, keeping AI perception, pathfinding, and combat decisions synchronized across clients without desync or duplicated damage events.
-- **Developed *Aura VR*, a location-based entertainment (LBE) VR platform now live in 3 commercial arenas** — free-roam multiplayer arena software on Meta Quest with Photon Fusion, avatar and physics synchronization at 90fps standalone, multi-headset co-location, and operator session-management tooling, delivered for a client operating VR gaming arenas across India.
+- **Architected *Aura VR*, free-roam location-based VR arena software for up to 8 co-located players** — a single authoritative host owning all session state while headsets contribute only input; a printed floor mat as the shared coordinate frame, so nothing spatial is networked and only poses already in a common frame replicate; depth-sensor floor correction; and offline-first session telemetry into Supabase behind a React operator dashboard, with disk queueing, backoff, and crash-journal reconciliation. Built to a 72fps standalone budget on Quest 3S, in development ahead of its first venue deployment.
 - **Delivered a gamified corporate compliance training product in VR** — converted regulatory curricula into scenario-based modules with branching decision paths and performance scoring, replacing slide-based training with rehearsable scenarios.
 - Delivered 15+ XR applications across Meta Quest, HoloLens, HTC Vive, and Varjo — training simulators, multiplayer experiences, and AR visualization tools, applying passthrough MR, hand tracking, and room-scale interaction models where the use case called for it.
 - Optimized rendering across URP and HDRP to hit Quest's 90fps frame budget — draw-call batching, LOD systems, texture atlasing, object pooling to control GC pressure, and custom HLSL/ShaderGraph shaders for realistic materials, lighting, and transparency on mobile XR hardware.
@@ -58,7 +58,7 @@ Hands-on XR engineer and studio founder with 17+ years building and shipping sof
 ## SHIPPED PRODUCTS
 
 **Ruins of the Forgotten: A Wild Survival** · Open-world survival, PC — public Steam demo live, Early Access Q3 2026 · [store.steampowered.com/app/2726410](https://store.steampowered.com/app/2726410/Ruins_of_the_Forgotten__A_Wild_Survival/)
-**Aura VR** · LBE free-roam VR arena software, live in 3 commercial venues — Photon Fusion, 90fps standalone, co-location
+**Aura VR** · LBE free-roam VR arena software, first venue deployment in build — Photon Fusion, 72fps standalone, 8-player co-location
 **CollaboratAR** · Photogrammetry-driven multi-user AR product collaboration — Mirror Networking, 8K texture fidelity on mobile
 **Big Cash Poker VR** · Meta Quest multiplayer on a 50M+ user IP — 3-month delivery
 **xrapp.dev** · Multi-user VR team training SaaS for logistics, manufacturing, and safety drills — Unity + PERN stack · [xrapp.dev](https://xrapp.dev/)
@@ -68,12 +68,13 @@ Hands-on XR engineer and studio founder with 17+ years building and shipping sof
 
 ## TECHNICAL SKILLS
 
+**Architecture:** Distributed state and authority models, service boundaries, coordinate and reference frames, relational schema design, offline-first sync with retry and reconciliation, failure and recovery design, multi-tenant models, architecture decision records
+**Multiplayer & Networked Systems:** Photon Fusion, Photon PUN, Mirror Networking, server-authoritative architecture, client-side prediction & interpolation, state synchronization & reconciliation, latency compensation, dedicated server hosting
+**Backend & Full-Stack:** PERN stack (PostgreSQL, Express, React, Node.js), REST API design, authentication & session management, Supabase, Python/Django, CI/CD and edge deployment (GitHub Actions, Cloudflare Workers)
 **Engines & XR SDKs:** Unity 3D, OpenXR, AR Foundation, XR Interaction Toolkit, Meta XR SDK, MRTK, ARKit, ARCore
-**Multiplayer & Networked Systems:** Photon Fusion, Photon PUN, Mirror Networking, server-authoritative architecture, client-side prediction & interpolation, state synchronization & reconciliation, latency compensation
+**Graphics & Performance:** URP, HDRP, HLSL, ShaderGraph, custom shaders, GPU profiling, draw-call batching, LOD systems, texture atlasing, Draco mesh compression, object pooling & GC optimization, 72fps standalone budgets (13.9ms)
 **Gameplay & AI:** Behaviour trees, finite state machines, NavMesh pathfinding, procedural generation, animation state machines, physics-based interaction, character controllers
-**Graphics & Performance:** URP, HDRP, HLSL, ShaderGraph, custom shaders, GPU profiling, draw-call batching, LOD systems, texture atlasing, Draco mesh compression, object pooling & GC optimization, 90fps standalone budgets
 **3D Pipeline:** Photogrammetry capture-to-runtime workflows, mesh decimation & retopology, UV/texture optimization, asset streaming
 **Mixed Reality & Interaction:** Passthrough MR, spatial anchors, hand tracking, room-scale and co-located multi-user setup
-**Platforms:** Meta Quest 2/3/Pro, HoloLens, HTC Vive, Varjo, PC (Steam/Steamworks), iOS, Android
-**Backend & Full-Stack:** PERN stack (PostgreSQL, Express, React, Node.js), REST API design, authentication & session management, dedicated server hosting for multiplayer
-**Languages & Tools:** C#, JavaScript/TypeScript, Python, HLSL, SQL, Git, Unity Profiler, RenderDoc, Blender, Jira, Agile/Scrum, CI/CD build pipelines
+**Platforms:** Meta Quest 2/3/Pro/3S, HoloLens, HTC Vive, Varjo, PC (Steam/Steamworks), iOS, Android
+**Languages & Tools:** C#, JavaScript/TypeScript, Python, HLSL, SQL, Git, Unity Profiler, RenderDoc, Blender, Jira, Agile/Scrum

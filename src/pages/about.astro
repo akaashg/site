@@ -1,10 +1,51 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+/* Grouped rather than one flat list: an architecture reader is scanning for
+   whether the backend and delivery layers are actually there, and a single
+   alphabetical soup of 17 tags hides that. */
+const stackGroups = [
+  {
+    label: 'Backend & data',
+    items: ['Node.js', 'Express', 'PostgreSQL', 'Supabase', 'React', 'Python', 'Django', 'REST APIs'],
+  },
+  {
+    label: 'Real-time & multiplayer',
+    items: [
+      'Photon Fusion 2',
+      'Photon PUN',
+      'Photon Voice',
+      'Mirror',
+      'Server-authoritative state',
+      'Prediction & reconciliation',
+    ],
+  },
+  {
+    label: 'Engine & XR',
+    items: [
+      'Unity 6',
+      'C#',
+      'OpenXR',
+      'AR Foundation',
+      'XR Interaction Toolkit',
+      'Meta XR SDK',
+      'MRTK',
+      'ARKit / ARCore',
+      'URP / HDRP',
+      'ShaderGraph / HLSL',
+      'Three.js / WebXR',
+    ],
+  },
+  {
+    label: 'Delivery & infrastructure',
+    items: ['GitHub Actions', 'Cloudflare Workers', 'Lighthouse CI', 'Steamworks', 'Google Play Console'],
+  },
+];
 ---
 
 <BaseLayout
   title="About"
-  description="Akaash Garg — lead XR engineer at 2 Dude Studios. 17+ years in software, currently focused on multiplayer XR simulation for medical, industrial, and enterprise training."
+  description="Akaash Garg — full-stack systems architect. 17+ years designing real-time distributed systems: authoritative multiplayer, offline-first data pipelines, PostgreSQL and Node backends, and clients that hold a 13.9ms frame budget."
 >
   <section class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
     <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-center lg:gap-12">
@@ -12,11 +53,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="space-y-4">
           <p class="font-mono text-xs uppercase tracking-[0.28em] text-signal">About</p>
           <h1 class="text-4xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-5xl">
-            Lead XR engineer and product technologist for enterprise and games.
+            Full-stack systems architect for real-time and distributed products.
           </h1>
         </div>
         <p class="max-w-prose text-base leading-8 text-muted sm:text-lg">
-          I lead a 6-person XR studio building premium enterprise training, simulation, and game experiences. With 17+ years in software and 6 years specialized in XR, I ship Unity products that combine performance, polish, and real business outcomes.
+          I design and ship the whole stack of a real-time product: the authoritative server that owns
+          state, the data layer and APIs behind it, and the client that has to render all of it inside a
+          frame budget. 17+ years in software — a decade of full-stack web and product delivery, then six
+          years against the tightest real-time constraint in commercial software: standalone headsets at
+          72fps, a 13.9ms budget per frame.
         </p>
         <div class="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-[0.18em] text-muted">
           <span class="flex items-center gap-2">
@@ -38,7 +83,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             sizes="300px"
             width="280"
             height="448"
-            alt="Akaash Garg, lead XR engineer, standing with his arms folded"
+            alt="Akaash Garg, full-stack systems architect, standing with his arms folded"
             class="portrait-image"
             decoding="async"
             fetchpriority="high"
@@ -54,9 +99,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       {[
-        { label: 'Experience', value: '17+ years', detail: '6 of them specialized in XR' },
-        { label: 'XR applications shipped', value: '15+', detail: 'Quest, HoloLens, Vive, and Varjo' },
-        { label: 'Games shipped', value: '4', detail: 'Racing, casual, simulation, and VR' },
+        { label: 'Experience', value: '17+ years', detail: 'Full-stack web and product, then real-time systems' },
+        { label: 'Products shipped', value: '65+', detail: '50+ web and mobile, 15+ XR applications' },
+        { label: 'Teams led', value: 'Up to 8', detail: 'Founded a studio; now a 6-person delivery team' },
       ].map((item) => (
         <div class="panel flex flex-col p-5">
           <p class="text-xs uppercase tracking-[0.28em] text-muted">{item.label}</p>
@@ -87,22 +132,41 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="space-y-6">
         <h2 class="text-2xl font-semibold text-paper">What I do</h2>
         <ul class="space-y-4 text-base leading-8 text-muted">
-          <li>Hands-on Unity XR engineering for Quest, HoloLens, Varjo, and SteamVR.</li>
-          <li>Multiplayer systems, real-time networking, and physics simulation tuned for headset budgets.</li>
-          <li>Enterprise-grade AR/VR training, visualization, and AI-assisted workflow products.</li>
+          <li>
+            <strong class="font-semibold text-paper">Distributed state architecture.</strong> Deciding
+            where authority lives and what is allowed to cross the wire — server-authoritative state,
+            client-side prediction, interpolation, and reconciliation under real latency.
+          </li>
+          <li>
+            <strong class="font-semibold text-paper">Data and backend design.</strong> PostgreSQL schema
+            design, Node and Express APIs, multi-tenant models, and offline-first ingestion that survives
+            a site with no reliable internet.
+          </li>
+          <li>
+            <strong class="font-semibold text-paper">Clients under hard constraints.</strong> Unity and C#
+            against a fixed frame budget, where an allocation per frame or one extra draw call is a
+            correctness problem, not a polish one.
+          </li>
+          <li>
+            <strong class="font-semibold text-paper">Delivery systems.</strong> Build pipelines, CI, edge
+            deployment, store and certification paths, and the internal tooling that lets a client
+            configure the product without me.
+          </li>
         </ul>
         <p class="text-base leading-8 text-muted">
-          I pair product strategy with execution, shipping the actual application, backend systems, and performance optimizations — not just design or technical proposals.
+          I work at the level where the choices are irreversible — the coordinate frame, the authority
+          model, the schema — and then I build the thing, rather than handing over a diagram and leaving.
         </p>
       </div>
 
       <div class="panel p-6">
         <h3 class="text-sm uppercase tracking-[0.28em] text-signal">Core strengths</h3>
         <ul class="mt-6 space-y-4 text-sm leading-7 text-muted">
-          <li>Enterprise XR product development</li>
-          <li>Multiplayer and real-time collaboration</li>
-          <li>Performance engineering for standalone headsets</li>
-          <li>Full-stack tooling, SaaS backends, and studio leadership</li>
+          <li>Real-time and distributed system design</li>
+          <li>Authoritative multiplayer and state synchronization</li>
+          <li>Backend, data modelling, and offline-first sync</li>
+          <li>Performance engineering against fixed budgets</li>
+          <li>Technical leadership and delivery ownership</li>
         </ul>
       </div>
     </div>
@@ -111,11 +175,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="space-y-4">
         <h2 class="text-2xl font-semibold text-paper">Why work with me</h2>
         <p class="text-base leading-8 text-muted">
-          I help startups, enterprises, and agencies move XR products from prototype to launch with the stability, polish, and performance expected by demanding clients.
+          Most teams can build the feature. What stalls a real-time product is the architecture
+          underneath it: two clients that disagree about the world, a sync layer that loses data when the
+          network drops, a build that misses its budget and nobody can say which subsystem owns the cost.
+          That is the work I take.
         </p>
       </div>
       <div class="mt-8 grid gap-4 sm:grid-cols-2">
-        {['Enterprise XR', 'Multiplayer systems', 'AI-integrated experiences', 'Technical leadership'].map((item) => (
+        {['Real-time distributed systems', 'Authoritative multiplayer', 'Backend and data architecture', 'Technical leadership'].map((item) => (
           <div class="rounded-3xl border border-white/10 bg-surface/90 px-4 py-4 text-sm leading-6 text-paper">{item}</div>
         ))}
       </div>
@@ -129,61 +196,50 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <span class="absolute -left-[29px] top-1 h-2.5 w-2.5 rounded-full bg-signal" aria-hidden="true"></span>
             <p class="font-mono text-xs uppercase tracking-[0.26em] text-muted">Jul 2023 — Present</p>
             <h3 class="mt-2 text-base font-semibold text-paper">Lead XR Engineer, 2 Dude Studios</h3>
-            <p class="mt-2 text-sm leading-7 text-muted">Lead a 6-person delivery team shipping enterprise training, simulation, and game experiences, with a free-roam LBE VR arena in build for its first venue and a Steam demo ready for Early Access.</p>
+            <p class="mt-2 text-sm leading-7 text-muted">Own the architecture across three concurrent products: a venue-scale multiplayer arena (one authoritative host, eight standalone clients, offline-first analytics into Supabase behind a React dashboard), an enterprise training platform on PostgreSQL and Node, and a Steam survival title. Lead a 6-person delivery team.</p>
           </li>
           <li class="relative">
             <span class="absolute -left-[29px] top-1 h-2.5 w-2.5 rounded-full bg-white/10" aria-hidden="true"></span>
             <p class="font-mono text-xs uppercase tracking-[0.26em] text-muted">Mar 2023 — Jul 2023</p>
             <h3 class="mt-2 text-base font-semibold text-paper">Lead VR Developer, Witzeal Technologies</h3>
-            <p class="mt-2 text-sm leading-7 text-muted">Delivered a multiplayer Quest VR extension for a 50M+ mobile platform in three months with zero critical post-launch defects.</p>
+            <p class="mt-2 text-sm leading-7 text-muted">Designed the integration between a Unity VR client and the client's existing proprietary Java backend, holding sub-100ms latency across the boundary. Shipped a multiplayer Quest extension of a 50M+ user platform in three months with zero critical post-launch defects.</p>
           </li>
           <li class="relative">
             <span class="absolute -left-[29px] top-1 h-2.5 w-2.5 rounded-full bg-white/10" aria-hidden="true"></span>
             <p class="font-mono text-xs uppercase tracking-[0.26em] text-muted">Jan 2022 — Dec 2022</p>
             <h3 class="mt-2 text-base font-semibold text-paper">Lead Unity Developer, CodeXAR</h3>
-            <p class="mt-2 text-sm leading-7 text-muted">Led a 5-person team building a real-time AR design-review platform with high-fidelity rendering on mobile hardware.</p>
+            <p class="mt-2 text-sm leading-7 text-muted">Led a 5-person team on a multi-user AR design-review platform: Mirror networking for geographically separated sessions, and a Draco mesh-compression pipeline that put 8K-source assets on mobile hardware in real time. The workflow cut physical sampling and travel costs by 40%.</p>
           </li>
           <li class="relative">
             <span class="absolute -left-[29px] top-1 h-2.5 w-2.5 rounded-full bg-white/10" aria-hidden="true"></span>
             <p class="font-mono text-xs uppercase tracking-[0.26em] text-muted">2009 — 2021</p>
             <h3 class="mt-2 text-base font-semibold text-paper">Founder & Lead Developer, Cyber Cerebs</h3>
-            <p class="mt-2 text-sm leading-7 text-muted">Grew a digital studio from solo operation to an eight-person team, shipping 50+ products across hospitality, sports, travel, and logistics.</p>
+            <p class="mt-2 text-sm leading-7 text-muted">Twelve years of full-stack delivery. Grew a digital studio from solo operation to an eight-person team and shipped 50+ products across hospitality, sports, travel, and logistics — web applications, mobile apps, and the APIs, relational schemas, and third-party integrations behind them. Owned architecture, hiring, and client delivery end to end.</p>
           </li>
         </ol>
       </div>
 
       <div>
         <h2 class="text-xl font-semibold text-paper">Stack</h2>
-        <ul class="mt-4 flex flex-wrap gap-2" aria-label="Technical stack">
-          {
-            [
-              'Unity 3D',
-              'C#',
-              'OpenXR',
-              'AR Foundation',
-              'XR Interaction Toolkit',
-              'Meta XR SDK',
-              'MRTK',
-              'ARKit / ARCore',
-              'URP / HDRP',
-              'ShaderGraph / HLSL',
-              'Photon Fusion',
-              'Photon PUN',
-              'Mirror',
-              'PERN stack',
-              'Node.js',
-              'PostgreSQL',
-              'Python',
-            ].map((item) => <li class="tag">{item}</li>)
-          }
-        </ul>
+        <div class="mt-6 space-y-6">
+          {stackGroups.map((group) => (
+            <div>
+              <h3 class="font-mono text-xs uppercase tracking-[0.26em] text-muted">{group.label}</h3>
+              <ul class="mt-3 flex flex-wrap gap-2" aria-label={group.label}>
+                {group.items.map((item) => <li class="tag">{item}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
 
     <div class="mt-14 rounded-[2rem] border border-white/10 bg-white/5 p-8">
       <h2 class="text-2xl font-semibold text-paper">Work with me</h2>
       <p class="mt-4 max-w-prose text-base leading-8 text-muted">
-        Open to senior roles, contract engagements, and retained XR engineering for teams that need a founder-level technical lead and execution partner.
+        Open to architect and staff-level roles, contract engagements, and retained work for teams that
+        need someone to own the system design and then ship it — including fractional alongside an
+        in-house team.
       </p>
       <div class="mt-6 flex flex-wrap gap-3">
         <a href="/contact/" class="rounded-full bg-signal px-5 py-3 text-sm font-semibold text-paper transition hover:bg-signal/90 hover:text-paper">Contact me</a>

@@ -13,10 +13,11 @@ import { getCollection } from 'astro:content';
  */
 
 const SUMMARY =
-  'Akaash Garg is the Lead XR Engineer at 2 Dude Studios, ' +
-  'based in Bangalore, India and working remotely worldwide. 17+ years in software, currently ' +
-  'focused on enterprise XR: Unity VR/AR product delivery, multiplayer systems, and ' +
-  'standalone-headset performance on Quest, HoloLens, Varjo, and SteamVR.';
+  'Akaash Garg is a full-stack systems architect and the technical lead at 2 Dude Studios, ' +
+  'based in Bangalore, India and working remotely worldwide. 17+ years in software — a decade of ' +
+  'full-stack web and product delivery, then six years architecting real-time distributed systems: ' +
+  'server-authoritative multiplayer, PostgreSQL and Node backends, offline-first data pipelines, and ' +
+  'Unity clients held inside a 13.9ms frame budget on standalone headsets.';
 
 /** Mirrors the nav. Descriptions are the same ones the pages carry in <head>. */
 const PAGES: Array<{ path: string; name: string; description: string }> = [
@@ -24,13 +25,13 @@ const PAGES: Array<{ path: string; name: string; description: string }> = [
     path: '/',
     name: 'Home',
     description:
-      'Overview of the practice: enterprise XR, multiplayer VR, and AR with real-time performance on Quest, HoloLens, Varjo, and SteamVR.',
+      'Overview of the practice: real-time and distributed system architecture, authoritative multiplayer, backend and data design, and clients held to a fixed frame budget.',
   },
   {
     path: '/services/',
     name: 'Services',
     description:
-      'XR engineering services — Unity VR and AR development, multiplayer systems, performance optimization, gamified training, and technical leadership. Explains how engagements are structured.',
+      'Systems architecture and design, backend and platform engineering, multiplayer systems, performance optimization, Unity VR and AR development, and technical leadership. Explains how engagements are structured.',
   },
   {
     path: '/projects/',
@@ -41,7 +42,7 @@ const PAGES: Array<{ path: string; name: string; description: string }> = [
     path: '/about/',
     name: 'About',
     description:
-      '17+ years in software, currently focused on multiplayer XR simulation for medical, industrial, and enterprise training.',
+      '17+ years in software: 12 years of full-stack web and product delivery, then six years of real-time distributed systems. Career history, grouped stack, and engagement options.',
   },
   {
     path: '/contact/',
@@ -52,11 +53,12 @@ const PAGES: Array<{ path: string; name: string; description: string }> = [
 ];
 
 const FACTS = [
-  'Role: Lead XR Engineer, 2 Dude Studios',
+  'Role: Full-stack systems architect and technical lead, 2 Dude Studios',
   'Based in: Bangalore, India (IST) — remote worldwide, with overlap for EU and US calls',
   'Client base: India, the United States, and the United Kingdom',
-  'Engagements: fixed-scope projects, monthly retainers, technical audits and rescues, and senior or long-term roles',
-  'Core stack: Unity, C#, OpenXR, AR Foundation, Photon and Netcode multiplayer, Meta Quest, HoloLens, Varjo, SteamVR',
+  'Engagements: architecture and design sprints, fixed-scope projects, monthly retainers, technical audits and rescues, and senior or long-term roles',
+  'Core stack: C#, Unity, Photon Fusion, Mirror, Node.js, Express, PostgreSQL, React, Supabase, OpenXR, AR Foundation',
+  'Specialism: server-authoritative state, client-side prediction and reconciliation, offline-first sync, relational data modelling, and performance against fixed frame budgets',
   'Languages: English, Hindi',
   'Availability: taking new engagements',
   'Contact: akaash.garg@gmail.com — https://cal.com/akaash-garg-xvijkt/hi',
@@ -78,7 +80,7 @@ export const GET: APIRoute = async ({ site }) => {
     return `- [${title}](${url(`/projects/${project.slug}/`)}): ${summary} (${context}. Stack: ${stack.join(', ')}.)`;
   });
 
-  const body = `# Akaash Garg — Lead XR Engineer
+  const body = `# Akaash Garg — Full-Stack Systems Architect
 
 > ${SUMMARY}
 

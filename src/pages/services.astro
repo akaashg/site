@@ -6,6 +6,20 @@ const CAL_URL = 'https://cal.com/akaash-garg-xvijkt/hi';
 /* Numbering is derived from position so adding a service never desyncs the ids. */
 const services = [
   {
+    name: 'Systems architecture & design',
+    lead: 'The decisions that are expensive to reverse, made deliberately and written down.',
+    detail:
+      'State ownership and authority models, coordinate and reference frames, service boundaries, schema and data-flow design, and failure and recovery behaviour. Delivered as a written architecture document that records the options considered and the constraint that settled each one — so the reasoning survives after I leave.',
+    proof: 'One authoritative host owning all state for eight standalone clients in a shared physical space.',
+  },
+  {
+    name: 'Backend & platform engineering',
+    lead: 'The half of a real-time product that is not the client.',
+    detail:
+      'PostgreSQL schema design, Node and Express APIs, multi-tenant models, auth and role boundaries, offline-first ingestion with retry and reconciliation, React operator dashboards, and CI and edge deployment pipelines.',
+    proof: 'Offline-first telemetry: disk queue, backoff, and crash-journal reconciliation on relaunch.',
+  },
+  {
     name: 'VR application development',
     lead: 'Multiplayer and single-user VR products built in Unity, shipped to standalone headsets.',
     detail:
@@ -65,6 +79,12 @@ const services = [
 
 const engagements = [
   {
+    name: 'Architecture & design sprint',
+    best: 'A system that has not been built yet.',
+    shape:
+      'One to three weeks ahead of implementation, producing the authority model, data design, and a written decision record your team can build against.',
+  },
+  {
     name: 'Fixed-scope project',
     best: 'A defined deliverable with a deadline.',
     shape: 'Scoped brief, milestone schedule, fixed fee. Best when the requirements are already clear.',
@@ -120,18 +140,19 @@ const faqs = [
 
 <BaseLayout
   title="Services"
-  description="XR engineering services: Unity VR and AR development, multiplayer systems, performance optimization, game development, gamified training solutions, and technical leadership for Quest, HoloLens, Varjo, and SteamVR."
+  description="Systems architecture and engineering services: real-time and distributed system design, PostgreSQL and Node backends, authoritative multiplayer, performance optimization, Unity VR and AR development, and technical leadership."
 >
   <section class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
     <div class="space-y-6 scroll-reveal" data-animate>
       <p class="font-mono text-xs uppercase tracking-[0.28em] text-signal">Services</p>
       <h1 class="max-w-4xl text-4xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-5xl">
-        XR engineering that ships on real hardware, inside the frame budget.
+        Architecture for real-time systems — and the engineering that ships them.
       </h1>
       <p class="max-w-prose text-base leading-8 text-muted sm:text-lg">
-        I take on the engineering that decides whether an XR product launches: multiplayer that stays
-        synchronized, rendering that holds its frame budget on standalone headsets, and delivery that survives
-        client deadlines. Eight services below, three ways to engage.
+        I take on the work that decides whether a real-time product launches: who owns state and what
+        crosses the wire, a data layer that holds up when the network does not, and clients that stay
+        inside their budget. I write the architecture and then build it — not one without the other.
+        Ten services below, four ways to engage.
       </p>
       <div class="flex flex-wrap gap-4 pt-2">
         <a
