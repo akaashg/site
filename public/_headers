@@ -16,6 +16,10 @@
 /images/*
   Cache-Control: public, max-age=2592000
 
+# Case-study clips change only when re-encoded from source.
+/videos/*
+  Cache-Control: public, max-age=2592000
+
 /favicon.svg
   Cache-Control: public, max-age=2592000
 

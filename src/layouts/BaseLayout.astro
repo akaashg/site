@@ -162,6 +162,48 @@ const ld = {
           }
         });
       }
+
+      /* Case-study clips are silent loops. They carry no autoplay attribute,
+         so nothing moves until this runs -- a visitor who asked for less
+         motion gets the poster frame and controls instead. */
+      document.querySelectorAll('video[data-autoplay]').forEach((clip) => {
+        if (!(clip instanceof HTMLVideoElement)) return;
+        if (prefersReducedMotion) {
+          clip.controls = true;
+          return;
+        }
+        clip.muted = true;
+        /* Autoplay can still be refused (data saver, low power); fall back to
+           controls rather than leaving a frozen poster with no way to play.
+           The promise also rejects transiently while the first frames load
+           even though playback then starts, so only surface controls if the
+           clip is genuinely still paused. */
+        clip.play().catch(() => {
+          if (clip.paused) clip.controls = true;
+        });
+      });
+
+      /* YouTube embeds are swapped in on click rather than shipped in the
+         markup, so opening a case study makes no request to YouTube and sets
+         no third-party cookie. nocookie host for the same reason. */
+      document.querySelectorAll('button[data-youtube]').forEach((facade) => {
+        if (!(facade instanceof HTMLElement)) return;
+        facade.addEventListener(
+          'click',
+          () => {
+            const id = facade.dataset.youtube;
+            if (!id) return;
+            const frame = document.createElement('iframe');
+            frame.className = 'yt-frame';
+            frame.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+            frame.title = facade.getAttribute('aria-label') ?? 'Video';
+            frame.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+            frame.allowFullscreen = true;
+            facade.replaceWith(frame);
+          },
+          { once: true },
+        );
+      });
     </script>
   </body>
 </html>

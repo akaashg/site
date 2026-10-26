@@ -146,6 +146,48 @@ const { Content } = await project.render();
     @apply mt-3 text-xs leading-5 text-muted;
   }
 
+  /* Short silent clips. Playback is started by the reduced-motion guard in
+     BaseLayout rather than an autoplay attribute, so a visitor who asked for
+     less motion gets a paused poster with controls instead. */
+  .prose-case-study .clip {
+    @apply mt-6 m-0;
+  }
+
+  .prose-case-study .clip video {
+    @apply block w-full rounded-xl border border-white/10 bg-surface;
+  }
+
+  .prose-case-study .clip figcaption {
+    @apply mt-2 text-xs leading-5 text-muted;
+  }
+
+  /* Click-to-load YouTube facade: a local thumbnail standing in for the embed,
+     so opening the page makes no third-party request. */
+  .prose-case-study .yt {
+    @apply relative block w-full cursor-pointer appearance-none border-0 bg-transparent p-0;
+  }
+
+  .prose-case-study .yt img {
+    @apply block w-full rounded-xl border border-white/10 bg-surface;
+  }
+
+  .prose-case-study .yt-play {
+    @apply pointer-events-none absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-signal/90 text-paper shadow-lg transition duration-200;
+  }
+
+  .prose-case-study .yt:hover .yt-play,
+  .prose-case-study .yt:focus-visible .yt-play {
+    @apply scale-105 bg-signal;
+  }
+
+  .prose-case-study .yt-play svg {
+    @apply h-8 w-8 translate-x-0.5;
+  }
+
+  .prose-case-study .yt-frame {
+    @apply block aspect-video w-full rounded-xl border border-white/10 bg-surface;
+  }
+
   /* Full-width branded card for projects with no publishable capture. */
   .prose-case-study .shot-figure {
     @apply mt-6 m-0;
