@@ -53,5 +53,3 @@ iOS and Android were not a porting step at the end. Both were targets from the f
 ## Outcome
 
 The shipped workflow cut clients' physical-sampling and travel costs by 40%, validated against their own procurement metrics rather than engagement numbers — which is the only measure that matters for a tool whose job is to stop a sample being shipped.
-
-What I would do differently: the per-material shader work was effective but hand-tuned per asset class, and it became the slowest part of onboarding a new product category. A parameterised material system, authored once, would have traded a little fidelity for a lot of throughput — and at the volume the platform was heading for, that was the better trade.
