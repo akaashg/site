@@ -100,7 +100,6 @@ ${caseStudies.join('\n')}
 - [Résumé (PDF)](${url('/Akaash-Garg-XR-Engineer-Resume.pdf')}): full work history and stack detail.
 - [Sitemap](${url('/sitemap.xml')}): every indexable route.
 - [LinkedIn](https://www.linkedin.com/in/akaashgarg/)
-- [xrapp.dev](https://xrapp.dev/): XR development studio site.
 - [2 Dude Studios](https://2dudestudios.com/): studio site.
 `;
 
