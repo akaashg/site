@@ -24,6 +24,43 @@ const engagementOptions = [
 ];
 
 const timelineOptions = ['Starting now', 'Within 1 month', '1-3 months out', 'Just exploring'];
+
+/**
+ * The three facts a contract hire screens on first, and the three this page
+ * could not answer. Postings ask for them in the application itself -- "include
+ * your rate quote, your availability, and when you can start" is a typical
+ * first filter -- so leaving them to the call costs replies.
+ *
+ * Replace a TODO to publish that row. Anything still TODO is skipped at render
+ * and named in the build output, so a placeholder cannot ship looking like a
+ * real answer. With all three unfilled the panel is exactly what it was before.
+ *
+ * Rate deliberately has no row here: it belongs in the reply, where it can be
+ * quoted against a specific commitment, and /services/ already says what it
+ * depends on.
+ */
+const TODO = 'TODO';
+const availability = {
+  /* e.g. 'Four to five days a week' or 'Two days a week from February' */
+  capacity: TODO,
+  /* e.g. 'Four hours with CET, two with US Eastern' */
+  overlap: TODO,
+  /* e.g. 'Immediately' or 'From 3 March, two weeks notice' */
+  earliestStart: TODO,
+};
+
+const filled = (value: string) => value !== TODO;
+
+const unfilled = Object.entries(availability)
+  .filter(([, value]) => !filled(value))
+  .map(([key]) => key);
+
+if (unfilled.length > 0) {
+  console.warn(
+    `[contact] availability not filled in: ${unfilled.join(', ')} — ` +
+      'those rows are omitted from the page. See src/pages/contact.astro.',
+  );
+}
 ---
 
 <BaseLayout
@@ -156,6 +193,24 @@ const timelineOptions = ['Starting now', 'Within 1 month', '1-3 months out', 'Ju
               <dt class="font-medium text-paper">Status</dt>
               <dd>Available for contract work.</dd>
             </div>
+            {filled(availability.capacity) && (
+              <div>
+                <dt class="font-medium text-paper">Capacity</dt>
+                <dd>{availability.capacity}</dd>
+              </div>
+            )}
+            {filled(availability.overlap) && (
+              <div>
+                <dt class="font-medium text-paper">Overlap</dt>
+                <dd>{availability.overlap}</dd>
+              </div>
+            )}
+            {filled(availability.earliestStart) && (
+              <div>
+                <dt class="font-medium text-paper">Earliest start</dt>
+                <dd>{availability.earliestStart}</dd>
+              </div>
+            )}
             <div>
               <dt class="font-medium text-paper">Based in</dt>
               <dd>Bangalore, India (IST) — remote worldwide, with overlap for EU and US calls.</dd>
