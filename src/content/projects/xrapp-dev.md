@@ -6,7 +6,7 @@ timeframe: In development
 stack: [Next.js, PostgreSQL, Drizzle ORM, Supabase Auth, Stripe, Node.js, Express, Docker, Unity 3D, Meta Quest]
 summary: Multi-tenant VR training platform where the organisation is the tenant - entitlement, assignment, and attempt are modelled apart so training history survives roster and catalogue changes.
 outcome: A nine-table PostgreSQL model behind a Next.js admin, Stripe billing scoped to the team rather than the user, and a separate containerised service bridging progress back to the customer's LMS.
-order: 6
+order: 7
 ---
 
 An organisation buys a training module once, assigns it to forty people, and each of those people attempts it several times over two years — failing, retrying, passing, then re-certifying. Staff leave. Modules get retired from the catalogue. Eighteen months later a compliance auditor asks who was certified on what, on which date, under which version.

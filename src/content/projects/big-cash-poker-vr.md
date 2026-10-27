@@ -7,7 +7,7 @@ stack: [Unity 3D, Meta Quest, Real-time networking, Java backend integration, Ag
 summary: Meta Quest VR extension of a 50M+ user poker platform, built in three months against a proprietary Java backend that could not be changed - so the headset became a view, never an authority.
 outcome: Sub-100ms across the service boundary, zero critical post-launch defects on a money-handling platform, and delivery 25% inside a fixed three-month window.
 availability: Shipped and launched publicly. No longer distributed - the client retired the VR title after launch.
-order: 4
+order: 5
 ---
 
 The backend was not mine to change, and that was the whole design.

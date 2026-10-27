@@ -6,7 +6,7 @@ timeframe: Jan 2022 - Dec 2022
 stack: [Unity, AR Foundation, Mirror Networking, Master Server Toolkit, Draco mesh compression, iOS, Android]
 summary: Enterprise AR design review across geographies, where the engineering problem was holding 8K scanned-material fidelity on a phone - a virtual sample nobody trusts replaces nothing.
 outcome: Led a 5-person team across iOS and Android; the capture-to-runtime pipeline held 8K source detail on mobile, and the workflow cut clients' physical-sampling and travel costs by 40%.
-order: 3
+order: 4
 ---
 
 A buyer deciding on a garment runs a thumb across the weave. Replacing that with a phone screen only works if the render is good enough that nobody asks for the physical sample anyway — and the moment someone does ask, the product has failed, however elegant the networking is.

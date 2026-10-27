@@ -9,7 +9,7 @@ outcome: Public Steam demo available; planned Early Access iteration cycle is 4-
 liveUrl: https://store.steampowered.com/app/2726410/Ruins_of_the_Forgotten__A_Wild_Survival/
 liveLabel: Play the Steam demo
 availability: Public demo live on Steam. Early Access planned Q3 2026.
-order: 5
+order: 6
 ---
 
 Ruins of the Forgotten is a first-person survival horror game about a forest ranger stranded in a jungle altered by a supernatural anomaly. Players manage hunger, thirst, and health while the wildlife turns hostile after dark.
