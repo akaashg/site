@@ -119,10 +119,10 @@ const CARDS = [
   },
   {
     slug: 'xrapp-dev',
-    eyebrow: 'ENTERPRISE VR TRAINING SAAS',
+    eyebrow: 'MULTI-TENANT VR TRAINING PLATFORM',
     title: 'xrapp.dev',
     title2: '',
-    facts: ['Instructor-led cohorts', 'Digital twin simulation', 'LMS / HRMS integration'],
+    facts: ['Team is the tenant', 'Entitlement / assignment / attempt', 'Containerised LMS bridge'],
     motif: hubMotif,
     seed: 4102,
   },
