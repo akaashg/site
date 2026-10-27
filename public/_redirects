@@ -17,3 +17,8 @@
 /projects/visualize-ar/          /projects/  301
 /projects/vr-simulation-toolkit/ /projects/  301
 /projects/social-vr-xtraspace/   /projects/  301
+
+# The resume was renamed when the positioning changed, and the old file is
+# gone rather than left to contradict the site. A static asset would win over
+# this rule, so the rename only works because the old PDF was deleted.
+/Akaash-Garg-XR-Engineer-Resume.pdf  /Akaash-Garg-Systems-Architect-Resume.pdf  301

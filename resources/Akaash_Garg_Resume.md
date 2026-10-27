@@ -23,9 +23,10 @@ Full-stack systems architect with 17+ years shipping software — 12 years of we
 - **Built *Ruins of the Forgotten*, an open-world survival game with a playable public demo on Steam** *(Early Access launch Q3 2026)* — owning gameplay systems, procedurally generated island terrain, day/night simulation, wildlife AI behaviour, animation state machines, custom shaders, and the full Steamworks pipeline through build, depot, store page, and age-rating submission. → store.steampowered.com/app/2726410
 - **Engineered a networked enemy AI system on Photon** — server-authoritative behaviour trees and state machines with client-side prediction and interpolation, keeping AI perception, pathfinding, and combat decisions synchronized across clients without desync or duplicated damage events.
 - **Architected *Aura VR*, free-roam location-based VR arena software for up to 8 co-located players** — a single authoritative host owning all session state while headsets contribute only input; a printed floor mat as the shared coordinate frame, so nothing spatial is networked and only poses already in a common frame replicate; depth-sensor floor correction; and offline-first session telemetry into Supabase behind a React operator dashboard, with disk queueing, backoff, and crash-journal reconciliation. Built to a 72fps standalone budget on Quest 3S, in development ahead of its first venue deployment.
+- **Built and published *claude-code-unity-kit*, a Claude Code plugin for Unity 6** *(MIT, v0.2.0)* — deterministic guardrails around agent work in a Unity project: hooks that block `.meta` edits, and end-of-turn gates that refuse to close the turn while the project has compile errors, an orphaned `.meta`, or an asset reference that broke since the last commit. Reference checking rewritten from 18s to 4.6s on a 3,000-asset project; A/B evals score 2/2 with the plugin against 0/2 without. → github.com/akaashg/claude-code-unity-kit
 - **Delivered a gamified corporate compliance training product in VR** — converted regulatory curricula into scenario-based modules with branching decision paths and performance scoring, replacing slide-based training with rehearsable scenarios.
 - Delivered 15+ XR applications across Meta Quest, HoloLens, HTC Vive, and Varjo — training simulators, multiplayer experiences, and AR visualization tools, applying passthrough MR, hand tracking, and room-scale interaction models where the use case called for it.
-- Optimized rendering across URP and HDRP to hit Quest's 90fps frame budget — draw-call batching, LOD systems, texture atlasing, object pooling to control GC pressure, and custom HLSL/ShaderGraph shaders for realistic materials, lighting, and transparency on mobile XR hardware.
+- Optimized rendering across URP and HDRP to hold Quest's 72fps frame budget — draw-call batching, LOD systems, texture atlasing, object pooling to control GC pressure, and custom HLSL/ShaderGraph shaders for realistic materials, lighting, and transparency on mobile XR hardware.
 
 ### Lead VR Developer — Multiplayer VR Platform · Witzeal Technologies
 *Mar 2023 – Jul 2023 · Contract, fixed-scope delivery · Remote*
@@ -61,14 +62,16 @@ Full-stack systems architect with 17+ years shipping software — 12 years of we
 **Aura VR** · LBE free-roam VR arena software, first venue deployment in build — Photon Fusion, 72fps standalone, 8-player co-location
 **CollaboratAR** · Photogrammetry-driven multi-user AR product collaboration — Mirror Networking, 8K texture fidelity on mobile
 **Big Cash Poker VR** · Meta Quest multiplayer on a 50M+ user IP — 3-month delivery
-**xrapp.dev** · Multi-user VR team training SaaS for logistics, manufacturing, and safety drills — Unity + PERN stack · [xrapp.dev](https://xrapp.dev/)
-**Full portfolio** · 15+ shipped AR/VR and game titles — [akaashgarg.com](https://akaashgarg.com/portfolio/)
+**claude-code-unity-kit** · Claude Code plugin putting deterministic guardrails around agent work in Unity 6 — MIT, v0.2.0 · [github.com/akaashg/claude-code-unity-kit](https://github.com/akaashg/claude-code-unity-kit)
+**xrapp.dev** · Multi-user VR team training SaaS for logistics, manufacturing, and safety drills — Unity + PERN stack, multi-tenant on PostgreSQL
+**Full portfolio** · Case studies with the architecture decisions behind each — [akaashgarg.com/projects](https://akaashgarg.com/projects/)
 
 ---
 
 ## TECHNICAL SKILLS
 
 **Architecture:** Distributed state and authority models, service boundaries, coordinate and reference frames, relational schema design, offline-first sync with retry and reconciliation, failure and recovery design, multi-tenant models, architecture decision records
+**AI-Native & Agentic Engineering:** Agent guardrails and verification gates, context engineering (CLAUDE.md and project rule files), Claude Code plugins, skills, hooks and review subagents, A/B evals for agent behaviour, deterministic checks around non-deterministic work
 **Multiplayer & Networked Systems:** Photon Fusion, Photon PUN, Mirror Networking, server-authoritative architecture, client-side prediction & interpolation, state synchronization & reconciliation, latency compensation, dedicated server hosting
 **Backend & Full-Stack:** PERN stack (PostgreSQL, Express, React, Node.js), REST API design, authentication & session management, Supabase, Python/Django, CI/CD and edge deployment (GitHub Actions, Cloudflare Workers)
 **Engines & XR SDKs:** Unity 3D, OpenXR, AR Foundation, XR Interaction Toolkit, Meta XR SDK, MRTK, ARKit, ARCore

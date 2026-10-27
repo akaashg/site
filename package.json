@@ -9,6 +9,7 @@
     "build": "astro build",
     "generate:images": "node ./scripts/generate-images.js",
     "generate:og": "node ./scripts/generate-og.js",
+    "generate:resume": "python ./scripts/generate-resume.py",
     "lhci": "lhci autorun --config ./.lighthouseci/ci-config.json --upload.target=temporary-public-storage",
     "lhci-local": "lhci autorun --config ./.lighthouseci/ci-config.json --upload.target=temporary-public-storage",
     "preview": "astro preview",
