@@ -82,14 +82,14 @@ const featured = allProjects.sort((a, b) => a.data.order - b.data.order).slice(0
      </div>
      <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
        {[
-         'One authoritative host, 8 clients',
-         'Offline-first sync with crash recovery',
-         '72fps standalone — 13.9ms budget',
-         'Published Claude Code plugin for Unity',
-         'Agent hooks that block unsafe edits',
-         'Checks that gate every agent turn',
-         'Technical lead, 6-person team',
-         'Sprint and review process from zero',
+         'Distributed systems architecture',
+         'Server-authoritative multiplayer',
+         'Real-time performance engineering',
+         'Agentic engineering',
+         'Agent guardrails & verification gates',
+         'Context engineering',
+         'Technical leadership',
+         'Architecture & code review',
        ].map((item, index) => (
          <div class="rounded-3xl border border-white/10 bg-white/5 px-4 py-4 scroll-reveal" data-animate data-animate-delay={index * 70 + 100}>
            <p class="text-sm font-medium text-paper">{item}</p>
