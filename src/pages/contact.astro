@@ -5,7 +5,7 @@ const CAL_URL = 'https://cal.com/akaash-garg-xvijkt/hi';
 const EMAIL = 'akaash.garg@gmail.com';
 
 /**
- * Web3Forms delivers the project brief to EMAIL.
+ * Web3Forms delivers the role description to EMAIL.
  *
  * The access key is public by design -- Web3Forms expects it in client-side
  * markup and it only permits submissions to the address it was registered
@@ -15,10 +15,11 @@ const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
 const WEB3FORMS_KEY = '38526bb6-3221-4db6-a1d9-74cebb55c983';
 
 const engagementOptions = [
+  'Full-time contract',
+  'Part-time contract',
+  'Permanent role',
+  'Architecture & design sprint',
   'Fixed-scope project',
-  'Monthly retainer',
-  'Technical audit / rescue',
-  'Full-time or long-term role',
   'Not sure yet',
 ];
 
@@ -27,18 +28,18 @@ const timelineOptions = ['Starting now', 'Within 1 month', '1-3 months out', 'Ju
 
 <BaseLayout
   title="Contact"
-  description="Start an XR engagement with Akaash Garg — Unity VR/AR development, multiplayer systems, and performance work. Book a 30-minute call or send a project brief."
+  description="Talk to Akaash Garg about a contract or permanent role — real-time and distributed systems, backend and platform work, and Unity VR/AR. Book an intro call or send a role description."
 >
   <section class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
     <div class="space-y-6 scroll-reveal" data-animate>
       <p class="font-mono text-xs uppercase tracking-[0.28em] text-signal">Contact</p>
       <h1 class="text-4xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-5xl">
-        Start an XR engagement.
+        Let’s talk about the role.
       </h1>
       <p class="max-w-prose text-base leading-8 text-muted sm:text-lg">
-        I partner with founders, CTOs, and product teams to deliver XR products that are polished,
-        performant, and built for real-world use. Book a call, or send a brief and I will reply with
-        whether it is a fit.
+        I work with engineering leads and product teams as a hands-on senior contractor — remote,
+        inside your repository and your process. Book a call, or send the role description and I will
+        reply with whether it is a fit.
       </p>
       <div class="flex flex-wrap gap-4 pt-2">
         <a
@@ -47,7 +48,7 @@ const timelineOptions = ['Starting now', 'Within 1 month', '1-3 months out', 'Ju
           rel="noopener noreferrer"
           class="rounded-full bg-signal px-6 py-3 text-sm font-semibold text-paper no-underline shadow-lg shadow-signal/15 transition hover:bg-signal-dark hover:text-paper"
         >
-          Book a 30-minute call
+          Book an intro call
         </a>
         <a
           href={`mailto:${EMAIL}`}
@@ -60,10 +61,10 @@ const timelineOptions = ['Starting now', 'Within 1 month', '1-3 months out', 'Ju
 
     <div class="mt-12 grid gap-8 lg:grid-cols-[1fr_320px]">
       <div id="brief" class="glass-card scroll-mt-24 p-8 scroll-reveal" data-animate>
-        <h2 class="text-2xl font-semibold text-paper">Send a project brief</h2>
+        <h2 class="text-2xl font-semibold text-paper">Send a role description</h2>
         <p class="mt-3 text-sm leading-7 text-muted">
           The more of this you fill in, the more useful my first reply is. Nothing here is required
-          except your email and the brief itself.
+          except your email and the description itself.
         </p>
 
         <form
@@ -74,8 +75,8 @@ const timelineOptions = ['Starting now', 'Within 1 month', '1-3 months out', 'Ju
           method="post"
         >
           <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
-          <input type="hidden" name="from_name" value="akaashgarg.com project brief" />
-          <input type="hidden" name="subject" value="XR project brief" data-brief-subject />
+          <input type="hidden" name="from_name" value="akaashgarg.com role enquiry" />
+          <input type="hidden" name="subject" value="Role enquiry" data-brief-subject />
 
           {/* Web3Forms discards any submission where this stays filled. */}
           <label class="brief-honeypot">
@@ -100,7 +101,7 @@ const timelineOptions = ['Starting now', 'Within 1 month', '1-3 months out', 'Ju
               <input class="form-field" id="company" name="company" type="text" autocomplete="organization" />
             </div>
             <div>
-              <label class="form-label" for="engagement">Engagement type</label>
+              <label class="form-label" for="engagement">What you are hiring for</label>
               <select class="form-field" id="engagement" name="engagement">
                 {engagementOptions.map((option) => <option value={option}>{option}</option>)}
               </select>
@@ -109,13 +110,13 @@ const timelineOptions = ['Starting now', 'Within 1 month', '1-3 months out', 'Ju
 
           <div class="grid gap-5 sm:grid-cols-2">
             <div>
-              <label class="form-label" for="platform">Target hardware</label>
+              <label class="form-label" for="platform">Stack / platform</label>
               <input
                 class="form-field"
                 id="platform"
                 name="platform"
                 type="text"
-                placeholder="Quest 3, HoloLens, iOS/Android, PC…"
+                placeholder="Node + Postgres, Unity, Quest 3, iOS/Android…"
               />
             </div>
             <div>
@@ -127,7 +128,7 @@ const timelineOptions = ['Starting now', 'Within 1 month', '1-3 months out', 'Ju
           </div>
 
           <div>
-            <label class="form-label" for="message">What are you building, and what is blocking it? <span class="text-signal">*</span></label>
+            <label class="form-label" for="message">What is the role, and what does the team need? <span class="text-signal">*</span></label>
             <textarea class="form-field min-h-[9rem]" id="message" name="message" rows="6" required></textarea>
           </div>
 
@@ -136,7 +137,7 @@ const timelineOptions = ['Starting now', 'Within 1 month', '1-3 months out', 'Ju
             class="rounded-full bg-signal px-6 py-3 text-sm font-semibold text-paper shadow-lg shadow-signal/15 transition hover:bg-signal-dark disabled:cursor-not-allowed disabled:opacity-60"
             data-brief-submit
           >
-            Send brief
+            Send
           </button>
 
           <p class="text-xs leading-6 text-muted" data-brief-note>
@@ -153,19 +154,19 @@ const timelineOptions = ['Starting now', 'Within 1 month', '1-3 months out', 'Ju
           <dl class="mt-6 space-y-5 text-sm leading-7 text-muted">
             <div>
               <dt class="font-medium text-paper">Status</dt>
-              <dd>Taking new engagements.</dd>
+              <dd>Available for contract work.</dd>
             </div>
             <div>
               <dt class="font-medium text-paper">Based in</dt>
               <dd>Bangalore, India (IST) — remote worldwide, with overlap for EU and US calls.</dd>
             </div>
             <div>
-              <dt class="font-medium text-paper">Client base</dt>
+              <dt class="font-medium text-paper">Worked with teams in</dt>
               <dd>India, the United States, and the United Kingdom.</dd>
             </div>
             <div>
-              <dt class="font-medium text-paper">Engagements</dt>
-              <dd>Fixed-scope projects, monthly retainers, technical audits, and senior roles.</dd>
+              <dt class="font-medium text-paper">Open to</dt>
+              <dd>Full-time and part-time contracts, permanent roles, and short architecture engagements.</dd>
             </div>
             <div>
               <dt class="font-medium text-paper">Languages</dt>
@@ -187,17 +188,17 @@ const timelineOptions = ['Starting now', 'Within 1 month', '1-3 months out', 'Ju
     </div>
 
     <div class="mt-12 rounded-[2rem] border border-white/10 bg-white/5 p-8 scroll-reveal" data-animate>
-      <h2 class="text-xl font-semibold text-paper">Retainer engagements</h2>
+      <h2 class="text-xl font-semibold text-paper">Ongoing contract work</h2>
       <p class="mt-4 max-w-prose text-base leading-8 text-muted">
-        I support teams with ongoing architecture and engineering: system design, authoritative
-        multiplayer, backend and data work, and hands-on Unity. This is the same delivery model behind
-        the case studies on this site, but continuous instead of one-off.
+        Most of my work is continuous rather than one-off: embedded in a team for months at a time,
+        owning system design, authoritative multiplayer, backend and data work, and hands-on Unity.
+        The case studies on this site came out of exactly that arrangement.
       </p>
       <a
         href="/services/"
         class="mt-6 inline-flex rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-paper no-underline transition hover:border-signal"
       >
-        See how engagements are structured
+        See how I work with teams
       </a>
     </div>
   </section>
@@ -231,8 +232,8 @@ const timelineOptions = ['Starting now', 'Within 1 month', '1-3 months out', 'Ju
 
       /* Give the notification email a subject that identifies the lead. */
       const subject = value('company')
-        ? `XR project brief — ${value('company')}`
-        : 'XR project brief';
+        ? `Role enquiry — ${value('company')}`
+        : 'Role enquiry';
       if (subjectField) subjectField.value = subject;
       data.set('subject', subject);
 
@@ -241,7 +242,7 @@ const timelineOptions = ['Starting now', 'Within 1 month', '1-3 months out', 'Ju
         button.textContent = 'Sending…';
         button.disabled = true;
       }
-      setStatus('pending', 'Sending your brief…');
+      setStatus('pending', 'Sending…');
 
       try {
         const response = await fetch(form.action, {
@@ -253,7 +254,7 @@ const timelineOptions = ['Starting now', 'Within 1 month', '1-3 months out', 'Ju
 
         if (response.ok && result.success !== false) {
           form.reset();
-          setStatus('ok', 'Thanks — your brief is in. I reply within two business days.');
+          setStatus('ok', 'Thanks — that is in. I reply within two business days.');
           /* The conversion that matters. Tagged so the dashboard can show
              which engagement types and timelines actually come through. */
           if (typeof window.track === 'function') {

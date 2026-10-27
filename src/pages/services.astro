@@ -73,35 +73,37 @@ const services = [
     lead: 'Founder-level ownership when a team needs direction, not just hands.',
     detail:
       'Architecture decisions, code review, sprint planning, hiring input, vendor and client communication, and delivery accountability. Available as fractional lead alongside an in-house team.',
-    proof: 'Leads a 6-person delivery team across concurrent client engagements.',
+    proof: 'Leads a 6-person delivery team across three concurrent products.',
   },
 ];
 
 const engagements = [
   {
+    name: 'Full-time contract',
+    best: 'A team that needs another senior engineer on the roadmap.',
+    shape:
+      'Four to five days a week, embedded in your team - your repository, your planning, your review process. Rolling monthly with a month of notice either way.',
+  },
+  {
+    name: 'Part-time contract',
+    best: 'Specialist depth you do not need every day.',
+    shape:
+      'Two or three days a week on a fixed schedule, so the overlap is predictable rather than best-effort.',
+  },
+  {
     name: 'Architecture & design sprint',
     best: 'A system that has not been built yet.',
     shape:
-      'One to three weeks ahead of implementation, producing the authority model, data design, and a written decision record your team can build against.',
+      'One to three weeks ahead of implementation, producing the authority model, data design, and a written decision record your team builds against.',
   },
   {
     name: 'Fixed-scope project',
     best: 'A defined deliverable with a deadline.',
-    shape: 'Scoped brief, milestone schedule, fixed fee. Best when the requirements are already clear.',
-  },
-  {
-    name: 'Monthly retainer',
-    best: 'Ongoing engineering capacity.',
-    shape: 'A reserved block of delivery time each month, with continuity across roadmap changes.',
-  },
-  {
-    name: 'Technical audit / rescue',
-    best: 'A build that misses frame budget or desyncs.',
-    shape: 'A short diagnostic engagement producing a prioritized findings report and a fix plan.',
+    shape: 'Scoped brief, milestone schedule, fixed price. Best when the requirements are already clear.',
   },
 ];
 
-const industries = [
+const domains = [
   'Manufacturing',
   'Logistics',
   'Healthcare & medical simulation',
@@ -112,47 +114,51 @@ const industries = [
 
 const faqs = [
   {
-    q: 'How do engagements usually start?',
-    a: 'A 30-minute call to establish scope, constraints, and hardware target. If it is a fit, you get a written scope with milestones and a fee before any work begins.',
+    q: 'Are you hands-on, or do you pass the work to a team?',
+    a: 'Hands-on, every day. I write the code I design. On a contract I am the one doing the work — you are not buying a fraction of divided attention, and nothing is quietly handed to someone else.',
   },
   {
-    q: 'Do you work with existing in-house teams?',
-    a: 'Yes. A large share of the work is embedding alongside an internal team — owning the XR-specific architecture and performance while your engineers keep the surrounding product.',
+    q: 'How much overlap do I get with your working day?',
+    a: 'I am in Bangalore (IST) and hold a standing overlap with European hours, with a shorter window for US Eastern. Tell me the hours your team actually needs and I will say plainly whether I can hold them.',
   },
   {
-    q: 'Which headsets and platforms do you target?',
-    a: 'Meta Quest 2/3/Pro, Microsoft HoloLens, HTC Vive, Varjo, SteamVR on PC, plus iOS and Android for AR. Steam releases include the full Steamworks pipeline.',
+    q: 'Do you work inside our repository and our process?',
+    a: 'Yes — your repository, your branching model, your review process, your planning and standups. I bring the engineering, not a parallel way of working for you to accommodate.',
   },
   {
-    q: 'Can you take a product from prototype to store release?',
-    a: 'Yes — including build pipelines, store certification, age-rating submission, and post-launch QA. Ruins of the Forgotten went through the complete Steamworks release path.',
+    q: 'How do contracting and invoicing work?',
+    a: 'Either as an individual or through my company, whichever suits your procurement. Monthly invoicing in arrears, under your contract and NDA.',
   },
   {
-    q: 'What time zone do you work in?',
-    a: 'Based in Bangalore, India (IST) and available for remote work worldwide, with regular overlap for European and US client calls.',
+    q: 'Which stacks and platforms do you work in?',
+    a: 'Node, PostgreSQL and React on the platform side; Unity and C# on the client, across Meta Quest 2/3/Pro, HoloLens, Vive, Varjo, SteamVR, iOS and Android. Steam releases include the full Steamworks pipeline.',
   },
   {
     q: 'Who owns the code and the IP?',
-    a: 'You do. Client work transfers in full on delivery, and engagements can run under your NDA and contract paperwork.',
+    a: 'You do. Work transfers in full on delivery, and contracts run under your paperwork and NDA.',
+  },
+  {
+    q: 'How soon can you start?',
+    a: 'Tell me the date you are working towards and I will tell you honestly whether I can meet it, rather than committing and renegotiating afterwards.',
   },
 ];
 ---
 
 <BaseLayout
-  title="Services"
-  description="Systems architecture and engineering services: real-time and distributed system design, PostgreSQL and Node backends, authoritative multiplayer, performance optimization, Unity VR and AR development, and technical leadership."
+  title="What I do"
+  description="What Akaash Garg is hired to own: real-time and distributed system design, PostgreSQL and Node backends, authoritative multiplayer, performance optimization, and Unity VR and AR development - full-time or part-time contract, remote."
 >
   <section class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
     <div class="space-y-6 scroll-reveal" data-animate>
-      <p class="font-mono text-xs uppercase tracking-[0.28em] text-signal">Services</p>
+      <p class="font-mono text-xs uppercase tracking-[0.28em] text-signal">What I do</p>
       <h1 class="max-w-4xl text-4xl font-semibold leading-[1.05] tracking-tight text-paper sm:text-5xl">
-        Architecture for real-time systems — and the engineering that ships them.
+        What I am hired to own.
       </h1>
       <p class="max-w-prose text-base leading-8 text-muted sm:text-lg">
         I take on the work that decides whether a real-time product launches: who owns state and what
         crosses the wire, a data layer that holds up when the network does not, and clients that stay
-        inside their budget. I write the architecture and then build it — not one without the other.
-        Ten services below, four ways to engage.
+        inside their budget. I write the architecture and then build it — hands-on, every day, in your
+        repo and your process. Ten areas below, and four ways to work together.
       </p>
       <div class="flex flex-wrap gap-4 pt-2">
         <a
@@ -161,13 +167,13 @@ const faqs = [
           rel="noopener noreferrer"
           class="rounded-full bg-signal px-6 py-3 text-sm font-semibold text-paper no-underline shadow-lg shadow-signal/15 transition hover:bg-signal-dark hover:text-paper"
         >
-          Book a 30-minute call
+          Book an intro call
         </a>
         <a
           href="/contact/#brief"
           class="rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-paper no-underline transition hover:border-signal"
         >
-          Send a project brief
+          Send a role description
         </a>
       </div>
     </div>
@@ -187,7 +193,7 @@ const faqs = [
     </div>
 
     <div class="mt-16 scroll-reveal" data-animate>
-      <h2 class="text-2xl font-semibold text-paper">How engagements are structured</h2>
+      <h2 class="text-2xl font-semibold text-paper">How I work with your team</h2>
       <div class="mt-6 grid gap-4 md:grid-cols-3">
         {engagements.map((item) => (
           <div class="panel flex flex-col p-6">
@@ -198,15 +204,15 @@ const faqs = [
         ))}
       </div>
       <p class="mt-6 max-w-prose text-sm leading-7 text-muted">
-        Fees depend on scope, hardware target, and timeline. Bring a brief to the first call and you
-        get a written figure — not a range that moves later.
+        Rate depends on the commitment level, the expected length, and the overlap hours you need.
+        Bring those to the first call and you get a figure on that call — not a range that moves later.
       </p>
     </div>
 
     <div class="mt-16 glass-card p-8 scroll-reveal" data-animate>
-      <h2 class="text-2xl font-semibold text-paper">Industries I build for</h2>
-      <ul class="mt-6 flex flex-wrap gap-3" aria-label="Industries served">
-        {industries.map((item) => <li class="tag">{item}</li>)}
+      <h2 class="text-2xl font-semibold text-paper">Domains I have shipped in</h2>
+      <ul class="mt-6 flex flex-wrap gap-3" aria-label="Domains shipped in">
+        {domains.map((item) => <li class="tag">{item}</li>)}
       </ul>
     </div>
 
@@ -223,10 +229,10 @@ const faqs = [
     </div>
 
     <div class="mt-16 glass-card p-8 text-center scroll-reveal" data-animate>
-      <h2 class="text-2xl font-semibold text-paper">Have something in mind?</h2>
+      <h2 class="text-2xl font-semibold text-paper">Looking at a role?</h2>
       <p class="mx-auto mt-4 max-w-prose text-base leading-8 text-muted">
-        Tell me the hardware target, the deadline, and what is currently blocking you. If I am not the
-        right fit, I will say so on the first call.
+        Send the role description, the stack, and the overlap hours you need. If I am not the right fit,
+        I will say so on the first call rather than three weeks in.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a
@@ -235,7 +241,7 @@ const faqs = [
           rel="noopener noreferrer"
           class="rounded-full bg-signal px-6 py-3 text-sm font-semibold text-paper no-underline shadow-lg shadow-signal/15 transition hover:bg-signal-dark hover:text-paper"
         >
-          Book a 30-minute call
+          Book an intro call
         </a>
         <a
           href="/projects/"

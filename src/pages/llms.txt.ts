@@ -29,9 +29,9 @@ const PAGES: Array<{ path: string; name: string; description: string }> = [
   },
   {
     path: '/services/',
-    name: 'Services',
+    name: 'What I do',
     description:
-      'Systems architecture and design, backend and platform engineering, multiplayer systems, performance optimization, Unity VR and AR development, and technical leadership. Explains how engagements are structured.',
+      'What Akaash Garg is hired to own: systems architecture and design, backend and platform engineering, multiplayer systems, performance optimization, and Unity VR and AR development. Covers contract shapes, overlap hours, and how he works inside an existing team.',
   },
   {
     path: '/projects/',
@@ -42,13 +42,13 @@ const PAGES: Array<{ path: string; name: string; description: string }> = [
     path: '/about/',
     name: 'About',
     description:
-      '17+ years in software: 12 years of full-stack web and product delivery, then six years of real-time distributed systems. Career history, grouped stack, and engagement options.',
+      '17+ years in software: 12 years of full-stack web and product delivery, then six years of real-time distributed systems. Career history, grouped stack, and what he is open to.',
   },
   {
     path: '/contact/',
     name: 'Contact',
     description:
-      'Book a 30-minute call or send a project brief. Engagement types, availability, and time-zone overlap.',
+      'Book an intro call or send a role description. Contract shapes, availability, and time-zone overlap.',
   },
 ];
 
@@ -56,11 +56,12 @@ const FACTS = [
   'Role: Full-stack systems architect and technical lead, 2 Dude Studios',
   'Based in: Bangalore, India (IST) — remote worldwide, with overlap for EU and US calls',
   'Client base: India, the United States, and the United Kingdom',
-  'Engagements: architecture and design sprints, fixed-scope projects, monthly retainers, technical audits and rescues, and senior or long-term roles',
+  'Open to: full-time contracts (4-5 days/week), part-time contracts (2-3 days/week), permanent roles, architecture and design sprints, and fixed-scope projects',
+  'Working style: hands-on individual contributor, remote, embedded in the client team repository and process',
   'Core stack: C#, Unity, Photon Fusion, Mirror, Node.js, Express, PostgreSQL, React, Supabase, OpenXR, AR Foundation',
   'Specialism: server-authoritative state, client-side prediction and reconciliation, offline-first sync, relational data modelling, and performance against fixed frame budgets',
   'Languages: English, Hindi',
-  'Availability: taking new engagements',
+  'Availability: open to contract work now',
   'Contact: akaash.garg@gmail.com — https://cal.com/akaash-garg-xvijkt/hi',
 ];
 
