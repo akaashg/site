@@ -31,7 +31,7 @@ const PAGES: Array<{ path: string; name: string; description: string }> = [
     path: '/services/',
     name: 'What I do',
     description:
-      'What Akaash Garg is hired to own: systems architecture and design, backend and platform engineering, multiplayer systems, performance optimization, and Unity VR and AR development. Covers contract shapes, overlap hours, and how he works inside an existing team.',
+      'What Akaash Garg is hired to own, in six areas: systems architecture and design, multiplayer and real-time systems, backend and platform engineering, XR application development, enterprise XR training and simulation, and game development. Covers contract shapes, overlap hours, and how he works inside an existing team.',
   },
   {
     path: '/projects/',

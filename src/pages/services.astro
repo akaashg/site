@@ -9,8 +9,15 @@ const services = [
     name: 'Systems architecture & design',
     lead: 'The decisions that are expensive to reverse, made deliberately and written down.',
     detail:
-      'State ownership and authority models, coordinate and reference frames, service boundaries, schema and data-flow design, and failure and recovery behaviour. Delivered as a written architecture document that records the options considered and the constraint that settled each one — so the reasoning survives after I leave.',
+      'State ownership and authority models, coordinate and reference frames, service boundaries, schema and data-flow design, and failure and recovery behaviour. Delivered as a written architecture document that records the options considered and the constraint that settled each one — so the reasoning survives after I leave, and your engineers have something to review rather than infer.',
     proof: 'One authoritative host owning all state for eight standalone clients in a shared physical space.',
+  },
+  {
+    name: 'Multiplayer & real-time systems',
+    lead: 'State that stays synchronized under real latency, inside the budget it has to run in.',
+    detail:
+      'Photon Fusion, Photon PUN, and Mirror. Server-authoritative state, client-side prediction and interpolation, reconciliation, latency compensation, and dedicated server hosting — then the profiling that keeps it affordable: Unity Profiler and RenderDoc, draw-call batching, LOD systems, texture atlasing, object pooling and GC pressure, and custom HLSL and ShaderGraph work across URP and HDRP.',
+    proof: 'Sub-100ms across a service boundary, and standalone Quest builds held to a 72fps budget.',
   },
   {
     name: 'Backend & platform engineering',
@@ -20,32 +27,18 @@ const services = [
     proof: 'Offline-first telemetry: disk queue, backoff, and crash-journal reconciliation on relaunch.',
   },
   {
-    name: 'VR application development',
-    lead: 'Multiplayer and single-user VR products built in Unity, shipped to standalone headsets.',
+    name: 'XR application development',
+    lead: 'VR and AR products built in Unity and shipped to real hardware.',
     detail:
-      'Free-roam and room-scale experiences, instructor-led training, simulation, and location-based entertainment. Delivered on Meta Quest 2/3/Pro, HTC Vive, Varjo, and SteamVR.',
-    proof: 'Free-roam arena software for 8 co-located players, built to a 72fps standalone budget.',
-  },
-  {
-    name: 'AR application development',
-    lead: 'Mobile and headset AR for product visualization, design review, and field work.',
-    detail:
-      'AR Foundation, ARKit, and ARCore on iOS and Android, plus HoloLens and passthrough MR. Includes photogrammetry capture-to-runtime pipelines, spatial anchors, and hand tracking.',
+      'Free-roam and room-scale VR, instructor-led sessions, and location-based entertainment on Meta Quest 2/3/Pro, HTC Vive, Varjo, and SteamVR. AR Foundation, ARKit, and ARCore on iOS and Android, plus HoloLens and passthrough MR — including photogrammetry capture-to-runtime pipelines, spatial anchors, and hand tracking.',
     proof: 'CollaboratAR held 8K source texture fidelity on mobile hardware.',
   },
   {
-    name: 'Multiplayer systems engineering',
-    lead: 'Networked architecture that stays synchronized under real-world latency.',
+    name: 'Enterprise XR training & simulation',
+    lead: 'Regulatory and operational curricula turned into scenarios people rehearse rather than read.',
     detail:
-      'Photon Fusion, Photon PUN, and Mirror. Server-authoritative state, client-side prediction and interpolation, reconciliation, latency compensation, and dedicated server hosting.',
-    proof: 'Sub-100ms latency bridging a Unity VR client to a proprietary Java backend.',
-  },
-  {
-    name: 'XR performance optimization',
-    lead: 'Getting an existing build inside the frame budget it keeps missing.',
-    detail:
-      'GPU and CPU profiling with Unity Profiler and RenderDoc, draw-call batching, LOD systems, texture atlasing, Draco mesh compression, object pooling and GC pressure, custom HLSL and ShaderGraph work across URP and HDRP.',
-    proof: 'Standalone Quest builds held to a 72fps budget with physics, AI, and avatar sync.',
+      'Branching decision paths, performance scoring and progression, digital twins of real facilities and equipment, SOP and hazard modules, LMS and HRMS integration, and offline deployment for remote sites — replacing slide-based courseware with situations a trainee has to work through.',
+    proof: 'Multi-user VR team training built for logistics, manufacturing, and safety drills.',
   },
   {
     name: 'Game development',
@@ -53,27 +46,6 @@ const services = [
     detail:
       'Gameplay systems, procedural generation, wildlife and enemy AI, animation state machines, custom shaders, and the full Steamworks pipeline through build, depot, store page, and age-rating submission. Shipped across racing, roguelite, RPG, simulation, survival, and runner genres.',
     proof: 'Ruins of the Forgotten: public Steam demo live, Early Access Q3 2026.',
-  },
-  {
-    name: 'Enterprise XR training products',
-    lead: 'Turning regulatory and operational curricula into rehearsable scenarios.',
-    detail:
-      'Branching decision paths, performance scoring, digital twins of real facilities and equipment, SOP and hazard modules, LMS/HRMS integration, and offline deployment for remote sites.',
-    proof: 'Multi-user VR team training built for logistics, manufacturing, and safety drills.',
-  },
-  {
-    name: 'Gamified training solutions',
-    lead: 'Game mechanics applied to training people actually finish.',
-    detail:
-      'Regulatory and compliance curricula rebuilt as branching scenario modules with performance scoring, progression, and measurable outcomes — replacing slide-based courseware with situations a trainee rehearses rather than reads.',
-    proof: 'Gamified VR compliance training delivered in place of slide-based courseware.',
-  },
-  {
-    name: 'Technical leadership & architecture',
-    lead: 'Founder-level ownership when a team needs direction, not just hands.',
-    detail:
-      'Architecture decisions, code review, sprint planning, hiring input, vendor and client communication, and delivery accountability. Available as fractional lead alongside an in-house team.',
-    proof: 'Leads a 6-person delivery team across three concurrent products.',
   },
 ];
 
@@ -158,7 +130,7 @@ const faqs = [
         I take on the work that decides whether a real-time product launches: who owns state and what
         crosses the wire, a data layer that holds up when the network does not, and clients that stay
         inside their budget. I write the architecture and then build it — hands-on, every day, in your
-        repo and your process. Ten areas below, and four ways to work together.
+        repo and your process. Six areas below, and four ways to work together.
       </p>
       <div class="flex flex-wrap gap-4 pt-2">
         <a

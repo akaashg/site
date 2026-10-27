@@ -117,15 +117,12 @@ const featured = allProjects.sort((a, b) => a.data.order - b.data.order).slice(0
    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
      {
        [
-         { name: 'Systems architecture', detail: 'Authority models, data flow, and the decisions that are expensive to reverse.' },
+         { name: 'Systems architecture & design', detail: 'Authority models, data flow, and the decisions that are expensive to reverse.' },
+         { name: 'Multiplayer & real-time systems', detail: 'Server-authoritative state, prediction, and holding the frame budget.' },
          { name: 'Backend & platform engineering', detail: 'PostgreSQL schemas, Node APIs, and offline-first sync.' },
-         { name: 'Multiplayer systems', detail: 'Server-authoritative state, prediction, and latency compensation.' },
-         { name: 'Performance optimization', detail: 'Getting an existing build inside its frame budget.' },
-         { name: 'VR application development', detail: 'Multiplayer, training, and LBE experiences on standalone headsets.' },
-         { name: 'AR application development', detail: 'Mobile and headset AR for visualization, review, and field work.' },
-         { name: 'Enterprise XR training', detail: 'Digital twins, branching scenarios, and compliance reporting.' },
+         { name: 'XR application development', detail: 'VR and AR in Unity, shipped to standalone headsets and mobile.' },
+         { name: 'Enterprise XR training & simulation', detail: 'Digital twins, branching scenarios, and scored outcomes.' },
          { name: 'Game development', detail: 'Unity games from prototype to Steam and mobile release.' },
-         { name: 'Technical leadership', detail: 'Founder-level architecture and delivery ownership.' },
        ].map((service, index) => (
          <a
            href="/services/"
