@@ -4,8 +4,8 @@ company: Independent project
 role: VR Platform Developer
 timeframe: Portfolio project
 stack: [Unity, Photon Networking, React, Three.js, Blender, VR SDK]
-summary: Immersive educational platform that connects physical and virtual classrooms across VR headsets and Android devices.
-outcome: Supports interactive teaching, learning, and collaboration in shared virtual spaces.
+summary: Cross-headset classroom prototype for shared, multi-user teaching - the same session running across Quest, HP, HTC, and Android so a school is not locked to one vendor.
+outcome: Multi-user sessions, a shared whiteboard, and hand-tracked interaction running across four device families from one Unity codebase.
 order: 9
 ---
 

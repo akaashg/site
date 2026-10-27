@@ -7,3 +7,13 @@
 # move is permanent and the old path has no content of its own to preserve.
 /portfolio    /projects/  301
 /portfolio/*  /projects/  301
+
+# Three case studies were unpublished because their only illustration was a
+# generated placeholder, which is worse than no page at all. The work was real
+# but nothing survives to show, so the pages are drafts rather than deletions
+# (src/content/projects, draft: true) and can come back if screenshots turn up.
+# 301 to the index: the content is gone, not moved, and the index is the
+# nearest useful thing.
+/projects/visualize-ar/          /projects/  301
+/projects/vr-simulation-toolkit/ /projects/  301
+/projects/social-vr-xtraspace/   /projects/  301
