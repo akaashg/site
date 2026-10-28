@@ -53,7 +53,7 @@ const PAGES: Array<{ path: string; name: string; description: string }> = [
 ];
 
 const FACTS = [
-  'Role: Full-stack systems architect and technical lead, 2 Dude Studios',
+  'Role: Founder and lead XR engineer, 2 Dude Studios - the 6-person studio he founded',
   'Based in: Bangalore, India (IST) — remote worldwide, with overlap for EU and US calls',
   'Client base: India, the United States, and the United Kingdom',
   'Open to: full-time contracts (4-5 days/week), part-time contracts (2-3 days/week), permanent roles, architecture and design sprints, and fixed-scope projects',
